@@ -1,4 +1,4 @@
-# Uncertainty-Aware Surgical Navigation
+# Uncertainty-Aware Active Perception for Safety-Critical Motion Planning in Minimally Invasive Surgical Robotics
 
 A simulation-based research engineering project investigating how perception and localisation uncertainty affect safety-critical motion planning in minimally invasive surgical robotics.
 
