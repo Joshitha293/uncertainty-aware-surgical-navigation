@@ -12,7 +12,7 @@ from src.geometry.transforms import (
 
 
 def rotation_z(theta: float) -> np.ndarray:
-    """Return a 3x3 rotation matrix for rotation about the z-axis."""
+    """Return a 3 x 3 rotation matrix for rotation about the z-axis."""
     c = np.cos(theta)
     s = np.sin(theta)
 
@@ -51,15 +51,17 @@ def test_non_orthogonal_matrix_is_rejected() -> None:
     assert not is_rotation_matrix(invalid_rotation)
 
 
-def test_make_transform_identity() -> None:
-    transform = make_transform(
-        np.eye(3),
-        np.zeros(3),
-    )
+def test_identity_transform_does_not_change_point() -> None:
+    transform = np.eye(4)
+
+    point = np.array([1.2, -0.4, 2.5])
+
+    result = transform_point(transform, point)
 
     np.testing.assert_allclose(
-        transform,
-        np.eye(4),
+        result,
+        point,
+        atol=1e-8,
     )
 
 
@@ -78,14 +80,13 @@ def test_translation_only_transform() -> None:
     np.testing.assert_allclose(
         result,
         expected,
+        atol=1e-8,
     )
 
 
 def test_rotation_90_degrees_about_z() -> None:
-    rotation = rotation_z(np.pi / 2)
-
     transform = make_transform(
-        rotation,
+        rotation_z(np.pi / 2),
         np.zeros(3),
     )
 
@@ -102,7 +103,7 @@ def test_rotation_90_degrees_about_z() -> None:
     )
 
 
-def test_transform_composition_matches_sequential_application() -> None:
+def test_composition_matches_sequential_transformation() -> None:
     first = make_transform(
         rotation_z(np.pi / 2),
         np.array([1.0, 0.0, 0.0]),
@@ -115,29 +116,29 @@ def test_transform_composition_matches_sequential_application() -> None:
 
     point = np.array([1.0, 1.0, 0.0])
 
-    sequential = transform_point(
+    sequential_result = transform_point(
         first,
         transform_point(second, point),
     )
 
-    composed = compose_transforms(
+    composed_transform = compose_transforms(
         first,
         second,
     )
 
     composed_result = transform_point(
-        composed,
+        composed_transform,
         point,
     )
 
     np.testing.assert_allclose(
-        sequential,
         composed_result,
+        sequential_result,
         atol=1e-8,
     )
 
 
-def test_inverse_transform_multiplies_to_identity() -> None:
+def test_inverse_multiplies_to_identity() -> None:
     transform = make_transform(
         rotation_z(np.pi / 4),
         np.array([1.0, -2.0, 0.5]),
@@ -152,7 +153,7 @@ def test_inverse_transform_multiplies_to_identity() -> None:
     )
 
 
-def test_round_trip_point_transformation() -> None:
+def test_round_trip_recovers_original_point() -> None:
     transform = make_transform(
         rotation_z(np.pi / 3),
         np.array([0.5, -1.2, 2.0]),
@@ -160,18 +161,18 @@ def test_round_trip_point_transformation() -> None:
 
     point = np.array([2.4, -0.7, 1.1])
 
-    transformed_point = transform_point(
+    transformed = transform_point(
         transform,
         point,
     )
 
-    recovered_point = transform_point(
+    recovered = transform_point(
         invert_transform(transform),
-        transformed_point,
+        transformed,
     )
 
     np.testing.assert_allclose(
-        recovered_point,
+        recovered,
         point,
         atol=1e-8,
     )
@@ -193,7 +194,7 @@ def test_invalid_bottom_row_is_rejected() -> None:
     assert not is_homogeneous_transform(transform)
 
 
-def test_make_transform_rejects_invalid_translation_shape() -> None:
+def test_invalid_translation_shape_is_rejected() -> None:
     with pytest.raises(ValueError):
         make_transform(
             np.eye(3),
@@ -201,14 +202,17 @@ def test_make_transform_rejects_invalid_translation_shape() -> None:
         )
 
 
-def test_transform_point_rejects_invalid_point_shape() -> None:
-    transform = np.eye(4)
-
+def test_invalid_point_shape_is_rejected() -> None:
     with pytest.raises(ValueError):
         transform_point(
-            transform,
+            np.eye(4),
             np.array([1.0, 2.0]),
         )
+
+
+def test_composition_requires_multiple_transforms() -> None:
+    with pytest.raises(ValueError):
+        compose_transforms(np.eye(4))
 
 
 def test_compose_transforms_requires_at_least_two_inputs() -> None:
