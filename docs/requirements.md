@@ -1,110 +1,207 @@
 # Research System Requirements
 
-## Functional Requirements
+## 1. Purpose
 
-### REQ-01 — Simulation Environment
-The system shall provide a reproducible simulated minimally invasive
-surgical workspace with known ground-truth geometry.
+This document defines the functional and non-functional requirements for the
+simulation framework used to investigate uncertainty-aware active perception
+and safety-critical motion planning in minimally invasive surgical robotics.
 
-### REQ-02 — Surgical Scene
-The environment shall contain a target region and safety-critical
-structures relevant to motion planning.
+Requirements are written to be individually identifiable, testable and
+traceable to implementation and verification evidence.
 
-### REQ-03 — Camera Observation
-The system shall generate observations of the simulated workspace from
+---
+
+## 2. Functional Requirements
+
+### REQ-01 — Reproducible Surgical Workspace
+
+The system shall generate a reproducible simulated minimally invasive surgical
+workspace containing defined ground-truth geometry.
+
+### REQ-02 — Target and Critical Structures
+
+The simulated environment shall contain:
+
+- a target region;
+- one or more safety-critical structures;
+- defined start and goal conditions for motion planning.
+
+### REQ-03 — Explicit Coordinate Frames
+
+The system shall maintain explicit coordinate frames for relevant simulation
+components, including the world, camera and instrument or robot reference
+frames.
+
+Transformations between frames shall use validated rigid-body transformation
+operations.
+
+### REQ-04 — Camera Observation
+
+The system shall generate simulated observations of the surgical workspace from
 defined camera viewpoints.
 
-### REQ-04 — Perception Perturbation
-The system shall support controlled visual degradation, localisation
-uncertainty and occlusion.
+### REQ-05 — Controlled Perception Degradation
 
-### REQ-05 — Fixed-View Baseline
-The system shall implement a fixed-view perception strategy.
+The system shall support controlled manipulation of perception quality,
+including localisation uncertainty and occlusion.
 
-### REQ-06 — Generic Active Perception
-The system shall implement an uncertainty-aware perception strategy that
-selects viewpoints according to global uncertainty.
+Perturbation parameters shall be recorded for every experimental trial.
 
-### REQ-07 — Task-Aware Active Perception
-The system shall implement a strategy in which uncertainty is weighted
-according to relevance to the planned trajectory and safety-critical
-structures.
+### REQ-06 — Perception Output
 
-### REQ-08 — Uncertainty Representation
-The system shall represent uncertainty associated with perceived target
-and obstacle geometry.
+The perception subsystem shall provide estimated spatial information for the
+target and safety-critical structures required by downstream planning.
 
-### REQ-09 — Viewpoint Selection
-The system shall support candidate camera viewpoints and select additional
-observations according to the active-perception strategy.
+### REQ-07 — Uncertainty Representation
 
-### REQ-10 — Motion Planning
-The system shall generate geometrically feasible paths between defined
-start and target positions while considering perceived obstacles.
+The system shall associate perceived spatial estimates with an explicit
+representation of uncertainty suitable for downstream decision-making.
 
-### REQ-11 — Risk-Aware Planning
-The planner shall incorporate uncertainty-dependent safety margins or
-risk costs.
+### REQ-08 — Fixed-View Baseline
 
-### REQ-12 — Ground-Truth Evaluation
-Planned trajectories shall be evaluated against known ground-truth
-critical-structure geometry.
+The system shall implement a fixed-view perception strategy in which motion
+planning proceeds without active viewpoint adjustment.
 
-### REQ-13 — Safety Evaluation
-The system shall detect safety-margin violations and collisions.
+### REQ-09 — Generic Active-Perception Baseline
 
-### REQ-14 — Performance Metrics
+The system shall implement an active-perception strategy that selects
+additional observations according to expected reduction in global perception
+uncertainty without task-relevance weighting.
+
+### REQ-10 — Task-Aware Active Perception
+
+The system shall implement an active-perception strategy that weights
+uncertainty according to its relevance to the planned trajectory and nearby
+safety-critical structures.
+
+### REQ-11 — Candidate Viewpoint Evaluation
+
+The active-perception subsystem shall evaluate a defined set of candidate
+camera viewpoints using a quantitative viewpoint-selection objective.
+
+### REQ-12 — Motion Planning
+
+The system shall generate geometrically feasible candidate trajectories between
+defined start and target states using perceived environmental information.
+
+### REQ-13 — Uncertainty-Aware Planning
+
+The planning subsystem shall support uncertainty-dependent safety margins,
+risk costs, or equivalent mechanisms through which perception uncertainty can
+influence trajectory selection.
+
+### REQ-14 — Ground-Truth Safety Evaluation
+
+Planned or executed trajectories shall be independently evaluated against
+simulator ground-truth geometry.
+
+### REQ-15 — Safety-Margin Violation Detection
+
+The evaluation subsystem shall determine whether a trajectory enters a
+predefined protected region surrounding a critical structure.
+
+### REQ-16 — Collision Detection
+
+The system shall determine whether a trajectory geometrically intersects a
+critical simulated structure.
+
+### REQ-17 — Quantitative Metrics
+
 The system shall calculate predefined safety, perception, planning and
-efficiency metrics.
+efficiency metrics for each experimental trial.
 
-### REQ-15 — Experimental Reproducibility
-Experimental scenarios shall be reproducible using stored configurations
-and random seeds.
+### REQ-18 — Experimental Logging
 
-### REQ-16 — Matched Comparison
-Equivalent experimental scenarios shall be reused across the three
-perception strategies to enable fair comparison.
+Each trial shall produce a machine-readable record containing sufficient
+information to identify:
 
-### REQ-17 — Data Logging
-The system shall automatically record experimental parameters,
-intermediate outputs and outcome metrics.
+- experimental condition;
+- perception strategy;
+- perturbation parameters;
+- random seed;
+- relevant intermediate outputs;
+- final outcome metrics.
 
-### REQ-18 — Verification
-Core mathematical, perception, planning and evaluation functions shall
-be independently testable.
+### REQ-19 — Matched Experimental Comparison
 
+Equivalent simulated scenarios shall be reused across the three perception
+strategies to support paired or matched statistical comparison.
 
-## Non-Functional Requirements
+### REQ-20 — Automated Experiment Execution
+
+The system shall support repeated execution of predefined experimental
+conditions without requiring manual intervention between individual trials.
+
+---
+
+## 3. Non-Functional Requirements
 
 ### NFR-01 — Modularity
-Perception, uncertainty estimation, planning, simulation and evaluation
-shall be implemented as separable software components.
+
+Simulation, geometry, perception, uncertainty estimation, active perception,
+planning and evaluation shall be implemented as separable software components
+with defined interfaces.
 
 ### NFR-02 — Reproducibility
-Experiments shall be reproducible from recorded configuration parameters
-and random seeds.
+
+A recorded configuration and random seed shall be sufficient to reproduce a
+corresponding stochastic simulation condition within the deterministic limits
+of the software environment.
 
 ### NFR-03 — Traceability
-Experimental results shall be traceable to the corresponding method,
-scenario and configuration.
 
-### NFR-04 — Quantitative Evaluation
-System performance shall be assessed quantitatively rather than solely
-through visual demonstrations.
+Experimental outputs shall remain traceable to the method, configuration,
+software version and random seed that generated them.
 
-### NFR-05 — Robustness Testing
-The three strategies shall be evaluated across multiple levels of
-perception degradation and uncertainty.
+### NFR-04 — Testability
 
-### NFR-06 — Software Verification
-Critical mathematical and algorithmic components shall include automated
-tests where practical.
+Critical mathematical and algorithmic components shall be independently
+testable.
 
-### NFR-07 — Safety of Interpretation
-Simulation parameters and results shall not be presented as clinically
-validated safety thresholds.
+### NFR-05 — Numerical Robustness
+
+Geometric and transformation operations shall use explicit numerical
+tolerances where exact floating-point equality is inappropriate.
+
+### NFR-06 — Quantitative Evaluation
+
+Conclusions regarding comparative system performance shall be supported by
+quantitative experimental evidence rather than visual demonstrations alone.
+
+### NFR-07 — Robustness Evaluation
+
+The experimental framework shall support evaluation across multiple predefined
+levels of perception degradation.
 
 ### NFR-08 — Extensibility
-The software architecture should allow later integration of additional
-perception models, planners or robotic simulation components without
-redesigning the complete system.
+
+The software architecture should permit alternative perception models,
+uncertainty representations, viewpoint-selection methods or motion planners to
+be introduced without redesigning the complete framework.
+
+### NFR-09 — Computational Observability
+
+Intermediate outputs required to diagnose system behaviour shall be accessible
+for logging, visualisation or analysis.
+
+### NFR-10 — Interpretation Safety
+
+Simulation parameters and outcomes shall not be represented as clinically
+validated thresholds, patient-risk estimates, or evidence of medical-device
+safety.
+
+---
+
+## 4. Requirements Traceability
+
+Each requirement will later be linked to one or more of the following:
+
+- software module;
+- unit test;
+- integration test;
+- simulation experiment;
+- quantitative metric;
+- generated result or figure.
+
+The corresponding verification method and evidence will be maintained in the
+project verification plan.
