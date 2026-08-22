@@ -67,6 +67,11 @@ setup(
                 "surgical_navigation_ros."
                 "planner_safety_bridge_node:main"
             ),
+            (
+                "visualisation_node = "
+                "surgical_navigation_ros."
+                "visualisation_node:main"
+            ),
         ],
     },
 )

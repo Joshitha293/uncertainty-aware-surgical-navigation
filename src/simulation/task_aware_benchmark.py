@@ -36,6 +36,11 @@ from src.perception.viewpoints import (
     viewpoint_displacement,
 )
 
+from src.simulation.active_perception_statistics import (
+    paired_comparison,
+    summarise_metric,
+)
+
 
 @dataclass(frozen=True)
 class TaskAwareBenchmarkConfig:
@@ -86,6 +91,14 @@ class TaskAwareComparison:
     task_alignment_change_percent: float
 
     selection_difference_rate_percent: float
+
+    generic_localisation_errors: np.ndarray
+
+    task_aware_localisation_errors: np.ndarray
+
+    generic_predicted_sigmas: np.ndarray
+
+    task_aware_predicted_sigmas: np.ndarray
 
 
 def make_camera() -> SurgicalCamera:
@@ -281,21 +294,14 @@ def run_benchmark(
     )
 
     generic_errors: list[float] = []
-
     generic_sigmas: list[float] = []
-
     generic_movements: list[float] = []
-
     generic_alignments: list[float] = []
 
     task_aware_errors: list[float] = []
-
     task_aware_sigmas: list[float] = []
-
     task_aware_movements: list[float] = []
-
     task_aware_alignments: list[float] = []
-
     task_relevances: list[float] = []
 
     selection_differences = 0
@@ -479,22 +485,42 @@ def run_benchmark(
             )
         )
 
+    generic_errors_array = np.asarray(
+        generic_errors,
+        dtype=float,
+    )
+
+    task_aware_errors_array = np.asarray(
+        task_aware_errors,
+        dtype=float,
+    )
+
+    generic_sigmas_array = np.asarray(
+        generic_sigmas,
+        dtype=float,
+    )
+
+    task_aware_sigmas_array = np.asarray(
+        task_aware_sigmas,
+        dtype=float,
+    )
+
     generic_summary = StrategySummary(
         strategy="Generic active perception",
         trials=config.trial_count,
         mean_localisation_error=float(
             np.mean(
-                generic_errors
+                generic_errors_array
             )
         ),
         median_localisation_error=float(
             np.median(
-                generic_errors
+                generic_errors_array
             )
         ),
         mean_predicted_sigma=float(
             np.mean(
-                generic_sigmas
+                generic_sigmas_array
             )
         ),
         mean_camera_movement=float(
@@ -519,17 +545,17 @@ def run_benchmark(
         trials=config.trial_count,
         mean_localisation_error=float(
             np.mean(
-                task_aware_errors
+                task_aware_errors_array
             )
         ),
         median_localisation_error=float(
             np.median(
-                task_aware_errors
+                task_aware_errors_array
             )
         ),
         mean_predicted_sigma=float(
             np.mean(
-                task_aware_sigmas
+                task_aware_sigmas_array
             )
         ),
         mean_camera_movement=float(
@@ -627,6 +653,200 @@ def run_benchmark(
         selection_difference_rate_percent=float(
             selection_difference_rate
         ),
+        generic_localisation_errors=(
+            generic_errors_array
+        ),
+        task_aware_localisation_errors=(
+            task_aware_errors_array
+        ),
+        generic_predicted_sigmas=(
+            generic_sigmas_array
+        ),
+        task_aware_predicted_sigmas=(
+            task_aware_sigmas_array
+        ),
+    )
+
+
+def print_statistical_analysis(
+    comparison: TaskAwareComparison,
+) -> None:
+    """Print statistical analysis of the matched trials."""
+
+    print()
+    print(
+        "Statistical analysis"
+    )
+    print(
+        "--------------------"
+    )
+
+    generic_error_summary = summarise_metric(
+        comparison.generic_localisation_errors,
+        seed=42,
+    )
+
+    task_aware_error_summary = summarise_metric(
+        comparison.task_aware_localisation_errors,
+        seed=42,
+    )
+
+    error_comparison = paired_comparison(
+        generic_values=(
+            comparison.generic_localisation_errors
+        ),
+        task_aware_values=(
+            comparison.task_aware_localisation_errors
+        ),
+        seed=42,
+    )
+
+    generic_sigma_summary = summarise_metric(
+        comparison.generic_predicted_sigmas,
+        seed=42,
+    )
+
+    task_aware_sigma_summary = summarise_metric(
+        comparison.task_aware_predicted_sigmas,
+        seed=42,
+    )
+
+    sigma_comparison = paired_comparison(
+        generic_values=(
+            comparison.generic_predicted_sigmas
+        ),
+        task_aware_values=(
+            comparison.task_aware_predicted_sigmas
+        ),
+        seed=42,
+    )
+
+    print()
+    print(
+        "Localisation error"
+    )
+
+    print(
+        f"Generic mean: "
+        f"{generic_error_summary.mean * 1000.0:.3f} mm"
+    )
+
+    print(
+        f"Generic SD: "
+        f"{generic_error_summary.standard_deviation * 1000.0:.3f} mm"
+    )
+
+    print(
+        "Generic 95% CI: "
+        f"["
+        f"{generic_error_summary.confidence_interval_low * 1000.0:.3f}, "
+        f"{generic_error_summary.confidence_interval_high * 1000.0:.3f}"
+        f"] mm"
+    )
+
+    print(
+        f"Task-aware mean: "
+        f"{task_aware_error_summary.mean * 1000.0:.3f} mm"
+    )
+
+    print(
+        f"Task-aware SD: "
+        f"{task_aware_error_summary.standard_deviation * 1000.0:.3f} mm"
+    )
+
+    print(
+        "Task-aware 95% CI: "
+        f"["
+        f"{task_aware_error_summary.confidence_interval_low * 1000.0:.3f}, "
+        f"{task_aware_error_summary.confidence_interval_high * 1000.0:.3f}"
+        f"] mm"
+    )
+
+    print(
+        "Paired improvement: "
+        f"{abs(error_comparison.mean_difference) * 1000.0:.3f} mm"
+    )
+
+    print(
+        "95% CI of paired difference: "
+        f"["
+        f"{error_comparison.confidence_interval_low * 1000.0:.3f}, "
+        f"{error_comparison.confidence_interval_high * 1000.0:.3f}"
+        f"] mm"
+    )
+
+    print(
+        f"Relative change: "
+        f"{error_comparison.relative_change_percent:.2f}%"
+    )
+
+    print(
+        f"Cohen's dz: "
+        f"{error_comparison.cohens_dz:.3f}"
+    )
+
+    print()
+    print(
+        "Predicted uncertainty"
+    )
+
+    print(
+        f"Generic mean: "
+        f"{generic_sigma_summary.mean * 1000.0:.3f} mm"
+    )
+
+    print(
+        f"Generic SD: "
+        f"{generic_sigma_summary.standard_deviation * 1000.0:.3f} mm"
+    )
+
+    print(
+        "Generic 95% CI: "
+        f"["
+        f"{generic_sigma_summary.confidence_interval_low * 1000.0:.3f}, "
+        f"{generic_sigma_summary.confidence_interval_high * 1000.0:.3f}"
+        f"] mm"
+    )
+
+    print(
+        f"Task-aware mean: "
+        f"{task_aware_sigma_summary.mean * 1000.0:.3f} mm"
+    )
+
+    print(
+        f"Task-aware SD: "
+        f"{task_aware_sigma_summary.standard_deviation * 1000.0:.3f} mm"
+    )
+
+    print(
+        "Task-aware 95% CI: "
+        f"["
+        f"{task_aware_sigma_summary.confidence_interval_low * 1000.0:.3f}, "
+        f"{task_aware_sigma_summary.confidence_interval_high * 1000.0:.3f}"
+        f"] mm"
+    )
+
+    print(
+        "Paired reduction: "
+        f"{abs(sigma_comparison.mean_difference) * 1000.0:.3f} mm"
+    )
+
+    print(
+        "95% CI of paired difference: "
+        f"["
+        f"{sigma_comparison.confidence_interval_low * 1000.0:.3f}, "
+        f"{sigma_comparison.confidence_interval_high * 1000.0:.3f}"
+        f"] mm"
+    )
+
+    print(
+        f"Relative change: "
+        f"{sigma_comparison.relative_change_percent:.2f}%"
+    )
+
+    print(
+        f"Cohen's dz: "
+        f"{sigma_comparison.cohens_dz:.3f}"
     )
 
 
@@ -755,13 +975,17 @@ def print_summary(
 
 
 def main() -> None:
-    """Run the matched experiment."""
+    """Run the matched experiment and statistical analysis."""
 
     comparison = run_benchmark(
         TaskAwareBenchmarkConfig()
     )
 
     print_summary(
+        comparison
+    )
+
+    print_statistical_analysis(
         comparison
     )
 
