@@ -31,3 +31,9 @@ dist/
 # Temporary files
 *.tmp
 *.log
+# ROS 2 / Pixi generated environments
+ros2_jazzy/.pixi/
+ros2_jazzy/install/
+ros2_jazzy/log/
+ros2_jazzy/ros2_ws/install/
+ros2_jazzy/ros2_ws/log/

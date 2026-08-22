@@ -1,0 +1,23 @@
+[workspace]
+name = "ros2_jazzy"
+version = "0.1.0"
+channels = [
+    "https://prefix.dev/conda-forge"
+]
+platforms = ["win-64"]
+
+[dependencies]
+python = "3.12.*"
+colcon-common-extensions = "*"
+pandas = ">=3.0.5,<4"
+
+[feature.jazzy]
+channels = [
+    "https://prefix.dev/robostack-jazzy"
+]
+
+[feature.jazzy.dependencies]
+ros-jazzy-desktop = "*"
+
+[environments]
+jazzy = ["jazzy"]
