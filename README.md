@@ -685,4 +685,3 @@ It must not be used for:
 * surgical guidance;
 * clinical decision-making;
 * any other clinical purpose.
-
