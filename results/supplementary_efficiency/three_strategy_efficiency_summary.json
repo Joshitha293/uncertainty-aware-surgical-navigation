@@ -1,0 +1,402 @@
+{
+  "metric_definitions": {
+    "planning_time_all_attempts": "RRT search wall-clock time over all planning attempts, including failures.",
+    "iterations_all_attempts": "RRT iterations over all attempts, including failures.",
+    "path_cost_given_success": "Smoothed joint-space path cost conditional on planning success.",
+    "paired_path_cost": "Task-Aware minus comparator path cost only on matched trials where both strategies successfully planned.",
+    "execution_order": "Strategy execution order is cyclically balanced to reduce systematic timing-order bias."
+  },
+  "config": {
+    "repetitions_per_scenario": 5,
+    "perception_seed_base": 20261020,
+    "planner_seed_base": 13000,
+    "sigma_multiplier": 2.0,
+    "instrument_radius": 0.006,
+    "proximal_length": 0.1,
+    "task_weight": 2.0,
+    "alignment_weight": 1.0,
+    "uncertainty_weight": 1.0,
+    "bootstrap_samples": 1000,
+    "bootstrap_seed": 20261021,
+    "confidence_level": 0.95
+  },
+  "scenarios": [
+    {
+      "scenario_id": 0,
+      "name": "baseline",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 0,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 1,
+      "name": "lateral_positive",
+      "translation": [
+        0.0,
+        0.008,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 3,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2,
+      "name": "lateral_negative",
+      "translation": [
+        0.0,
+        -0.008,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 6,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 3,
+      "name": "superior_shift",
+      "translation": [
+        0.0,
+        0.0,
+        0.006
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 9,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 4,
+      "name": "larger_anatomy",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.1,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 12,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 5,
+      "name": "smaller_anatomy",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 0.9,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 15,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 6,
+      "name": "larger_safety_margin",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.2,
+      "initial_view_index": 18,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 7,
+      "name": "partial_occlusion",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 4,
+      "occluder_radius": 0.008
+    },
+    {
+      "scenario_id": 8,
+      "name": "strong_occlusion",
+      "translation": [
+        0.003,
+        -0.004,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 8,
+      "occluder_radius": 0.012
+    },
+    {
+      "scenario_id": 9,
+      "name": "combined_variation",
+      "translation": [
+        -0.004,
+        0.005,
+        0.003
+      ],
+      "radius_scale": 1.05,
+      "safety_margin_scale": 1.1,
+      "initial_view_index": 13,
+      "occluder_radius": 0.006
+    }
+  ],
+  "summaries": [
+    {
+      "strategy": "fixed",
+      "scenario_count": 10,
+      "record_count": 50,
+      "planning_success_rate": {
+        "n": 50,
+        "mean": 0.46,
+        "ci_low": 0.2,
+        "ci_high": 0.74
+      },
+      "safe_navigation_success_rate": {
+        "n": 50,
+        "mean": 0.38,
+        "ci_low": 0.12,
+        "ci_high": 0.64
+      },
+      "camera_movement": {
+        "n": 50,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "planning_time_all_attempts": {
+        "n": 50,
+        "mean": 0.5471887019999986,
+        "ci_low": 0.23085061635000995,
+        "ci_high": 0.8873598130999987
+      },
+      "iterations_all_attempts": {
+        "n": 50,
+        "mean": 142.76,
+        "ci_low": 57.22,
+        "ci_high": 238.5225
+      },
+      "planning_time_given_success": {
+        "n": 23,
+        "mean": 1.189336995652154,
+        "ci_low": 1.028452608695617,
+        "ci_high": 1.369755543750017
+      },
+      "iterations_given_success": {
+        "n": 23,
+        "mean": 310.3478260869565,
+        "ci_low": 276.4,
+        "ci_high": 354.84895833333326
+      },
+      "path_cost_given_success": {
+        "n": 23,
+        "mean": 2.5174434194693363,
+        "ci_low": 2.409663949192301,
+        "ci_high": 2.6026605688996414
+      }
+    },
+    {
+      "strategy": "generic_active",
+      "scenario_count": 10,
+      "record_count": 50,
+      "planning_success_rate": {
+        "n": 50,
+        "mean": 0.66,
+        "ci_low": 0.36,
+        "ci_high": 0.92
+      },
+      "safe_navigation_success_rate": {
+        "n": 50,
+        "mean": 0.6,
+        "ci_low": 0.34,
+        "ci_high": 0.84
+      },
+      "camera_movement": {
+        "n": 50,
+        "mean": 0.01562833599002373,
+        "ci_low": 0.0,
+        "ci_high": 0.03125667198004746
+      },
+      "planning_time_all_attempts": {
+        "n": 50,
+        "mean": 0.8824430239999947,
+        "ci_low": 0.509970651450006,
+        "ci_high": 1.268031148000034
+      },
+      "iterations_all_attempts": {
+        "n": 50,
+        "mean": 227.22,
+        "ci_low": 127.19350000000003,
+        "ci_high": 323.3915
+      },
+      "planning_time_given_success": {
+        "n": 33,
+        "mean": 1.3369554848484932,
+        "ci_low": 1.103568842547434,
+        "ci_high": 1.645379806435224
+      },
+      "iterations_given_success": {
+        "n": 33,
+        "mean": 344.27272727272725,
+        "ci_low": 287.5147727272727,
+        "ci_high": 422.1923076923077
+      },
+      "path_cost_given_success": {
+        "n": 33,
+        "mean": 2.557827088114144,
+        "ci_low": 2.4838659388866384,
+        "ci_high": 2.629815548956772
+      }
+    },
+    {
+      "strategy": "task_aware_active",
+      "scenario_count": 10,
+      "record_count": 50,
+      "planning_success_rate": {
+        "n": 50,
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      },
+      "safe_navigation_success_rate": {
+        "n": 50,
+        "mean": 0.92,
+        "ci_low": 0.86,
+        "ci_high": 0.98
+      },
+      "camera_movement": {
+        "n": 50,
+        "mean": 0.109985096469159,
+        "ci_low": 0.059680955835077334,
+        "ci_high": 0.16400269554402133
+      },
+      "planning_time_all_attempts": {
+        "n": 50,
+        "mean": 1.2391259840000612,
+        "ci_low": 1.0653911798000961,
+        "ci_high": 1.433253733050052
+      },
+      "iterations_all_attempts": {
+        "n": 50,
+        "mean": 333.66,
+        "ci_low": 292.748,
+        "ci_high": 387.6075
+      },
+      "planning_time_given_success": {
+        "n": 50,
+        "mean": 1.2391259840000612,
+        "ci_low": 1.0673087018000809,
+        "ci_high": 1.4214165399500356
+      },
+      "iterations_given_success": {
+        "n": 50,
+        "mean": 333.66,
+        "ci_low": 290.7345,
+        "ci_high": 383.782
+      },
+      "path_cost_given_success": {
+        "n": 50,
+        "mean": 2.4990466303369345,
+        "ci_low": 2.4250723544373685,
+        "ci_high": 2.5755651039601988
+      }
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "comparator": "fixed",
+      "task_strategy": "task_aware_active",
+      "matched_count": 50,
+      "both_success_count": 23,
+      "planning_time_difference_all_attempts": {
+        "n": 50,
+        "mean": 0.6919372820000627,
+        "ci_low": 0.30494290580010025,
+        "ci_high": 1.0665830499500126
+      },
+      "iterations_difference_all_attempts": {
+        "n": 50,
+        "mean": 190.9,
+        "ci_low": 85.952,
+        "ci_high": 290.16900000000004
+      },
+      "camera_movement_difference": {
+        "n": 50,
+        "mean": 0.109985096469159,
+        "ci_low": 0.05930459042804738,
+        "ci_high": 0.16132375064925628
+      },
+      "planning_success_difference": {
+        "n": 50,
+        "mean": 0.54,
+        "ci_low": 0.25950000000000045,
+        "ci_high": 0.82
+      },
+      "safe_navigation_success_difference": {
+        "n": 50,
+        "mean": 0.54,
+        "ci_low": 0.26,
+        "ci_high": 0.82
+      },
+      "path_cost_difference_both_successful": {
+        "n": 23,
+        "mean": -0.041070232628324176,
+        "ci_low": -0.18026899139122785,
+        "ci_high": 0.010922918502776654
+      }
+    },
+    {
+      "comparator": "generic_active",
+      "task_strategy": "task_aware_active",
+      "matched_count": 50,
+      "both_success_count": 33,
+      "planning_time_difference_all_attempts": {
+        "n": 50,
+        "mean": 0.3566829600000665,
+        "ci_low": 0.03768065140003281,
+        "ci_high": 0.7228922312500358
+      },
+      "iterations_difference_all_attempts": {
+        "n": 50,
+        "mean": 106.44,
+        "ci_low": 25.51600000000002,
+        "ci_high": 194.20049999999998
+      },
+      "camera_movement_difference": {
+        "n": 50,
+        "mean": 0.09435676047913524,
+        "ci_low": 0.04425879493835143,
+        "ci_high": 0.14373205397226835
+      },
+      "planning_success_difference": {
+        "n": 50,
+        "mean": 0.34,
+        "ci_low": 0.1,
+        "ci_high": 0.64
+      },
+      "safe_navigation_success_difference": {
+        "n": 50,
+        "mean": 0.32,
+        "ci_low": 0.06,
+        "ci_high": 0.58
+      },
+      "path_cost_difference_both_successful": {
+        "n": 33,
+        "mean": -0.10744557158666385,
+        "ci_low": -0.2565911571980817,
+        "ci_high": -0.015209411966500266
+      }
+    }
+  ]
+}

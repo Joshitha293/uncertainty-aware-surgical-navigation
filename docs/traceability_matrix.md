@@ -1,729 +1,475 @@
-# Requirements Verification Traceability Matrix
+Requirements Verification Traceability Matrix
 
-## 1. Purpose
+1. Purpose
 
-This document provides bidirectional traceability between the research-system requirements, software implementation, automated verification, and experimental evidence for the uncertainty-aware surgical navigation framework.
+This document links the completed research-system requirements to implementation, automated verification, and experimental evidence.
 
-The matrix complements:
+Verification refers to computational behaviour of the simulation framework only and does not constitute clinical or regulatory validation.
 
-* `docs/requirements.md`
-* `docs/verification_plan.md`
-* `docs/architecture.md`
+2. Final Verification Status
 
-Its purpose is to distinguish clearly between:
+All 20 functional requirements are implemented and computationally verified at project closure.
 
-* requirements that are currently verified;
-* requirements that have partial evidence;
-* requirements that remain dependent on the final end-to-end experiment.
+The final local regression baseline is:
 
-Verification refers to computational/software behaviour only. It does not constitute clinical validation or medical-device certification.
-
----
-
-## 2. Status Definitions
-
-| Status                     | Meaning                                                                                                                                 |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| **Verified**               | Direct implementation and automated or quantitative verification evidence currently exist.                                              |
-| **Partially Verified**     | Substantial implementation/evidence exists, but one part of the requirement still requires additional integration or validation.        |
-| **Pending**                | The requirement depends primarily on work that has not yet been completed.                                                              |
-| **Documentation Verified** | Evidence is principally architectural, reproducibility, configuration, or interpretation documentation rather than algorithmic testing. |
-
----
-
-# 3. Functional Requirements Traceability
-
-## REQ-01 — Reproducible Surgical Workspace
-
-**Requirement:** The system shall generate a reproducible simulated minimally invasive surgical workspace containing defined ground-truth geometry.
-
-**Implementation evidence**
-
-* `src/geometry/workspace.py`
-* simulation scene/configuration modules
-
-**Verification evidence**
-
-* `tests/test_workspace.py`
-* deterministic seeded simulation behaviour
-
-**Status:** **Verified**
-
----
-
-## REQ-02 — Target and Critical Structures
-
-**Requirement:** The environment shall contain a target region, safety-critical structures, and defined planning start/goal conditions.
-
-**Implementation evidence**
-
-* workspace geometry
-* simulation scene definitions
-* safety-critical structure representation
-
-**Verification evidence**
-
-* `tests/test_workspace.py`
-* `tests/test_safety.py`
-* `tests/test_safety_critical_benchmark.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-03 — Explicit Coordinate Frames
-
-**Requirement:** Explicit world, camera, and instrument-related coordinate frames shall be maintained using validated rigid transformations.
-
-**Implementation evidence**
-
-* `src/geometry/transforms.py`
-* camera and instrument geometry
-
-**Verification evidence**
-
-* `tests/test_transforms.py`
-* analytical translation/rotation cases
-* inverse and round-trip transformation checks
-
-**Status:** **Verified**
-
----
-
-## REQ-04 — Camera Observation
-
-**Requirement:** The system shall generate simulated observations from defined camera viewpoints.
-
-**Implementation evidence**
-
-* `src/perception/camera.py`
-* `src/perception/observation.py`
-* `src/perception/viewpoints.py`
-
-**Verification evidence**
-
-* `tests/test_camera.py`
-* `tests/test_observation.py`
-* `tests/test_viewpoints.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-05 — Controlled Perception Degradation
-
-**Requirement:** Localisation uncertainty and occlusion shall be controllable and experimental perturbation conditions shall be reproducible.
-
-**Implementation evidence**
-
-* `src/perception/uncertainty.py`
-* `src/perception/occlusion.py`
-* uncertainty-sensitivity experiment modules
-* uncertainty-heterogeneity experiments
-
-**Verification evidence**
-
-* `tests/test_uncertainty.py`
-* `tests/test_occlusion.py`
-* `tests/test_uncertainty_sensitivity.py`
-* `tests/test_uncertainty_heterogeneity_sensitivity.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-06 — Perception Output
-
-**Requirement:** Perception shall provide estimated spatial information required by downstream planning.
-
-**Implementation evidence**
-
-* `src/perception/perception.py`
-* `src/perception/observation.py`
-* perception/planning interface
-
-**Verification evidence**
-
-* `tests/test_perception.py`
-* `tests/test_observation.py`
-* `tests/test_perception_planning.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-07 — Uncertainty Representation
-
-**Requirement:** Perceived spatial estimates shall contain an explicit uncertainty representation suitable for decision-making.
-
-**Implementation evidence**
-
-* `src/perception/uncertainty.py`
-* observation-quality/uncertainty outputs
-* uncertainty-aware planning interface
-
-**Verification evidence**
-
-* `tests/test_uncertainty.py`
-* `tests/test_perception_planning.py`
-* uncertainty-sensitivity tests
-
-**Status:** **Verified**
-
----
-
-## REQ-08 — Fixed-View Baseline
-
-**Requirement:** A fixed-view strategy shall allow planning/perception evaluation without active camera adjustment.
-
-**Implementation evidence**
-
-* fixed-view benchmark pathway
-* active-perception benchmark simulation modules
-
-**Verification evidence**
-
-* `tests/test_active_perception_benchmark.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-09 — Generic Active-Perception Baseline
-
-**Requirement:** A task-agnostic active-perception strategy shall select viewpoints according to global perception utility.
-
-**Implementation evidence**
-
-* `src/perception/viewpoint_scoring.py`
-* `src/perception/active_perception.py`
-* `src/perception/closed_loop.py`
-
-**Verification evidence**
-
-* `tests/test_viewpoint_scoring.py`
-* `tests/test_active_perception.py`
-* `tests/test_active_perception_benchmark.py`
-* `tests/test_closed_loop.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-10 — Task-Aware Active Perception
-
-**Requirement:** Active perception shall incorporate trajectory and safety-critical task relevance into viewpoint selection.
-
-**Implementation evidence**
-
-* `src/perception/task_relevance.py`
-* `src/perception/task_aware_scoring.py`
-* `src/perception/task_aware_active_perception.py`
-
-**Verification evidence**
-
-* `tests/test_task_relevance.py`
-* `tests/test_task_aware_scoring.py`
-* `tests/test_task_aware_active_perception.py`
-* `tests/test_task_aware_ablation.py`
-* `tests/test_task_weight_sensitivity.py`
-
-**Status:** **Verified at component/selection level**
-
-The remaining end-to-end work is tracked separately under REQ-19.
-
----
-
-## REQ-11 — Candidate Viewpoint Evaluation
-
-**Requirement:** Candidate viewpoints shall be evaluated using a quantitative selection objective.
-
-**Implementation evidence**
-
-* candidate-viewpoint generation
-* generic viewpoint scorer
-* task-aware viewpoint scorer
-
-**Verification evidence**
-
-* `tests/test_viewpoints.py`
-* `tests/test_viewpoint_scoring.py`
-* `tests/test_task_aware_scoring.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-12 — Motion Planning
-
-**Requirement:** The system shall generate geometrically feasible candidate trajectories using perceived environmental information.
-
-**Implementation evidence**
-
-* `src/robotics/planner.py`
-* trajectory-processing modules
-* perception/planning interface
-
-**Verification evidence**
-
-* `tests/test_planner.py`
-* `tests/test_trajectory.py`
-* `tests/test_perception_planning.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-13 — Uncertainty-Aware Planning
-
-**Requirement:** Perception uncertainty shall be capable of modifying planning safety/risk behaviour.
-
-**Implementation evidence**
-
-* uncertainty-dependent planning margins
-* uncertainty-aware benchmark framework
-* perception/planning coupling
-
-**Verification evidence**
-
-* `tests/test_perception_planning.py`
-* `tests/test_safety_critical_benchmark.py`
-* `tests/test_statistical_benchmark.py`
-* uncertainty benchmark experiments
-
-**Status:** **Verified**
-
----
-
-## REQ-14 — Ground-Truth Safety Evaluation
-
-**Requirement:** Planned trajectories shall be evaluated independently against simulator ground truth.
-
-**Implementation evidence**
-
-* ground-truth geometry retained independently from perceived geometry
-* safety evaluation subsystem
-
-**Verification evidence**
-
-* `tests/test_safety.py`
-* `tests/test_safety_critical_benchmark.py`
-* `tests/test_statistical_benchmark.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-15 — Safety-Margin Violation Detection
-
-**Requirement:** The system shall identify entry into a protected region surrounding critical anatomy.
-
-**Implementation evidence**
-
-* robotics safety subsystem
-* clearance/safety-margin calculations
-
-**Verification evidence**
-
-* `tests/test_safety.py`
-* `tests/test_safety_critical_benchmark.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-16 — Collision Detection
-
-**Requirement:** The system shall detect geometric intersection between the instrument trajectory and critical simulated structures.
-
-**Implementation evidence**
-
-* collision checking
-* configuration safety
-* edge safety
-* trajectory evaluation
-
-**Verification evidence**
-
-* `tests/test_safety.py`
-* `tests/test_planner.py`
-* `tests/test_safety_critical_benchmark.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-17 — Quantitative Metrics
-
-**Requirement:** Safety, perception, planning, and efficiency metrics shall be calculated for experimental trials.
-
-**Implementation evidence**
-
-Experimental modules expose metrics including:
-
-* localisation error;
-* uncertainty;
-* camera movement;
-* planning success;
-* planner iterations;
-* planning time;
-* path cost;
-* true clearance;
-* safety-margin violation;
-* collision outcome.
-
-**Verification evidence**
-
-* `tests/test_active_perception_benchmark.py`
-* `tests/test_safety_critical_benchmark.py`
-* `tests/test_statistical_results.py`
-* `tests/test_statistical_validation.py`
-
-**Status:** **Verified**
-
----
-
-## REQ-18 — Experimental Logging
-
-**Requirement:** Trials shall retain sufficient machine-readable information to identify conditions, strategy, perturbation, seed, intermediate outputs, and outcomes.
-
-**Implementation evidence**
-
-* benchmark-result data structures
-* experiment outputs
-* stored result files
-* seeded experimental execution
-
-**Current gap**
-
-A single formally defined experiment-record schema linking all final three-strategy trials to software/version metadata has not yet been demonstrated as part of the final experiment pipeline.
-
-**Status:** **Partially Verified**
-
----
-
-## REQ-19 — Matched Experimental Comparison
-
-**Requirement:** Equivalent scenarios shall be reused across fixed-view, generic active-perception, and task-aware active-perception strategies.
-
-**Existing evidence**
-
-Matched comparisons already exist in individual benchmark and task-aware experiments.
-
-Relevant verification includes:
-
-* `tests/test_active_perception_benchmark.py`
-* task-aware benchmark/ablation experiments
-* controlled random seeds
-* statistical benchmarking utilities
-
-**Remaining gap**
-
-The final unified:
-
-```text
-Fixed view
-    vs
-Generic active perception
-    vs
-Task-aware active perception
-```
-
-comparison has not yet been completed through the same full:
-
-```text
-perception
-→ uncertainty
-→ motion planning
-→ ground-truth safety
-```
-
-pipeline.
-
-**Status:** **Partially Verified — principal outstanding research requirement**
-
----
-
-## REQ-20 — Automated Experiment Execution
-
-**Requirement:** Repeated predefined experiments shall execute without manual intervention between trials.
-
-**Implementation evidence**
-
-Automated experiment drivers exist for:
-
-* Monte Carlo evaluation;
-* active-perception benchmarking;
-* uncertainty sweeps;
-* task-aware benchmarking;
-* ablation;
-* sensitivity analysis;
-* statistical validation.
-
-**Verification evidence**
-
-* benchmark tests
-* sensitivity tests
-* statistical-validation tests
-
-**Status:** **Verified**
-
----
-
-# 4. Non-Functional Requirements Traceability
-
-## NFR-01 — Modularity
-
-Core concerns are separated into:
-
-```text
-geometry
-robotics
-perception
-simulation
-ROS 2 integration
-```
-
-Further decomposition separates camera modelling, observation, occlusion, uncertainty, generic active perception, task relevance, task-aware scoring, planning, and safety.
-
-**Evidence**
-
-* package architecture
-* `docs/architecture.md`
-* independently testable modules
-
-**Status:** **Verified**
-
----
-
-## NFR-02 — Reproducibility
-
-The project uses:
-
-* Python 3.11;
-* `environment.yml`;
-* controlled random seeds;
-* `pytest.ini`;
-* automated regression tests.
-
-A completely fresh Conda environment reproduced:
-
-```text
-377 passed
+449 passed
 0 failed
-```
 
-**Status:** **Verified**
+3. Functional Requirements
 
----
+Requirement
 
-## NFR-03 — Traceability
+Principal Implementation / Evidence
 
-Requirements, verification methods, architecture, software modules, and test evidence are explicitly documented.
+Verification Evidence
 
-This document provides requirement-to-evidence traceability.
+Status
 
-The final experiment should additionally record software revision identifiers alongside final experiment outputs.
+REQ-01 Reproducible workspace
 
-**Status:** **Partially Verified**
+workspace and scenario construction
 
----
+workspace tests; robustness scenarios
 
-## NFR-04 — Testability
+Verified
 
-The project contains independent automated tests spanning:
+REQ-02 Target and critical structures
 
-* geometry;
-* robotics;
-* safety;
-* planning;
-* perception;
-* uncertainty;
-* active perception;
-* task awareness;
-* integration;
-* experiments;
-* statistics.
+anatomical/workspace representations; start/goal definitions
 
-Current regression baseline:
+workspace, safety, navigation tests
 
-```text
-377 passed
-0 failed
-```
+Verified
 
-**Status:** **Verified**
+REQ-03 Coordinate frames
 
----
+src/geometry/transforms.py; camera/instrument geometry
 
-## NFR-05 — Numerical Robustness
+tests/test_transforms.py; coordinate-frame checks
 
-Geometric and transformation operations are evaluated using numerical tolerances rather than inappropriate exact floating-point comparisons.
+Verified
 
-**Evidence**
+REQ-04 Camera observation
 
-* transformation tests;
-* geometry tests;
-* RCM verification;
-* statistical/numerical checks.
+camera, observation, viewpoint modules
 
-**Status:** **Verified**
+camera, observation, viewpoint tests
 
----
+Verified
 
-## NFR-06 — Quantitative Evaluation
+REQ-05 Controlled degradation
 
-The framework uses quantitative metrics rather than relying on visual demonstration alone.
+uncertainty, occlusion, heterogeneity and synthetic illumination modules
 
-Evidence includes:
+uncertainty/occlusion tests; illumination benchmark
 
-* Monte Carlo benchmarking;
-* safety outcomes;
-* uncertainty sweeps;
-* task-aware comparisons;
-* statistical confidence intervals;
-* statistical-validation utilities.
+Verified
 
-**Status:** **Verified**
+REQ-06 Perception output
 
----
+perception and observation interfaces; common three-strategy interface
 
-## NFR-07 — Robustness Evaluation
+perception, observation and integration tests
 
-The framework supports evaluation across multiple perception-degradation conditions.
+Verified
 
-**Evidence**
+REQ-07 Explicit uncertainty
 
-* `tests/test_uncertainty_sensitivity.py`
-* `tests/test_uncertainty_heterogeneity_sensitivity.py`
-* `tests/test_task_weight_sensitivity.py`
-* uncertainty sweeps
-* ablation experiments
+localisation sigma/covariance and observation uncertainty
 
-**Status:** **Verified**
+uncertainty tests; calibration benchmark
 
----
+Verified
 
-## NFR-08 — Extensibility
+REQ-08 Fixed View
 
-Alternative algorithms can be incorporated through modular interfaces rather than rewriting the complete framework.
+common Fixed View perception pathway
 
-Existing evidence includes separate:
+three-strategy perception/navigation tests
 
-* viewpoint scorers;
-* perception strategies;
-* planning algorithms;
-* observation models;
-* experiment drivers.
+Verified
 
-**Status:** **Verified by architecture and implementation structure**
+REQ-09 Generic Active Perception
 
----
+generic viewpoint scorer and controller
 
-## NFR-09 — Computational Observability
+viewpoint-scoring and active-perception tests
 
-Intermediate algorithm outputs are available for experiment logging and analysis, including:
+Verified
 
-* viewpoint scores;
-* selected viewpoints;
-* localisation uncertainty;
-* localisation error;
-* planner success;
-* iterations;
-* path cost;
-* clearance;
-* safety outcomes.
+REQ-10 Task-Aware Active Perception
 
-**Status:** **Verified**
+task relevance, task-aware scorer/controller
 
----
+task-aware, ablation and sensitivity tests
 
-## NFR-10 — Interpretation Safety
+Verified
 
-The repository explicitly distinguishes simulation evidence from:
+REQ-11 Candidate viewpoint evaluation
 
-* clinical validation;
-* patient-risk estimation;
-* medical-device safety;
-* clinical effectiveness.
+viewpoint generation and quantitative scoring
 
-This boundary is documented in:
+viewpoint and scorer tests
 
-* `README.md`;
-* `docs/requirements.md`;
-* `docs/verification_plan.md`;
-* `docs/architecture.md`.
+Verified
 
-**Status:** **Documentation Verified**
+REQ-12 Motion planning
 
----
+collision-aware RRT and trajectory modules
 
-# 5. Traceability Summary
+planner and trajectory tests
 
-## Functional Requirements
+Verified
 
-| Status             | Requirements                |
-| ------------------ | --------------------------- |
-| Verified           | REQ-01–REQ-17, REQ-20       |
-| Partially Verified | REQ-18, REQ-19              |
-| Pending            | None as isolated components |
+REQ-13 Uncertainty-aware planning
 
-The major remaining research gap is therefore not the absence of core algorithms.
+uncertainty-inflated planning geometry
 
-It is completion of the **unified end-to-end three-strategy experiment** required to fully close REQ-19 and strengthen REQ-18.
+perception-planning and safety-critical benchmark tests
 
----
+Verified
 
-## Non-Functional Requirements
+REQ-14 Ground-truth evaluation
 
-| Status                 | Requirements                                                   |
-| ---------------------- | -------------------------------------------------------------- |
-| Verified               | NFR-01, NFR-02, NFR-04, NFR-05, NFR-06, NFR-07, NFR-08, NFR-09 |
-| Partially Verified     | NFR-03                                                         |
-| Documentation Verified | NFR-10                                                         |
+independent hidden truth geometry and evaluation
 
----
+navigation, safety and statistical tests
 
-# 6. Verification Baseline
+Verified
 
-At the time of this traceability update, the core Python framework has been reproduced in a fresh documented environment with:
+REQ-15 Safety-margin violations
 
-```text
-377 passed
-0 failed
-```
+safety/clearance subsystem
 
-The regression suite covers component, algorithm, integration, experiment, and statistical behaviour.
+safety and benchmark tests
 
-ROS 2 validation is maintained separately because ROS 2-specific dependencies require a correctly configured ROS 2 Jazzy environment.
+Verified
 
----
+REQ-16 Collision detection
 
-# 7. Remaining Closure Actions
+configuration/edge/path collision checking
 
-The following evidence is still required before all major research requirements can be considered fully closed:
+safety and planner tests
 
-1. implement the unified fixed-view vs generic active-perception vs task-aware active-perception experiment;
-2. propagate viewpoint-dependent uncertainty into the common motion-planning pipeline;
-3. evaluate all three strategies against identical hidden ground-truth geometry;
-4. record common safety, planning, perception, and efficiency metrics;
-5. retain matched scenario identifiers and random seeds;
-6. define a final machine-readable experiment-record schema;
-7. retain the software revision associated with final experimental results;
-8. perform final paired statistical comparison.
+Verified
 
-Once these actions are complete, REQ-18, REQ-19, and NFR-03 can be reassessed for full verification.
+REQ-17 Quantitative metrics
 
----
+benchmark result structures and analysis modules
 
-# 8. Interpretation Boundary
+statistical, robustness, illumination and efficiency tests
 
-Verification evidence in this matrix demonstrates implementation and computational behaviour relative to the research-system requirements.
+Verified
 
-It does **not** demonstrate:
+REQ-18 Experimental logging
 
-* clinical safety;
-* clinical effectiveness;
-* regulatory compliance;
-* medical-device certification;
-* suitability for patient use.
+CSV/JSON outputs; final evidence package; reproducibility manifest
+
+output-writing tests and generated result artifacts
+
+Verified
+
+REQ-19 Matched three-strategy comparison
+
+unified Fixed / Generic / Task-Aware pipeline
+
+E3-E8 tests and final matched experiments
+
+Verified
+
+REQ-20 Automated experiment execution
+
+benchmark drivers and CLI experiment modules
+
+benchmark and regression tests
+
+Verified
+
+4. Key Experimental Evidence
+
+End-to-End Three-Strategy Validation
+
+The project completed a common:
+
+Fixed View
+vs
+Generic Active Perception
+vs
+Task-Aware Active Perception
+
+pipeline with perception uncertainty propagated into planning and hidden ground-truth safety evaluation.
+
+A 100-trial matched fixed-scene benchmark demonstrated strong planning-feasibility differences between strategies.
+
+Status: REQ-13, REQ-14, REQ-17, REQ-19 verified.
+
+Multi-Scenario Robustness
+
+The robustness benchmark evaluated:
+
+10 scenarios
+x 10 repetitions
+x 3 strategies
+= 300 strategy evaluations
+
+Aggregate safe-navigation success:
+
+Fixed:       43%
+Generic:     61%
+Task-Aware:  97%
+
+Task-Aware planning success was 100% across the tested scenarios.
+
+Status: REQ-05, REQ-17, REQ-19 and NFR-07 verified.
+
+Mechanism Ablation
+
+Generic, alignment-only, uncertainty-only, and full task-aware variants were compared.
+
+The experiments showed that task alignment was the dominant viewpoint-selection mechanism. The explicit uncertainty term did not provide independent selection benefit under the tested observation model.
+
+Status: REQ-10 and REQ-11 verified with mechanism-level evidence.
+
+Uncertainty Stress Testing
+
+Uncertainty-weight values from 0 through 16 and multiple uncertainty profiles were tested.
+
+The selected viewpoint did not change as the explicit uncertainty weighting increased, while uncertainty remained important downstream through uncertainty-inflated planning geometry.
+
+Status: REQ-07, REQ-10, REQ-13 and NFR-06 verified.
+
+Formal Uncertainty Calibration
+
+The calibration experiment evaluated:
+
+10 scenarios
+60 viewpoint conditions
+6,000 simulated observations
+
+Key results:
+
+Mean normalised squared error:
+Observed 3.024
+Expected 3.000
+
+95% empirical coverage:
+Observed 94.98%
+Nominal  95.00%
+
+The model was classified as:
+
+well_calibrated_under_simulation
+
+Artifacts:
+
+results/supplementary_uncertainty_calibration/uncertainty_calibration_samples.csv
+
+results/supplementary_uncertainty_calibration/uncertainty_calibration_summary.json
+
+Status: REQ-07 verified quantitatively.
+
+Synthetic Visual-Quality Degradation
+
+The synthetic observation-quality model used:
+
+sigma_degraded = sigma_nominal / sqrt(quality)
+
+Under the severe condition (quality = 0.25):
+
+Strategy
+
+Planning Success
+
+Safe Navigation
+
+Fixed
+
+35%
+
+35%
+
+Generic
+
+55%
+
+55%
+
+Task-Aware
+
+95%
+
+90%
+
+Artifacts:
+
+results/supplementary_illumination/illumination_trials.csv
+
+results/supplementary_illumination/illumination_summary.json
+
+This is explicitly a synthetic stress test, not a physical lighting model.
+
+Status: REQ-05 and NFR-07 verified.
+
+Planning Efficiency
+
+The final efficiency benchmark used:
+
+10 scenarios
+x 5 matched repetitions
+= 50 matched units
+= 150 strategy evaluations
+
+Metric
+
+Fixed
+
+Generic
+
+Task-Aware
+
+Planning success
+
+46%
+
+66%
+
+100%
+
+Safe navigation
+
+38%
+
+60%
+
+92%
+
+Planning time, all attempts
+
+0.547 s
+
+0.882 s
+
+1.239 s
+
+Successful-plan path cost
+
+2.517
+
+2.558
+
+2.499
+
+On the 33 matched trials where both Generic and Task-Aware planning succeeded:
+
+Task-Aware - Generic path cost:
+-0.107
+95% CI [-0.257, -0.015]
+
+Artifacts:
+
+results/supplementary_efficiency/three_strategy_efficiency_trials.csv
+
+results/supplementary_efficiency/three_strategy_efficiency_summary.json
+
+Status: REQ-17 and NFR-09 verified.
+
+5. Non-Functional Requirements
+
+Requirement
+
+Evidence
+
+Status
+
+NFR-01 Modularity
+
+separated geometry, robotics, perception, simulation, and ROS 2 components
+
+Verified
+
+NFR-02 Reproducibility
+
+Python 3.11 environment definition, deterministic seeds, reproducible experiment drivers
+
+Verified
+
+NFR-03 Traceability
+
+requirements, tests, result artifacts, final-evidence manifest/hashes, version-controlled repository
+
+Verified
+
+NFR-04 Testability
+
+final regression suite: 449 passing tests
+
+Verified
+
+NFR-05 Numerical robustness
+
+tolerance-based geometric and transformation verification
+
+Verified
+
+NFR-06 Quantitative evaluation
+
+matched trials, confidence intervals, calibration, ablation and robustness analysis
+
+Verified
+
+NFR-07 Robustness evaluation
+
+10-scene robustness, uncertainty stress and synthetic visual degradation
+
+Verified
+
+NFR-08 Extensibility
+
+separate scorers, controllers, observation models, planners and experiment drivers
+
+Verified
+
+NFR-09 Computational observability
+
+scores, uncertainty, planning time, iterations, cost, clearance and safety outputs retained
+
+Verified
+
+NFR-10 Interpretation safety
+
+README, requirements and experiment descriptions explicitly bound claims to simulation
+
+Documentation Verified
+
+6. Final Traceability Summary
+
+Functional Requirements
+
+Verified:  REQ-01 through REQ-20
+Pending:   None
+
+Non-Functional Requirements
+
+Verified:               NFR-01 through NFR-09
+Documentation Verified: NFR-10
+Pending:                None
+
+The previously outstanding unified three-strategy integration, experimental logging, matched statistical evaluation, uncertainty calibration, degradation testing, and planning-efficiency analysis are now complete.
+
+7. Interpretation Boundary
+
+The verification evidence in this matrix demonstrates implementation and computational behaviour relative to the project's simulation requirements.
+
+It does not demonstrate:
+
+clinical safety;
+
+clinical effectiveness;
+
+patient-specific performance;
+
+regulatory compliance;
+
+medical-device certification;
+
+suitability for clinical use.

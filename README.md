@@ -1,687 +1,574 @@
-# Uncertainty-Aware Active Perception for Safety-Critical Motion Planning in Minimally Invasive Surgical Robotics
+Task-Aware Active Perception Coupled with Uncertainty-Aware Motion Planning for Simulated Surgical Navigation
 
-A simulation-based research engineering framework investigating how **perception uncertainty, task-aware active perception, and safety-critical motion planning** interact in minimally invasive surgical robotics.
+A simulation-based research engineering framework investigating how task-aware active perception, localisation uncertainty, and safety-critical motion planning interact in minimally invasive surgical robotics.
 
-The framework combines surgical robot modelling, collision-aware motion planning, uncertainty representation, camera/viewpoint simulation, active perception, task-aware viewpoint selection, controlled benchmarking, statistical evaluation, automated verification, and ROS 2 integration.
+The project compares Fixed View, Generic Active Perception, and Task-Aware Active Perception through a common perception-to-planning pipeline with hidden ground-truth safety evaluation.
 
-> **Research prototype:** This repository is intended for simulation and engineering research only. It is not a clinical system or medical device.
+Research prototype: This repository is intended for simulation and engineering research only. It is not a clinical system or medical device.
 
----
+Research Question
 
-## Research Question
+Can task-aware active perception improve the probability of obtaining a safe executable motion plan in simulated minimally invasive surgical environments when perception uncertainty is explicitly propagated into safety-critical motion planning?
 
-**Can task-aware uncertainty-driven active perception improve the safety and efficiency of motion planning in simulated minimally invasive surgical environments compared with fixed-view and task-agnostic active perception?**
-
-The project investigates this question through two linked research layers:
-
-1. **Uncertainty-aware navigation:** how localisation uncertainty affects trajectory safety and planning efficiency.
-2. **Task-aware active perception:** whether selecting viewpoints using information about the intended surgical trajectory improves task-relevant perception compared with generic viewpoint selection.
-
-The final objective is to evaluate:
-
-```text
-Fixed-view perception
+Fixed View
         vs
-Generic active perception
+Generic Active Perception
         vs
-Task-aware active perception
-```
+Task-Aware Active Perception
 
-through a common perception → uncertainty → planning → ground-truth safety pipeline.
+Common pipeline:
 
----
+Perception
+    ->
+Localisation estimate + predicted uncertainty
+    ->
+Uncertainty-inflated planning geometry
+    ->
+Collision-aware RRT
+    ->
+Hidden ground-truth safety evaluation
 
-## Current Research Status
+What This Project Implements
 
-| Component                                                   | Status                 |
-| ----------------------------------------------------------- | ---------------------- |
-| RCM-constrained surgical instrument model                   | Complete               |
-| Safety-critical workspace modelling                         | Complete               |
-| Collision-aware RRT planning                                | Complete               |
-| Trajectory shortcutting and optimisation                    | Complete               |
-| Gaussian localisation uncertainty                           | Complete               |
-| Ground-truth vs perceived anatomy separation                | Complete               |
-| Uncertainty-aware safety margins                            | Complete               |
-| Monte Carlo uncertainty evaluation                          | Complete               |
-| Camera and viewpoint modelling                              | Complete               |
-| Viewpoint-dependent observation model                       | Complete               |
-| Occlusion modelling                                         | Complete               |
-| Generic active perception                                   | Complete               |
-| Task-relevance modelling                                    | Complete               |
-| Task-aware viewpoint scoring                                | Complete               |
-| Task-aware viewpoint selection                              | Complete               |
-| Generic closed-loop perception evaluation                   | Implemented            |
-| Ablation experiments                                        | Implemented            |
-| Sensitivity analysis                                        | Implemented            |
-| Statistical evaluation utilities                            | Implemented            |
-| ROS 2 integration                                           | Implemented separately |
-| Core automated verification                                 | **377 tests passing**  |
-| Fresh-environment reproduction                              | **Verified**           |
-| GitHub Actions CI                                           | Configured             |
-| Unified fixed vs generic vs task-aware navigation benchmark | **In progress**        |
-| Full perception → planning → safety closed loop             | **In progress**        |
+RCM-constrained minimally invasive surgical instrument modelling
 
-This distinction is deliberate: individual planning and active-perception hypotheses have been evaluated, while the full three-strategy end-to-end navigation comparison remains the main outstanding technical objective.
+joint-space forward kinematics
 
----
+surgical workspace and anatomical geometry
 
-## Core Contributions
+collision and safety-margin evaluation
 
-### 1. Safety-Critical Surgical Motion Planning
+collision-aware RRT planning
 
-The project implements a simulated minimally invasive surgical instrument constrained by a **remote centre of motion (RCM)**.
+edge validation and trajectory shortcutting
 
-The planning framework includes:
+path-cost evaluation
 
-* joint-space configuration modelling;
-* RCM-constrained instrument kinematics;
-* collision checking;
-* anatomical safety margins;
-* collision-aware rapidly exploring random tree (RRT) planning;
-* edge validation;
-* joint-limit enforcement;
-* trajectory shortcutting;
-* path-cost evaluation;
-* hidden ground-truth safety evaluation.
+explicit Gaussian localisation uncertainty
 
-The RCM error in the implemented geometric model remains approximately at floating-point numerical precision.
+separation of perceived and hidden ground-truth anatomy
 
----
+uncertainty-aware planning margins
 
-### 2. Explicit Perception Uncertainty
+camera pose, visibility, viewpoints, and occlusion
 
-The framework deliberately separates:
+Generic Active Perception
 
-```text
-Ground-truth anatomy
-        from
-Perceived anatomy
-```
+task representation and task relevance
 
-The planner therefore does not receive perfect knowledge of the simulated surgical environment.
+Task-Aware Active Perception
 
-Anatomical localisation uncertainty is represented using a Gaussian positional model:
+matched stochastic benchmarking
 
-[
-\Sigma = \sigma^2 I
-]
+multi-scenario robustness evaluation
 
-for isotropic uncertainty, where:
+mechanism ablation
 
-* (\Sigma) is the positional covariance matrix;
-* (\sigma) is localisation standard deviation;
-* (I) is the identity matrix.
+uncertainty stress testing
 
-A noisy anatomical estimate is supplied to the planner while hidden ground-truth geometry is retained independently for evaluation.
+formal uncertainty calibration
 
-This allows a trajectory that appears safe according to perception to be tested against the actual simulated anatomy.
+synthetic visual-quality degradation
 
----
+planning-time, iteration, and path-cost evaluation
 
-### 3. Uncertainty-Aware Motion Planning
+automated verification
 
-The deterministic planner uses the nominal safety margin:
+ROS 2 Jazzy integration
 
-[
-m_{\text{plan}} = m_{\text{base}}
-]
+Core Idea
 
-The uncertainty-aware planner can instead inflate the protected region:
+The planner does not receive perfect simulator geometry.
 
-[
-m_{\text{plan}} = m_{\text{base}} + k\sigma
-]
+Hidden ground truth
+        |
+        +----> evaluation only
 
-where:
+Noisy perceived anatomy
+        |
+        +----> motion planning
 
-* (m_{\text{base}}) is the nominal anatomical safety margin;
-* (\sigma) is estimated localisation uncertainty;
-* (k) controls planning conservatism.
+For the principal isotropic localisation model:
 
-This explicitly exposes the engineering trade-off between:
+Sigma = sigma^2 I
 
-```text
-robustness
-    vs
-planning feasibility
-    vs
-computation
-    vs
-trajectory efficiency
-```
+Planning geometry can then be inflated according to:
 
----
+m_plan = m_base + k sigma
 
-## Uncertainty-Aware Planning Benchmark
+This connects perception uncertainty directly to planning conservatism and feasibility.
 
-A paired 30-trial Monte Carlo experiment compared deterministic and uncertainty-aware planning under matched noisy anatomical observations.
+Main Results
 
-Experimental configuration:
+Multi-Scenario Robustness
 
-```text
-Localisation standard deviation: 5 mm
-Uncertainty multiplier:          k = 2
-Trials:                          30
-```
+The principal experiment evaluated:
 
-| Metric                             | Deterministic RRT | Uncertainty-Aware RRT |
-| ---------------------------------- | ----------------: | --------------------: |
-| Planning success                   |              100% |                  100% |
-| Ground-truth collision rate        |                0% |                    0% |
-| Ground-truth safety-violation rate |         **56.7%** |              **3.3%** |
-| Mean true safety clearance         |     **−2.106 mm** |         **+8.555 mm** |
-| Mean planning time                 |           0.818 s |               1.609 s |
-| Mean iterations                    |             230.1 |                 475.5 |
-| Mean path cost                     |            2.1614 |                2.6381 |
+10 simulated scene variations
+x 10 matched repetitions
+x 3 strategies
+= 300 strategy evaluations
 
-Within this simulation configuration, uncertainty-aware planning substantially reduced observed safety-margin violations.
+Metric
 
-The improvement was accompanied by greater computation and trajectory cost, demonstrating a **safety–efficiency trade-off rather than a cost-free improvement**.
+Fixed
 
-These results are simulation-specific and should not be interpreted as evidence of clinical performance.
+Generic
 
----
+Task-Aware
 
-## Active Perception
+Mean localisation error
 
-The perception subsystem models:
+25.964 mm
 
-* camera pose;
-* camera intrinsics;
-* candidate viewpoint generation;
-* visibility;
-* geometric observation quality;
-* occlusion;
-* localisation uncertainty;
-* camera movement cost;
-* generic viewpoint utility.
+16.934 mm
 
-Candidate viewpoints are generated around the surgical workspace and evaluated according to expected observation quality.
+4.682 mm
 
-Generic active perception selects a viewpoint using perception-related utility without information about the intended surgical trajectory.
+Mean predicted sigma
 
----
+17.777 mm
 
-## Task-Aware Active Perception
+12.267 mm
 
-Generic active perception asks:
+3.003 mm
 
-> Which viewpoint provides the best observation?
+Camera movement
 
-Task-aware active perception additionally asks:
+0 mm
 
-> Which viewpoint provides useful information **where uncertainty matters to the intended surgical task?**
+15.628 mm
 
-A surgical task contains:
+109.985 mm
 
-* the planned trajectory;
-* task-relevant safety-critical locations.
+Planning success
 
-The planned trajectory is used to create a **task-relevance model**.
+45%
 
-The task-aware scoring framework then combines observation information with trajectory relevance and task alignment before selecting a viewpoint.
+63%
 
-This allows the framework to distinguish between:
+100%
 
-```text
-global perception quality
-        and
-task-relevant perception quality
-```
+Safe-navigation success
 
----
+43%
 
-## Task-Aware Active-Perception Benchmark
+61%
 
-A matched 100-trial benchmark compared generic and task-aware active perception.
+97%
 
-### Generic Active Perception
+Collision rate
 
-| Metric                    |    Result |
-| ------------------------- | --------: |
-| Trials                    |       100 |
-| Mean localisation error   |  4.211 mm |
-| Median localisation error |  4.017 mm |
-| Mean predicted sigma      |  2.667 mm |
-| Mean camera movement      | 85.962 mm |
-| Mean task alignment       |  0.999040 |
+0%
 
-### Task-Aware Active Perception
+0%
 
-| Metric                    |     Result |
-| ------------------------- | ---------: |
-| Trials                    |        100 |
-| Mean localisation error   |   3.158 mm |
-| Median localisation error |   3.013 mm |
-| Mean predicted sigma      |   2.000 mm |
-| Mean camera movement      | 111.544 mm |
-| Mean task alignment       |   0.998298 |
-| Mean task relevance       |   0.349321 |
+0%
 
-### Comparative Result
+Safety-violation rate
 
-| Metric                            |      Change |
-| --------------------------------- | ----------: |
-| Mean localisation-error reduction |  **25.00%** |
-| Mean predicted-sigma reduction    |  **25.00%** |
-| Task-alignment change             |      −0.07% |
-| Selection difference rate         | **100.00%** |
-
-The task-aware strategy selected a different viewpoint in every tested trial and produced lower simulated localisation error under the implemented benchmark conditions.
+2%
 
-The improvement required increased camera movement, again exposing a trade-off rather than an unconditional performance improvement.
+2%
 
----
+3%
 
-## Statistical Evaluation
+Worst-scenario safe-navigation success
 
-For the 100-trial localisation-error comparison:
+0%
 
-| Statistic                   |                   Result |
-| --------------------------- | -----------------------: |
-| Generic mean                |                 4.211 mm |
-| Generic SD                  |                 1.758 mm |
-| Generic 95% CI              |           3.877–4.548 mm |
-| Task-aware mean             |                 3.158 mm |
-| Task-aware SD               |                 1.318 mm |
-| Task-aware 95% CI           |           2.908–3.411 mm |
-| Mean paired improvement     |                 1.053 mm |
-| 95% CI of paired difference | 0.969–1.137 mm reduction |
+0%
 
-The repository also includes statistical benchmarking and validation utilities for controlled experimental analysis.
+90%
 
-Reported uncertainty values are outputs of the implemented simulation model rather than measurements from a physical imaging system.
+Across the tested simulated perturbations, Task-Aware Active Perception substantially improved planning feasibility and the probability of obtaining a safe executable trajectory.
 
----
+The project does not claim that Task-Aware Active Perception reduces collision probability conditional on a valid trajectory already existing.
 
-## Sensitivity and Ablation Analysis
+Mechanism Ablation
 
-The project includes dedicated experiments for:
+Four variants were evaluated:
 
-* task-aware ablation;
-* normalised ablation;
-* task-weight sensitivity;
-* perception-uncertainty sensitivity;
-* uncertainty-heterogeneity sensitivity;
-* uncertainty parameter sweeps.
+Generic baseline
+Alignment-only
+Uncertainty-only
+Full task-aware
 
-These experiments are used to determine whether observed behaviour depends on:
+The main finding was:
 
-* a particular task weight;
-* a single uncertainty magnitude;
-* one scoring term;
-* one uncertainty composition.
+Task alignment was the dominant viewpoint-selection mechanism.
 
-This is intended to distinguish genuine algorithmic behaviour from results caused by a single tuned configuration.
+The uncertainty-only variant behaved essentially identically to the Generic baseline under the tested observation model.
 
----
+Further uncertainty-stress experiments increased the uncertainty weight from:
 
-## System Architecture
+0 -> 0.25 -> 1 -> 4 -> 16
 
-```text
-                         Surgical Task
-                              |
-                              v
-                     Surgical Workspace
-                              |
-                              v
-                  RCM-Constrained Instrument
-                              |
-                              v
-                    Collision-Aware RRT
-                              |
-                              v
-                      Planned Trajectory
-                              |
-                  +-----------+-----------+
-                  |                       |
-                  v                       v
-          Task-Relevance Model     Candidate Viewpoints
-                  |                       |
-                  |                       v
-                  |              Camera / Observation Model
-                  |                       |
-                  |              Visibility / Occlusion
-                  |                       |
-                  |                       v
-                  +-------------> Uncertainty Estimate
-                                          |
-                               +----------+----------+
-                               |                     |
-                               v                     v
-                         Generic Active        Task-Aware Active
-                           Perception              Perception
-                               |                     |
-                               +----------+----------+
-                                          |
-                                          v
-                                  Selected Viewpoint
-                                          |
-                                          v
-                                Updated Observation
-                                          |
-                                          v
-                                Localisation Estimate
-                                          |
-                                          v
-                             Ground-Truth Evaluation
-```
+without changing the selected viewpoint.
 
-The principal design separation is between:
+The project is therefore best described as:
 
-* planning geometry;
-* perception estimates;
-* task information;
-* ground truth.
+Task-aware active perception coupled with uncertainty-aware motion planning
 
-This prevents evaluation from simply testing a system against the same imperfect information it used for planning.
+rather than as an uncertainty-driven viewpoint-selection algorithm.
 
-The remaining end-to-end work extends the selected observation back into the uncertainty-aware motion planner so that all three perception strategies can be compared using common navigation safety and efficiency outcomes.
+Formal Uncertainty Calibration
 
----
+The localisation-uncertainty model was evaluated using:
 
-## Software Verification
+10 scenarios
+60 viewpoint conditions
+6,000 observations
 
-The core Python research framework currently has:
+Diagnostic
 
-```text
-377 passed
+Expected
+
+Observed
+
+Mean normalised squared error
+
+3.000
+
+3.024
+
+Mean radial error / sigma
+
+1.596
+
+1.603
+
+50% coverage
+
+50%
+
+49.42%
+
+90% coverage
+
+90%
+
+89.95%
+
+95% coverage
+
+95%
+
+94.98%
+
+99% coverage
+
+99%
+
+98.88%
+
+The uncertainty model was therefore classified as:
+
+well_calibrated_under_simulation
+
+This applies only to the implemented simulation model.
+
+Synthetic Visual-Quality Degradation
+
+A supplementary stress test represented reduced visual quality using:
+
+sigma_degraded = sigma_nominal / sqrt(quality)
+
+Under the most severe tested degradation:
+
+Metric
+
+Fixed
+
+Generic
+
+Task-Aware
+
+Localisation error
+
+60.222 mm
+
+42.250 mm
+
+9.812 mm
+
+Predicted sigma
+
+35.555 mm
+
+24.533 mm
+
+6.007 mm
+
+Planning success
+
+35%
+
+55%
+
+95%
+
+Safe-navigation success
+
+35%
+
+55%
+
+90%
+
+This is a synthetic observation-quality stress test, not a physical photometric model.
+
+Planning Efficiency
+
+A final benchmark used:
+
+10 scenarios
+x 5 matched repetitions
+= 50 matched planning units
+
+Metric
+
+Fixed
+
+Generic
+
+Task-Aware
+
+Planning success
+
+46%
+
+66%
+
+100%
+
+Safe-navigation success
+
+38%
+
+60%
+
+92%
+
+Camera movement
+
+0 mm
+
+15.628 mm
+
+109.985 mm
+
+Planning time, all attempts
+
+0.547 s
+
+0.882 s
+
+1.239 s
+
+RRT iterations, all attempts
+
+142.8
+
+227.2
+
+333.7
+
+Planning time, successful plans
+
+1.189 s
+
+1.337 s
+
+1.239 s
+
+Path cost, successful plans
+
+2.517
+
+2.558
+
+2.499
+
+Task-aware perception requires greater camera repositioning and more computation when averaged across all attempts.
+
+However, Fixed and Generic strategies frequently fail to produce a path. Conditional on successful planning, computational effort is comparable.
+
+On the 33 matched trials where both Generic and Task-Aware succeeded:
+
+Task-Aware minus Generic path cost:
+-0.107
+
+95% CI:
+[-0.257, -0.015]
+
+Scientific Conclusions
+
+The experiments support four principal conclusions:
+
+Task-aware perception improves end-to-end navigation feasibility.
+
+Task alignment is the dominant viewpoint-selection mechanism.
+
+Explicit uncertainty weighting adds no measurable independent viewpoint-ranking benefit under the tested observation model.
+
+Localisation uncertainty remains important downstream because it modifies safety-critical planning geometry.
+
+Verification
+
+Final local automated regression baseline:
+
+449 passed
 0 failed
-```
-
-The regression suite covers areas including:
-
-* coordinate transformations;
-* surgical instrument kinematics;
-* RCM constraints;
-* trajectory generation;
-* workspace geometry;
-* collision detection;
-* safety evaluation;
-* motion planning;
-* path optimisation;
-* uncertainty modelling;
-* noisy perception;
-* camera geometry;
-* viewpoints;
-* observation models;
-* occlusion;
-* generic active perception;
-* task relevance;
-* task-aware scoring;
-* task-aware active perception;
-* closed-loop behaviour;
-* ablation experiments;
-* sensitivity analysis;
-* statistical benchmarking;
-* statistical validation.
-
-A completely fresh Conda environment created from `environment.yml` reproduced the full **377-test passing baseline**.
-
----
-
-## Continuous Integration
-
-The repository contains a GitHub Actions workflow that:
-
-1. checks out the repository;
-2. creates the documented Conda environment;
-3. uses Python 3.11;
-4. installs the project dependencies;
-5. runs the complete core research test suite.
-
-The workflow runs on pushes and pull requests targeting `main`.
-
-ROS 2 testing remains separate because the ROS middleware dependencies require a ROS 2 environment rather than the standard Python research environment.
-
----
-
-## Reproducible Environment
-
-The core research environment is defined in:
-
-```text
-environment.yml
-```
-
-Current principal dependencies include:
-
-* Python 3.11;
-* NumPy;
-* PyBullet;
-* Matplotlib;
-* pandas;
-* pytest.
-
-Create the environment with:
-
-```bash
-conda env create -f environment.yml
-conda activate surgical-navigation
-```
-
-Run the complete core test suite with:
-
-```bash
-python -m pytest -q
-```
-
-Expected current regression result:
-
-```text
-377 passed
-```
-
-Exact execution time is machine-dependent.
-
----
-
-## Running Key Experiments
-
-### Task-Aware Active-Perception Benchmark
-
-```bash
-python -m src.simulation.task_aware_benchmark
-```
-
-### Uncertainty Sensitivity Analysis
-
-```bash
-python -m src.simulation.uncertainty_sensitivity
-```
-
-### Generate Active-Perception Figures
-
-```bash
-python -m src.simulation.active_perception_figures
-```
-
-Generated figures are stored under:
-
-```text
-results/active_perception_figures/
-```
-
-### Standalone Surgical Simulation
-
-```bash
-python visual_surgical_simulation.py
-```
-
----
-
-## ROS 2 Integration
-
-A separate ROS 2 Jazzy workspace is included under:
-
-```text
-ros2_jazzy/
-└── ros2_ws/
-```
-
-The ROS layer provides experimental integration for components including:
-
-* perception;
-* planning;
-* planner/safety bridging;
-* safety gating;
-* viewpoint communication;
-* visualisation.
-
-ROS 2 is intentionally separated from the core research environment so that the simulation framework remains independently reproducible and testable.
-
-ROS-specific tests require a correctly configured ROS 2 Jazzy environment.
-
----
-
-## Repository Structure
-
-```text
-uncertainty-aware-surgical-navigation/
-│
-├── .github/
-│   └── workflows/
-│       └── core-tests.yml
-│
-├── docs/
-│   ├── coordinate_frames.md
-│   ├── project_scope.md
-│   ├── requirements.md
-│   └── verification_plan.md
-│
-├── results/
-│   ├── active_perception_figures/
-│   ├── figures/
-│   └── experimental outputs
-│
-├── ros2_jazzy/
-│   └── ros2_ws/
-│
-├── src/
-│   ├── geometry/
-│   ├── perception/
-│   ├── robotics/
-│   └── simulation/
-│
-├── tests/
-│
-├── environment.yml
-├── pytest.ini
-├── visual_surgical_simulation.py
-└── README.md
-```
-
----
-
-## Engineering and Research Practices
-
-The repository is structured to demonstrate:
-
-* modular software architecture;
-* version-controlled research development;
-* explicit requirements;
-* verification planning;
-* automated regression testing;
-* reproducible environments;
-* continuous integration;
-* controlled stochastic experiments;
-* matched experimental trials;
-* Monte Carlo evaluation;
-* baseline comparison;
-* ablation analysis;
-* sensitivity analysis;
-* statistical confidence intervals;
-* effect-size analysis;
-* explicit modelling assumptions;
-* separation of estimated and ground-truth state;
-* safety-oriented evaluation.
-
----
-
-## Remaining Technical Objectives
-
-The principal remaining work is intentionally focused rather than feature-driven.
-
-### 1. Unified Three-Strategy Experiment
 
 Run:
 
-```text
-Fixed view
-    vs
-Generic active perception
-    vs
-Task-aware active perception
-```
+python -m pytest -q
 
-under matched simulated conditions.
+The suite covers geometry, kinematics, safety, planning, uncertainty, camera modelling, active perception, task awareness, end-to-end integration, statistical validation, robustness, ablation, stress testing, calibration, synthetic visual degradation, and efficiency benchmarking.
 
-### 2. Full Perception–Planning Feedback
+Reproducible Environment
 
-Propagate viewpoint-dependent perception uncertainty into the uncertainty-aware motion planner.
+The Python research environment is defined in:
 
-### 3. Common Navigation Outcomes
+environment.yml
 
-Evaluate all three strategies using:
+The project targets Python 3.11.
 
-* planning success;
-* ground-truth collision rate;
-* ground-truth safety violations;
-* true minimum clearance;
-* path cost;
-* computation time;
-* planner iterations;
-* perception movement cost.
+conda env create -f environment.yml
+conda activate surgical-navigation
+python -m pytest -q
 
-### 4. Matched Repeated Trials
+Key Experiments
 
-Use controlled seeds and matched scenarios so that differences between strategies can be attributed to the strategy rather than different random conditions.
+python -m src.simulation.three_strategy_trial
+python -m src.simulation.three_strategy_statistical_benchmark
+python -m src.simulation.three_strategy_robustness_benchmark
+python -m src.simulation.final_evidence_package
+python -m src.simulation.uncertainty_calibration_benchmark
+python -m src.simulation.illumination_degradation_benchmark
+python -m src.simulation.three_strategy_efficiency_benchmark
 
-### 5. Final End-to-End Statistical Validation
+Standalone simulation:
 
-Quantify uncertainty in the measured differences using appropriate confidence intervals, effect sizes, and paired comparisons.
+python visual_surgical_simulation.py
 
-No unrelated functionality will be added solely to increase project size; remaining development is directed toward answering the central research question.
+Repository Structure
 
----
+uncertainty-aware-surgical-navigation/
+|
+|-- .github/
+|   `-- workflows/
+|
+|-- docs/
+|   |-- architecture.md
+|   |-- coordinate_frames.md
+|   |-- experimental_protocol.md
+|   |-- project_scope.md
+|   |-- requirements.md
+|   |-- traceability_matrix.md
+|   `-- verification_plan.md
+|
+|-- results/
+|-- ros2_jazzy/
+|-- src/
+|   |-- geometry/
+|   |-- perception/
+|   |-- robotics/
+|   `-- simulation/
+|
+|-- tests/
+|-- environment.yml
+|-- pytest.ini
+|-- visual_surgical_simulation.py
+`-- README.md
 
-## Limitations
+Result Artifacts
 
-This framework intentionally simplifies several aspects of real surgical robotics.
+Important final result directories include:
 
-Current limitations include:
+results/final_evidence/
+results/supplementary_uncertainty_calibration/
+results/supplementary_illumination/
+results/supplementary_efficiency/
 
-* simplified anatomical geometry;
-* simulated rather than learned visual perception;
-* simplified camera and observation models;
-* Gaussian localisation-uncertainty assumptions;
-* simplified surgical instrument dynamics;
-* no deformable tissue model;
-* no force or contact interaction modelling;
-* no patient data;
-* no physical robotic-platform validation;
-* no clinical validation.
+Machine-readable CSV and JSON outputs are retained for reproducibility and analysis.
 
-The reported results therefore provide **simulation evidence about the implemented algorithms and mechanisms**, not evidence of clinical effectiveness.
+ROS 2 Integration
 
----
+A separate ROS 2 Jazzy workspace is included under:
 
-## Safety and Intended Use
+ros2_jazzy/
+`-- ros2_ws/
+
+It provides experimental integration for perception communication, planning, safety bridging, viewpoint communication, and visualisation.
+
+ROS 2 is intentionally separated from the core Python simulation environment.
+
+No physical surgical robot implementation is claimed.
+
+Limitations
+
+Important limitations include:
+
+simulation-only validation
+
+simplified anatomical geometry
+
+engineered scene variations rather than independent patient anatomies
+
+simulated rather than learned visual perception
+
+simplified camera and observation models
+
+isotropic Gaussian localisation uncertainty
+
+synthetic rather than physical illumination degradation
+
+no deformable tissue model
+
+no force or tactile sensing
+
+no dynamic anatomy
+
+no calibration-drift model
+
+no realistic specular-reflection model
+
+no patient data
+
+no animal or cadaver experiments
+
+no physical robotic-platform validation
+
+no clinical validation
+
+Task-Aware Active Perception also requires substantially greater camera repositioning.
+
+Results therefore demonstrate robustness to the tested simulated perturbations, not clinical generalisation.
+
+Safety and Intended Use
 
 This repository contains a simulation-based engineering research prototype.
 
-It is **not a medical device** and has not undergone:
+It is not a medical device and must not be used for:
 
-* clinical validation;
-* regulatory approval;
-* medical-device certification;
-* clinical safety testing.
+diagnosis
 
-It must not be used for:
+treatment
 
-* patient monitoring;
-* diagnosis;
-* treatment;
-* surgical guidance;
-* clinical decision-making;
-* any other clinical purpose.
+patient monitoring
+
+surgical guidance
+
+clinical decision-making
+
+autonomous clinical intervention
+
+any other clinical purpose
+
+Final Research Position
+
+The project provides simulation evidence that Task-Aware Active Perception can improve end-to-end surgical-navigation feasibility when coupled with uncertainty-aware motion planning.
+
+The strongest demonstrated active-perception mechanism is task alignment, while localisation uncertainty remains important through its downstream effect on 

@@ -1,207 +1,216 @@
-# Research System Requirements
+Research System Requirements
 
-## 1. Purpose
+1. Purpose
 
-This document defines the functional and non-functional requirements for the
-simulation framework used to investigate uncertainty-aware active perception
-and safety-critical motion planning in minimally invasive surgical robotics.
+This document defines the functional and non-functional requirements for the completed simulation framework used to investigate task-aware active perception coupled with uncertainty-aware motion planning for simulated minimally invasive surgical navigation.
 
-Requirements are written to be individually identifiable, testable and
-traceable to implementation and verification evidence.
+Requirements are individually identifiable and traceable to implementation, automated tests, experimental evidence, or research documentation.
 
----
+Verification applies only to the implemented simulation framework. It does not constitute clinical validation, regulatory approval, or medical-device certification.
 
-## 2. Functional Requirements
+2. Functional Requirements
 
-### REQ-01 — Reproducible Surgical Workspace
+REQ-01 — Reproducible Surgical Workspace
 
-The system shall generate a reproducible simulated minimally invasive surgical
-workspace containing defined ground-truth geometry.
+The system shall generate reproducible simulated minimally invasive surgical workspaces containing explicit hidden ground-truth geometry.
 
-### REQ-02 — Target and Critical Structures
+REQ-02 — Target and Safety-Critical Structures
 
-The simulated environment shall contain:
+The environment shall contain a target, one or more safety-critical structures, and defined start and goal conditions for motion planning.
 
-- a target region;
-- one or more safety-critical structures;
-- defined start and goal conditions for motion planning.
+REQ-03 — Explicit Coordinate Frames
 
-### REQ-03 — Explicit Coordinate Frames
+The system shall maintain explicit world, camera, and instrument-related coordinate frames using validated rigid-body transformations.
 
-The system shall maintain explicit coordinate frames for relevant simulation
-components, including the world, camera and instrument or robot reference
-frames.
+REQ-04 — Camera Observation
 
-Transformations between frames shall use validated rigid-body transformation
-operations.
+The system shall generate simulated observations of the surgical workspace from defined camera viewpoints.
 
-### REQ-04 — Camera Observation
+REQ-05 — Controlled Perception Degradation
 
-The system shall generate simulated observations of the surgical workspace from
-defined camera viewpoints.
+The system shall support reproducible manipulation of perception quality, including localisation uncertainty, visibility, occlusion, viewpoint geometry, and synthetic visual-quality degradation.
 
-### REQ-05 — Controlled Perception Degradation
+REQ-06 — Perception Output
 
-The system shall support controlled manipulation of perception quality,
-including localisation uncertainty and occlusion.
+The perception subsystem shall provide estimated spatial information required by downstream motion planning.
 
-Perturbation parameters shall be recorded for every experimental trial.
+REQ-07 — Explicit Uncertainty Representation
 
-### REQ-06 — Perception Output
+Perceived spatial estimates shall contain an explicit localisation-uncertainty representation suitable for downstream planning and quantitative calibration analysis.
 
-The perception subsystem shall provide estimated spatial information for the
-target and safety-critical structures required by downstream planning.
+REQ-08 — Fixed-View Baseline
 
-### REQ-07 — Uncertainty Representation
+The system shall implement a Fixed View strategy without active camera repositioning.
 
-The system shall associate perceived spatial estimates with an explicit
-representation of uncertainty suitable for downstream decision-making.
+REQ-09 — Generic Active-Perception Baseline
 
-### REQ-08 — Fixed-View Baseline
+The system shall implement a task-agnostic active-perception strategy using quantitative global observation utility.
 
-The system shall implement a fixed-view perception strategy in which motion
-planning proceeds without active viewpoint adjustment.
+REQ-10 — Task-Aware Active Perception
 
-### REQ-09 — Generic Active-Perception Baseline
+The system shall implement an active-perception strategy that incorporates intended trajectory or task-relevant safety information into viewpoint selection.
 
-The system shall implement an active-perception strategy that selects
-additional observations according to expected reduction in global perception
-uncertainty without task-relevance weighting.
+REQ-11 — Candidate Viewpoint Evaluation
 
-### REQ-10 — Task-Aware Active Perception
+Candidate camera viewpoints shall be evaluated using quantitative scoring objectives.
 
-The system shall implement an active-perception strategy that weights
-uncertainty according to its relevance to the planned trajectory and nearby
-safety-critical structures.
+REQ-12 — Motion Planning
 
-### REQ-11 — Candidate Viewpoint Evaluation
+The system shall generate geometrically feasible candidate trajectories between defined start and goal states using perceived environmental information.
 
-The active-perception subsystem shall evaluate a defined set of candidate
-camera viewpoints using a quantitative viewpoint-selection objective.
+REQ-13 — Uncertainty-Aware Planning
 
-### REQ-12 — Motion Planning
+Localisation uncertainty shall influence planning through uncertainty-dependent protected geometry or equivalent safety mechanisms.
 
-The system shall generate geometrically feasible candidate trajectories between
-defined start and target states using perceived environmental information.
+REQ-14 — Hidden Ground-Truth Safety Evaluation
 
-### REQ-13 — Uncertainty-Aware Planning
+Planned trajectories shall be independently evaluated against simulator ground-truth geometry unavailable to the planner.
 
-The planning subsystem shall support uncertainty-dependent safety margins,
-risk costs, or equivalent mechanisms through which perception uncertainty can
-influence trajectory selection.
+REQ-15 — Safety-Margin Violation Detection
 
-### REQ-14 — Ground-Truth Safety Evaluation
+The system shall identify whether a trajectory enters a predefined protected region around safety-critical anatomy.
 
-Planned or executed trajectories shall be independently evaluated against
-simulator ground-truth geometry.
+REQ-16 — Collision Detection
 
-### REQ-15 — Safety-Margin Violation Detection
+The system shall identify geometric collision between the instrument trajectory and critical simulated structures.
 
-The evaluation subsystem shall determine whether a trajectory enters a
-predefined protected region surrounding a critical structure.
+REQ-17 — Quantitative Metrics
 
-### REQ-16 — Collision Detection
+Experimental trials shall expose appropriate perception, planning, safety, and efficiency metrics, including localisation error, predicted uncertainty, camera movement, planning success, safe-navigation success, collisions, safety violations, clearance, planner iterations, planning time, and path cost.
 
-The system shall determine whether a trajectory geometrically intersects a
-critical simulated structure.
+REQ-18 — Experimental Logging
 
-### REQ-17 — Quantitative Metrics
+Trials shall produce machine-readable records containing sufficient information to identify scenario, strategy, perturbation condition, random seed, relevant intermediate outputs, and final metrics.
 
-The system shall calculate predefined safety, perception, planning and
-efficiency metrics for each experimental trial.
+REQ-19 — Matched Three-Strategy Comparison
 
-### REQ-18 — Experimental Logging
+Equivalent simulated conditions shall be reused across Fixed View, Generic Active Perception, and Task-Aware Active Perception through a common:
 
-Each trial shall produce a machine-readable record containing sufficient
-information to identify:
+perception
+->
+localisation uncertainty
+->
+motion planning
+->
+hidden ground-truth safety evaluation
 
-- experimental condition;
-- perception strategy;
-- perturbation parameters;
-- random seed;
-- relevant intermediate outputs;
-- final outcome metrics.
+pipeline to support matched statistical comparison.
 
-### REQ-19 — Matched Experimental Comparison
+REQ-20 — Automated Experiment Execution
 
-Equivalent simulated scenarios shall be reused across the three perception
-strategies to support paired or matched statistical comparison.
+The framework shall support repeated execution of predefined experiments without manual intervention between individual trials.
 
-### REQ-20 — Automated Experiment Execution
+3. Non-Functional Requirements
 
-The system shall support repeated execution of predefined experimental
-conditions without requiring manual intervention between individual trials.
+NFR-01 — Modularity
 
----
+Geometry, robotics, perception, active perception, uncertainty, planning, evaluation, and experiment logic shall remain separable software components.
 
-## 3. Non-Functional Requirements
+NFR-02 — Reproducibility
 
-### NFR-01 — Modularity
+Recorded configuration and controlled random seeds shall support reproduction of stochastic simulation conditions within the deterministic limits of the software environment.
 
-Simulation, geometry, perception, uncertainty estimation, active perception,
-planning and evaluation shall be implemented as separable software components
-with defined interfaces.
+NFR-03 — Traceability
 
-### NFR-02 — Reproducibility
+Requirements, implementation, tests, experiment configurations, generated artifacts, and repository revision history shall remain traceable. Final evidence artifacts shall include reproducibility metadata or hashes where applicable.
 
-A recorded configuration and random seed shall be sufficient to reproduce a
-corresponding stochastic simulation condition within the deterministic limits
-of the software environment.
+NFR-04 — Testability
 
-### NFR-03 — Traceability
+Critical mathematical, algorithmic, integration, and experiment components shall be independently testable.
 
-Experimental outputs shall remain traceable to the method, configuration,
-software version and random seed that generated them.
+NFR-05 — Numerical Robustness
 
-### NFR-04 — Testability
+Geometric and transformation operations shall use appropriate numerical tolerances rather than inappropriate exact floating-point equality.
 
-Critical mathematical and algorithmic components shall be independently
-testable.
+NFR-06 — Quantitative Evaluation
 
-### NFR-05 — Numerical Robustness
+Research conclusions shall be supported by quantitative experimental evidence rather than visual demonstrations alone.
 
-Geometric and transformation operations shall use explicit numerical
-tolerances where exact floating-point equality is inappropriate.
+NFR-07 — Robustness Evaluation
 
-### NFR-06 — Quantitative Evaluation
+The framework shall support evaluation across multiple geometry, occlusion, uncertainty, safety-margin, and visual-quality conditions.
 
-Conclusions regarding comparative system performance shall be supported by
-quantitative experimental evidence rather than visual demonstrations alone.
+NFR-08 — Extensibility
 
-### NFR-07 — Robustness Evaluation
+Alternative perception models, uncertainty representations, viewpoint-selection methods, or motion planners should be introducible without redesigning the complete framework.
 
-The experimental framework shall support evaluation across multiple predefined
-levels of perception degradation.
+NFR-09 — Computational Observability
 
-### NFR-08 — Extensibility
+Intermediate outputs required for debugging and analysis shall be available for logging, including selected viewpoints, scores, uncertainty estimates, planning outcomes, iterations, path cost, clearance, and safety outcomes.
 
-The software architecture should permit alternative perception models,
-uncertainty representations, viewpoint-selection methods or motion planners to
-be introduced without redesigning the complete framework.
+NFR-10 — Interpretation Safety
 
-### NFR-09 — Computational Observability
+Simulation outcomes shall not be represented as clinically validated thresholds, patient-risk estimates, evidence of clinical effectiveness, or evidence of medical-device safety.
 
-Intermediate outputs required to diagnose system behaviour shall be accessible
-for logging, visualisation or analysis.
+4. Verification Baseline
 
-### NFR-10 — Interpretation Safety
+The completed local Python regression baseline is:
 
-Simulation parameters and outcomes shall not be represented as clinically
-validated thresholds, patient-risk estimates, or evidence of medical-device
-safety.
+449 passed
+0 failed
 
----
+Verification spans:
 
-## 4. Requirements Traceability
+geometry and coordinate transformations;
 
-Each requirement will later be linked to one or more of the following:
+RCM-constrained kinematics;
 
-- software module;
-- unit test;
-- integration test;
-- simulation experiment;
-- quantitative metric;
-- generated result or figure.
+workspace and safety geometry;
 
-The corresponding verification method and evidence will be maintained in the
-project verification plan.
+collision-aware planning;
+
+trajectory processing;
+
+uncertainty modelling;
+
+camera and observation modelling;
+
+visibility and occlusion;
+
+Generic Active Perception;
+
+task relevance and Task-Aware Active Perception;
+
+perception-to-planning integration;
+
+three-strategy end-to-end navigation;
+
+matched statistical benchmarking;
+
+multi-scenario robustness;
+
+mechanism ablation;
+
+uncertainty stress testing;
+
+final evidence consolidation;
+
+formal uncertainty calibration;
+
+synthetic visual-quality degradation;
+
+planning-efficiency comparison.
+
+Requirement-to-evidence mapping is maintained in docs/traceability_matrix.md.
+
+5. Scope Boundary
+
+The completed research system does not claim or require:
+
+patient data;
+
+physical surgical robot validation;
+
+deformable tissue modelling;
+
+force or tactile sensing;
+
+autonomous cutting or suturing;
+
+animal or cadaver validation;
+
+clinical validation;
+
+regulatory certification.
+
+These remain outside the scope of the project.
