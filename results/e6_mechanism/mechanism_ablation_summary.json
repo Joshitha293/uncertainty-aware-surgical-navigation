@@ -1,0 +1,613 @@
+{
+  "config": {
+    "repetitions_per_scenario": 10,
+    "perception_seed_base": 20260910,
+    "planner_seed_base": 7000,
+    "sigma_multiplier": 2.0,
+    "instrument_radius": 0.006,
+    "proximal_length": 0.1,
+    "task_weight": 2.0,
+    "confidence_level": 0.95,
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 20260911
+  },
+  "scenarios": [
+    {
+      "scenario_id": 0,
+      "name": "baseline",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 0,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 1,
+      "name": "lateral_positive",
+      "translation": [
+        0.0,
+        0.008,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 3,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2,
+      "name": "lateral_negative",
+      "translation": [
+        0.0,
+        -0.008,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 6,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 3,
+      "name": "superior_shift",
+      "translation": [
+        0.0,
+        0.0,
+        0.006
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 9,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 4,
+      "name": "larger_anatomy",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.1,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 12,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 5,
+      "name": "smaller_anatomy",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 0.9,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 15,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 6,
+      "name": "larger_safety_margin",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.2,
+      "initial_view_index": 18,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 7,
+      "name": "partial_occlusion",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 4,
+      "occluder_radius": 0.008
+    },
+    {
+      "scenario_id": 8,
+      "name": "strong_occlusion",
+      "translation": [
+        0.003,
+        -0.004,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 8,
+      "occluder_radius": 0.012
+    },
+    {
+      "scenario_id": 9,
+      "name": "combined_variation",
+      "translation": [
+        -0.004,
+        0.005,
+        0.003
+      ],
+      "radius_scale": 1.05,
+      "safety_margin_scale": 1.1,
+      "initial_view_index": 13,
+      "occluder_radius": 0.006
+    }
+  ],
+  "variants": [
+    {
+      "name": "generic_baseline",
+      "alignment_weight": 0.0,
+      "uncertainty_weight": 0.0
+    },
+    {
+      "name": "alignment_only",
+      "alignment_weight": 1.0,
+      "uncertainty_weight": 0.0
+    },
+    {
+      "name": "uncertainty_only",
+      "alignment_weight": 0.0,
+      "uncertainty_weight": 1.0
+    },
+    {
+      "name": "full_task_aware",
+      "alignment_weight": 1.0,
+      "uncertainty_weight": 1.0
+    }
+  ],
+  "summaries": [
+    {
+      "variant": "generic_baseline",
+      "scenario_count": 10,
+      "record_count": 100,
+      "localisation_error": {
+        "n": 100,
+        "mean": 0.020784830997330285,
+        "ci_low": 0.009085303564455171,
+        "ci_high": 0.03341596108126668
+      },
+      "predicted_sigma": {
+        "n": 100,
+        "mean": 0.012266668537158597,
+        "ci_low": 0.005406996558633624,
+        "ci_high": 0.019150553135388458
+      },
+      "camera_movement": {
+        "n": 100,
+        "mean": 0.01562833599002373,
+        "ci_low": 0.0,
+        "ci_high": 0.03125667198004747
+      },
+      "planning_success_rate": {
+        "n": 100,
+        "mean": 0.63,
+        "ci_low": 0.34,
+        "ci_high": 0.91
+      },
+      "safe_navigation_success_rate": {
+        "n": 100,
+        "mean": 0.63,
+        "ci_low": 0.34,
+        "ci_high": 0.91
+      },
+      "collision_rate_all_trials": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate_all_trials": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "collision_rate_given_plan": {
+        "n": 63,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate_given_plan": {
+        "n": 63,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "true_clearance_given_plan": {
+        "n": 63,
+        "mean": 0.005443152512278171,
+        "ci_low": 0.004455995929078249,
+        "ci_high": 0.006384967551906743
+      },
+      "selection_difference_from_generic_rate": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "worst_scenario_safe_navigation_rate": 0.0
+    },
+    {
+      "variant": "alignment_only",
+      "scenario_count": 10,
+      "record_count": 100,
+      "localisation_error": {
+        "n": 100,
+        "mean": 0.004754855327074327,
+        "ci_low": 0.004584327831823921,
+        "ci_high": 0.004967214025601178
+      },
+      "predicted_sigma": {
+        "n": 100,
+        "mean": 0.0030147050919576966,
+        "ci_low": 0.002955065791646113,
+        "ci_high": 0.0030806679888154844
+      },
+      "camera_movement": {
+        "n": 100,
+        "mean": 0.10359090275801927,
+        "ci_low": 0.058703324514848734,
+        "ci_high": 0.14831169871365915
+      },
+      "planning_success_rate": {
+        "n": 100,
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      },
+      "safe_navigation_success_rate": {
+        "n": 100,
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      },
+      "collision_rate_all_trials": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate_all_trials": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "collision_rate_given_plan": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate_given_plan": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "true_clearance_given_plan": {
+        "n": 100,
+        "mean": 0.005759393686437653,
+        "ci_low": 0.005053443380223832,
+        "ci_high": 0.006463323461600929
+      },
+      "selection_difference_from_generic_rate": {
+        "n": 100,
+        "mean": 0.7,
+        "ci_low": 0.4,
+        "ci_high": 1.0
+      },
+      "worst_scenario_safe_navigation_rate": 1.0
+    },
+    {
+      "variant": "uncertainty_only",
+      "scenario_count": 10,
+      "record_count": 100,
+      "localisation_error": {
+        "n": 100,
+        "mean": 0.020784830997330285,
+        "ci_low": 0.009145344424656044,
+        "ci_high": 0.03313308229126815
+      },
+      "predicted_sigma": {
+        "n": 100,
+        "mean": 0.012266668537158597,
+        "ci_low": 0.005394701812126284,
+        "ci_high": 0.01914832011107044
+      },
+      "camera_movement": {
+        "n": 100,
+        "mean": 0.01562833599002373,
+        "ci_low": 0.0,
+        "ci_high": 0.03125667198004747
+      },
+      "planning_success_rate": {
+        "n": 100,
+        "mean": 0.63,
+        "ci_low": 0.34,
+        "ci_high": 0.91
+      },
+      "safe_navigation_success_rate": {
+        "n": 100,
+        "mean": 0.63,
+        "ci_low": 0.35,
+        "ci_high": 0.91
+      },
+      "collision_rate_all_trials": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate_all_trials": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "collision_rate_given_plan": {
+        "n": 63,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate_given_plan": {
+        "n": 63,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "true_clearance_given_plan": {
+        "n": 63,
+        "mean": 0.005443152512278171,
+        "ci_low": 0.004428790968106831,
+        "ci_high": 0.006373709830736817
+      },
+      "selection_difference_from_generic_rate": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "worst_scenario_safe_navigation_rate": 0.0
+    },
+    {
+      "variant": "full_task_aware",
+      "scenario_count": 10,
+      "record_count": 100,
+      "localisation_error": {
+        "n": 100,
+        "mean": 0.004776649245367027,
+        "ci_low": 0.004617096136743952,
+        "ci_high": 0.004965324846226689
+      },
+      "predicted_sigma": {
+        "n": 100,
+        "mean": 0.0030033009890084715,
+        "ci_low": 0.0029605623571265427,
+        "ci_high": 0.003044410598147847
+      },
+      "camera_movement": {
+        "n": 100,
+        "mean": 0.109985096469159,
+        "ci_low": 0.061068997448006875,
+        "ci_high": 0.16369379720823454
+      },
+      "planning_success_rate": {
+        "n": 100,
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      },
+      "safe_navigation_success_rate": {
+        "n": 100,
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      },
+      "collision_rate_all_trials": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate_all_trials": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "collision_rate_given_plan": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate_given_plan": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "true_clearance_given_plan": {
+        "n": 100,
+        "mean": 0.005574764039457994,
+        "ci_low": 0.004943968970067294,
+        "ci_high": 0.0062309089425308314
+      },
+      "selection_difference_from_generic_rate": {
+        "n": 100,
+        "mean": 0.7,
+        "ci_low": 0.4,
+        "ci_high": 1.0
+      },
+      "worst_scenario_safe_navigation_rate": 1.0
+    }
+  ],
+  "full_comparisons": [
+    {
+      "comparator": "generic_baseline",
+      "localisation_error_difference": {
+        "n": 100,
+        "mean": -0.016008181751963266,
+        "ci_low": -0.02831020503186248,
+        "ci_high": -0.003888954619589094
+      },
+      "predicted_sigma_difference": {
+        "n": 100,
+        "mean": -0.00926336754815012,
+        "ci_low": -0.016157855791515022,
+        "ci_high": -0.00237685596699395
+      },
+      "camera_movement_difference": {
+        "n": 100,
+        "mean": 0.09435676047913528,
+        "ci_low": 0.04817618688228534,
+        "ci_high": 0.14393134796706916
+      },
+      "planning_success_difference": {
+        "n": 100,
+        "mean": 0.37,
+        "ci_low": 0.09,
+        "ci_high": 0.65
+      },
+      "safe_navigation_success_difference": {
+        "n": 100,
+        "mean": 0.37,
+        "ci_low": 0.09,
+        "ci_high": 0.6502499999999987
+      },
+      "collision_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "viewpoint_difference_rate": {
+        "n": 100,
+        "mean": 0.7,
+        "ci_low": 0.4,
+        "ci_high": 1.0
+      }
+    },
+    {
+      "comparator": "alignment_only",
+      "localisation_error_difference": {
+        "n": 100,
+        "mean": 2.1793918292699493e-05,
+        "ci_low": -9.878207351413454e-05,
+        "ci_high": 0.00016416382839223303
+      },
+      "predicted_sigma_difference": {
+        "n": 100,
+        "mean": -1.1404102949225201e-05,
+        "ci_low": -9.739828005741035e-05,
+        "ci_high": 6.318597120973474e-05
+      },
+      "camera_movement_difference": {
+        "n": 100,
+        "mean": 0.006394193711139707,
+        "ci_low": -0.007617142502662672,
+        "ci_high": 0.026799723636081803
+      },
+      "planning_success_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safe_navigation_success_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "collision_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "viewpoint_difference_rate": {
+        "n": 100,
+        "mean": 0.2,
+        "ci_low": 0.0,
+        "ci_high": 0.5
+      }
+    },
+    {
+      "comparator": "uncertainty_only",
+      "localisation_error_difference": {
+        "n": 100,
+        "mean": -0.016008181751963266,
+        "ci_low": -0.028842888364789505,
+        "ci_high": -0.0038652033188293156
+      },
+      "predicted_sigma_difference": {
+        "n": 100,
+        "mean": -0.00926336754815012,
+        "ci_low": -0.016149777591610483,
+        "ci_high": -0.002384278922699684
+      },
+      "camera_movement_difference": {
+        "n": 100,
+        "mean": 0.09435676047913528,
+        "ci_low": 0.04590815402575699,
+        "ci_high": 0.143929621641574
+      },
+      "planning_success_difference": {
+        "n": 100,
+        "mean": 0.37,
+        "ci_low": 0.09,
+        "ci_high": 0.66
+      },
+      "safe_navigation_success_difference": {
+        "n": 100,
+        "mean": 0.37,
+        "ci_low": 0.09,
+        "ci_high": 0.65
+      },
+      "collision_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "viewpoint_difference_rate": {
+        "n": 100,
+        "mean": 0.7,
+        "ci_low": 0.4,
+        "ci_high": 1.0
+      }
+    }
+  ]
+}

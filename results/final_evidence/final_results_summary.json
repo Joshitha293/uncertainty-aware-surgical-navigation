@@ -1,0 +1,140 @@
+{
+  "validation_checks": [
+    "E4 stochastic evidence validated.",
+    "E5 multi-scenario robustness evidence validated.",
+    "E6 mechanism-ablation evidence validated.",
+    "E7 uncertainty-stress evidence validated."
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "statement": "Task-aware active perception improved end-to-end navigation feasibility across the tested multi-scenario simulation benchmark.",
+      "evidence": "E5 safe-navigation success was 97.0% for task-aware perception versus 43.0% for fixed view and 61.0% for generic active perception; paired scenario-clustered 95% confidence intervals for both improvements excluded zero."
+    },
+    {
+      "claim_id": "C2",
+      "statement": "Task alignment was the dominant viewpoint-selection mechanism responsible for the observed task-aware benefit.",
+      "evidence": "E6 alignment-only achieved 100.0% safe-navigation success, whereas uncertainty-only achieved 63.0% and the generic baseline achieved 63.0%."
+    },
+    {
+      "claim_id": "C3",
+      "statement": "The explicit uncertainty term did not provide independent viewpoint-selection information under the tested scoring and observation models.",
+      "evidence": "E7 produced zero uncertainty-only viewpoint changes for all tested uncertainty weights up to 16 across every scenario/profile condition."
+    },
+    {
+      "claim_id": "C4",
+      "statement": "Uncertainty remains operationally important downstream because perceived localisation uncertainty is propagated into uncertainty-inflated planning geometry.",
+      "evidence": "The final architecture separates viewpoint-selection mechanism evidence from the uncertainty-aware motion-planning stage and hidden-ground-truth safety evaluation."
+    }
+  ],
+  "limitations": [
+    "All reported experiments are simulation-based; no physical surgical robot or clinical system was evaluated.",
+    "The robustness benchmark contains ten engineered surgical-scene variations rather than ten independent patient anatomies.",
+    "The results therefore demonstrate robustness to the tested scene perturbations, not clinical generalisation.",
+    "The experiments do not establish that task-aware perception reduces collision probability once a valid trajectory already exists.",
+    "The explicit uncertainty term was redundant for viewpoint selection under the tested model; the principal selection benefit was attributable to task alignment.",
+    "Camera repositioning was substantially greater for task-aware strategies and should be treated as a real operational trade-off.",
+    "The simulated observation model does not capture the full range of real surgical effects such as tissue deformation, calibration drift, specularities and dynamic anatomy."
+  ],
+  "metrics": [
+    {
+      "stage": "E5 multi-scenario",
+      "condition": "fixed",
+      "localisation_error_mm": 25.964264408139854,
+      "predicted_sigma_mm": 17.77731307083079,
+      "camera_movement_mm": 0.0,
+      "planning_success_percent": 45.0,
+      "safe_navigation_success_percent": 43.0
+    },
+    {
+      "stage": "E5 multi-scenario",
+      "condition": "generic_active",
+      "localisation_error_mm": 16.93403943909844,
+      "predicted_sigma_mm": 12.266668537158596,
+      "camera_movement_mm": 15.62833599002373,
+      "planning_success_percent": 63.0,
+      "safe_navigation_success_percent": 61.0
+    },
+    {
+      "stage": "E5 multi-scenario",
+      "condition": "task_aware_active",
+      "localisation_error_mm": 4.681516204589485,
+      "predicted_sigma_mm": 3.0033009890084714,
+      "camera_movement_mm": 109.98509646915899,
+      "planning_success_percent": 100.0,
+      "safe_navigation_success_percent": 97.0
+    },
+    {
+      "stage": "E6 mechanism",
+      "condition": "generic_baseline",
+      "localisation_error_mm": 20.784830997330285,
+      "predicted_sigma_mm": 12.266668537158596,
+      "camera_movement_mm": 15.62833599002373,
+      "planning_success_percent": 63.0,
+      "safe_navigation_success_percent": 63.0
+    },
+    {
+      "stage": "E6 mechanism",
+      "condition": "alignment_only",
+      "localisation_error_mm": 4.754855327074328,
+      "predicted_sigma_mm": 3.0147050919576968,
+      "camera_movement_mm": 103.59090275801927,
+      "planning_success_percent": 100.0,
+      "safe_navigation_success_percent": 100.0
+    },
+    {
+      "stage": "E6 mechanism",
+      "condition": "uncertainty_only",
+      "localisation_error_mm": 20.784830997330285,
+      "predicted_sigma_mm": 12.266668537158596,
+      "camera_movement_mm": 15.62833599002373,
+      "planning_success_percent": 63.0,
+      "safe_navigation_success_percent": 63.0
+    },
+    {
+      "stage": "E6 mechanism",
+      "condition": "full_task_aware",
+      "localisation_error_mm": 4.776649245367027,
+      "predicted_sigma_mm": 3.0033009890084714,
+      "camera_movement_mm": 109.98509646915899,
+      "planning_success_percent": 100.0,
+      "safe_navigation_success_percent": 100.0
+    },
+    {
+      "stage": "E7 uncertainty stress",
+      "condition": "generic_baseline",
+      "localisation_error_mm": 32.745976422532614,
+      "predicted_sigma_mm": 15.641670992179249,
+      "camera_movement_mm": 15.62833599002373,
+      "planning_success_percent": 68.75,
+      "safe_navigation_success_percent": 61.25000000000001
+    },
+    {
+      "stage": "E7 uncertainty stress",
+      "condition": "high_uncertainty_only",
+      "localisation_error_mm": 32.745976422532614,
+      "predicted_sigma_mm": 15.641670992179249,
+      "camera_movement_mm": 15.62833599002373,
+      "planning_success_percent": 68.75,
+      "safe_navigation_success_percent": 61.25000000000001
+    },
+    {
+      "stage": "E7 uncertainty stress",
+      "condition": "alignment_only",
+      "localisation_error_mm": 7.3581460973218045,
+      "predicted_sigma_mm": 4.329254949492975,
+      "camera_movement_mm": 107.3849096420784,
+      "planning_success_percent": 95.0,
+      "safe_navigation_success_percent": 92.5
+    },
+    {
+      "stage": "E7 uncertainty stress",
+      "condition": "full_task_aware",
+      "localisation_error_mm": 7.376418550239747,
+      "predicted_sigma_mm": 4.320133537082092,
+      "camera_movement_mm": 109.98509646915896,
+      "planning_success_percent": 95.0,
+      "safe_navigation_success_percent": 92.5
+    }
+  ]
+}

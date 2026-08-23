@@ -1,0 +1,285 @@
+{
+  "config": {
+    "trial_count": 100,
+    "perception_seed_base": 20260823,
+    "planner_seed_base": 2000,
+    "sigma_multiplier": 2.0,
+    "instrument_radius": 0.006,
+    "proximal_length": 0.1,
+    "task_weight": 2.0,
+    "alignment_weight": 1.0,
+    "confidence_level": 0.95,
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 20260824
+  },
+  "summaries": [
+    {
+      "strategy": "fixed",
+      "trial_count": 100,
+      "localisation_error": {
+        "n": 100,
+        "mean": 0.005177789927625017,
+        "ci_low": 0.004837507094350205,
+        "ci_high": 0.00553053090554518
+      },
+      "predicted_sigma": {
+        "n": 100,
+        "mean": 0.003289246736164147,
+        "ci_low": 0.003289246736164147,
+        "ci_high": 0.003289246736164147
+      },
+      "camera_movement": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "planning_success_rate": {
+        "n": 100,
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      },
+      "collision_rate": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate": {
+        "n": 100,
+        "mean": 0.02,
+        "ci_low": 0.0,
+        "ci_high": 0.05
+      },
+      "minimum_true_safety_clearance": {
+        "n": 100,
+        "mean": 0.005267602456845218,
+        "ci_low": 0.004766580261260517,
+        "ci_high": 0.005774106253189677
+      },
+      "planning_safety_margin": {
+        "n": 100,
+        "mean": 0.021578493472328292,
+        "ci_low": 0.021578493472328292,
+        "ci_high": 0.021578493472328292
+      },
+      "maximum_planning_safety_radius": {
+        "n": 100,
+        "mean": 0.04915698694465659,
+        "ci_low": 0.04915698694465659,
+        "ci_high": 0.04915698694465659
+      }
+    },
+    {
+      "strategy": "generic_active",
+      "trial_count": 100,
+      "localisation_error": {
+        "n": 100,
+        "mean": 0.04100536474784072,
+        "ci_low": 0.03765236488622131,
+        "ci_high": 0.04457243382964117
+      },
+      "predicted_sigma": {
+        "n": 100,
+        "mean": 0.025999999999999995,
+        "ci_low": 0.025999999999999995,
+        "ci_high": 0.025999999999999995
+      },
+      "camera_movement": {
+        "n": 100,
+        "mean": 0.03642709213008327,
+        "ci_low": 0.03642709213008327,
+        "ci_high": 0.03642709213008327
+      },
+      "planning_success_rate": {
+        "n": 100,
+        "mean": 0.14,
+        "ci_low": 0.08,
+        "ci_high": 0.21
+      },
+      "collision_rate": {
+        "n": 100,
+        "mean": 0.01,
+        "ci_low": 0.0,
+        "ci_high": 0.03
+      },
+      "safety_violation_rate": {
+        "n": 100,
+        "mean": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07
+      },
+      "minimum_true_safety_clearance": {
+        "n": 14,
+        "mean": 0.001143466491706985,
+        "ci_low": -0.0035570890483814202,
+        "ci_high": 0.005127897782265118
+      },
+      "planning_safety_margin": {
+        "n": 100,
+        "mean": 0.06699999999999999,
+        "ci_low": 0.06699999999999999,
+        "ci_high": 0.06699999999999999
+      },
+      "maximum_planning_safety_radius": {
+        "n": 100,
+        "mean": 0.14000000000000007,
+        "ci_low": 0.14000000000000007,
+        "ci_high": 0.14000000000000007
+      }
+    },
+    {
+      "strategy": "task_aware_active",
+      "trial_count": 100,
+      "localisation_error": {
+        "n": 100,
+        "mean": 0.004907183043670294,
+        "ci_low": 0.004581793160585727,
+        "ci_high": 0.005235735522430598
+      },
+      "predicted_sigma": {
+        "n": 100,
+        "mean": 0.003117711648907181,
+        "ci_low": 0.003117711648907181,
+        "ci_high": 0.003117711648907181
+      },
+      "camera_movement": {
+        "n": 100,
+        "mean": 0.11544233643275584,
+        "ci_low": 0.11544233643275584,
+        "ci_high": 0.11544233643275584
+      },
+      "planning_success_rate": {
+        "n": 100,
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      },
+      "collision_rate": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate": {
+        "n": 100,
+        "mean": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07
+      },
+      "minimum_true_safety_clearance": {
+        "n": 100,
+        "mean": 0.005188168313766969,
+        "ci_low": 0.004703668906711955,
+        "ci_high": 0.00566558650637052
+      },
+      "planning_safety_margin": {
+        "n": 100,
+        "mean": 0.021235423297814363,
+        "ci_low": 0.021235423297814363,
+        "ci_high": 0.021235423297814363
+      },
+      "maximum_planning_safety_radius": {
+        "n": 100,
+        "mean": 0.048470846595628746,
+        "ci_low": 0.048470846595628746,
+        "ci_high": 0.048470846595628746
+      }
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "comparator": "fixed",
+      "task_strategy": "task_aware_active",
+      "localisation_error_difference": {
+        "n": 100,
+        "mean": -0.00027060688395472344,
+        "ci_low": -0.0002931798848809333,
+        "ci_high": -0.00024598747886251315
+      },
+      "predicted_sigma_difference": {
+        "n": 100,
+        "mean": -0.00017153508725696598,
+        "ci_low": -0.00017153508725696598,
+        "ci_high": -0.00017153508725696598
+      },
+      "camera_movement_difference": {
+        "n": 100,
+        "mean": 0.11544233643275584,
+        "ci_low": 0.11544233643275584,
+        "ci_high": 0.11544233643275584
+      },
+      "planning_success_rate_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "collision_rate_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate_difference": {
+        "n": 100,
+        "mean": 0.01,
+        "ci_low": 0.0,
+        "ci_high": 0.03
+      },
+      "minimum_true_safety_clearance_difference": {
+        "n": 100,
+        "mean": -7.943414307824879e-05,
+        "ci_low": -0.000348959834991427,
+        "ci_high": 0.00018237391469417842
+      }
+    },
+    {
+      "comparator": "generic_active",
+      "task_strategy": "task_aware_active",
+      "localisation_error_difference": {
+        "n": 100,
+        "mean": -0.03609818170417043,
+        "ci_low": -0.03928194435583939,
+        "ci_high": -0.03310408253535225
+      },
+      "predicted_sigma_difference": {
+        "n": 100,
+        "mean": -0.022882288351092822,
+        "ci_low": -0.022882288351092822,
+        "ci_high": -0.022882288351092822
+      },
+      "camera_movement_difference": {
+        "n": 100,
+        "mean": 0.07901524430267258,
+        "ci_low": 0.07901524430267258,
+        "ci_high": 0.07901524430267258
+      },
+      "planning_success_rate_difference": {
+        "n": 100,
+        "mean": 0.86,
+        "ci_low": 0.79,
+        "ci_high": 0.92
+      },
+      "collision_rate_difference": {
+        "n": 100,
+        "mean": -0.01,
+        "ci_low": -0.03,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate_difference": {
+        "n": 100,
+        "mean": 0.0,
+        "ci_low": -0.04,
+        "ci_high": 0.04
+      },
+      "minimum_true_safety_clearance_difference": {
+        "n": 14,
+        "mean": 0.003134683260660462,
+        "ci_low": -0.00044571396121892773,
+        "ci_high": 0.007690589483284803
+      }
+    }
+  ]
+}

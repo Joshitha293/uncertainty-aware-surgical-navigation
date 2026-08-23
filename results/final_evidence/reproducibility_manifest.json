@@ -1,0 +1,31 @@
+{
+  "evidence_files": {
+    "E4": {
+      "path": "results\\e4_100_trials\\three_strategy_statistical_summary.json",
+      "sha256": "2e8a75af718cfe13b2800e811b29c4bd221fd753dff5f4d12d80704fdcb18305"
+    },
+    "E5": {
+      "path": "results\\e5_robustness\\three_strategy_robustness_summary.json",
+      "sha256": "7e1fa20161317f9f59e532cd74f337a0eb82c6b4eca106b91bf6039a2e5edb82"
+    },
+    "E6": {
+      "path": "results\\e6_mechanism\\mechanism_ablation_summary.json",
+      "sha256": "ea53ce9f6d7466a155cbfb7ad4b2c7a04f482ba5553e61d8f45bdfaf476dd2ca"
+    },
+    "E7": {
+      "path": "results\\e7_uncertainty_stress\\uncertainty_stress_summary.json",
+      "sha256": "47cbeb32ddd1d708f5c9ea1947e32f921c6089fbcaefdf958c927c59a051fa46"
+    }
+  },
+  "generated_files": {
+    "summary_json": "results\\final_evidence\\final_results_summary.json",
+    "metrics_csv": "results\\final_evidence\\final_metrics.csv",
+    "report_markdown": "results\\final_evidence\\final_results_report.md"
+  },
+  "validation_checks": [
+    "E4 stochastic evidence validated.",
+    "E5 multi-scenario robustness evidence validated.",
+    "E6 mechanism-ablation evidence validated.",
+    "E7 uncertainty-stress evidence validated."
+  ]
+}

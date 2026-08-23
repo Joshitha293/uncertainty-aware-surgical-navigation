@@ -1,0 +1,269 @@
+{
+  "config": {
+    "repetitions": 2,
+    "perception_seed_base": 20260920,
+    "planner_seed_base": 9000,
+    "task_weight": 2.0,
+    "sigma_multiplier": 2.0,
+    "instrument_radius": 0.006,
+    "proximal_length": 0.1,
+    "uncertainty_weights": [
+      0.0,
+      0.25,
+      1.0,
+      4.0,
+      16.0
+    ],
+    "confidence_level": 0.95,
+    "bootstrap_samples": 1000,
+    "bootstrap_seed": 20260921
+  },
+  "stress_profiles": [
+    {
+      "name": "baseline",
+      "distance_multiplier": 1.0,
+      "angle_multiplier": 1.0,
+      "occluded_sigma_multiplier": 1.0,
+      "invisible_sigma_multiplier": 1.0
+    },
+    {
+      "name": "distance_dominant",
+      "distance_multiplier": 4.0,
+      "angle_multiplier": 0.25,
+      "occluded_sigma_multiplier": 1.0,
+      "invisible_sigma_multiplier": 1.0
+    },
+    {
+      "name": "angle_dominant",
+      "distance_multiplier": 0.25,
+      "angle_multiplier": 4.0,
+      "occluded_sigma_multiplier": 1.0,
+      "invisible_sigma_multiplier": 1.0
+    },
+    {
+      "name": "strong_combined",
+      "distance_multiplier": 4.0,
+      "angle_multiplier": 4.0,
+      "occluded_sigma_multiplier": 2.0,
+      "invisible_sigma_multiplier": 2.0
+    }
+  ],
+  "selection_summaries": [
+    {
+      "uncertainty_weight": 0.0,
+      "condition_count": 40,
+      "selection_change_rate": 0.0,
+      "mean_sigma_change": 0.0
+    },
+    {
+      "uncertainty_weight": 0.25,
+      "condition_count": 40,
+      "selection_change_rate": 0.0,
+      "mean_sigma_change": 0.0
+    },
+    {
+      "uncertainty_weight": 1.0,
+      "condition_count": 40,
+      "selection_change_rate": 0.0,
+      "mean_sigma_change": 0.0
+    },
+    {
+      "uncertainty_weight": 4.0,
+      "condition_count": 40,
+      "selection_change_rate": 0.0,
+      "mean_sigma_change": 0.0
+    },
+    {
+      "uncertainty_weight": 16.0,
+      "condition_count": 40,
+      "selection_change_rate": 0.0,
+      "mean_sigma_change": 0.0
+    }
+  ],
+  "variant_summaries": [
+    {
+      "variant": "generic_baseline",
+      "record_count": 80,
+      "localisation_error": {
+        "n": 80,
+        "mean": 0.032745976422532616,
+        "ci_low": 0.012411225172075626,
+        "ci_high": 0.05360588857814565
+      },
+      "predicted_sigma": {
+        "n": 80,
+        "mean": 0.01564167099217925,
+        "ci_low": 0.007343524533322655,
+        "ci_high": 0.023980490256850385
+      },
+      "camera_movement": {
+        "n": 80,
+        "mean": 0.01562833599002373,
+        "ci_low": 0.00520944533000791,
+        "ci_high": 0.03125667198004746
+      },
+      "planning_success_rate": {
+        "n": 80,
+        "mean": 0.6875,
+        "ci_low": 0.525,
+        "ci_high": 0.85
+      },
+      "safe_navigation_success_rate": {
+        "n": 80,
+        "mean": 0.6125,
+        "ci_low": 0.4125,
+        "ci_high": 0.8
+      },
+      "collision_rate": {
+        "n": 80,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate": {
+        "n": 80,
+        "mean": 0.075,
+        "ci_low": 0.0125,
+        "ci_high": 0.15
+      }
+    },
+    {
+      "variant": "high_uncertainty_only",
+      "record_count": 80,
+      "localisation_error": {
+        "n": 80,
+        "mean": 0.032745976422532616,
+        "ci_low": 0.0128708184881648,
+        "ci_high": 0.05230482207561906
+      },
+      "predicted_sigma": {
+        "n": 80,
+        "mean": 0.01564167099217925,
+        "ci_low": 0.00734899743716928,
+        "ci_high": 0.023988862009783896
+      },
+      "camera_movement": {
+        "n": 80,
+        "mean": 0.01562833599002373,
+        "ci_low": 0.0,
+        "ci_high": 0.03125667198004746
+      },
+      "planning_success_rate": {
+        "n": 80,
+        "mean": 0.6875,
+        "ci_low": 0.5246875000000003,
+        "ci_high": 0.85
+      },
+      "safe_navigation_success_rate": {
+        "n": 80,
+        "mean": 0.6125,
+        "ci_low": 0.4246875000000003,
+        "ci_high": 0.8
+      },
+      "collision_rate": {
+        "n": 80,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate": {
+        "n": 80,
+        "mean": 0.075,
+        "ci_low": 0.0125,
+        "ci_high": 0.15
+      }
+    },
+    {
+      "variant": "alignment_only",
+      "record_count": 80,
+      "localisation_error": {
+        "n": 80,
+        "mean": 0.0073581460973218046,
+        "ci_low": 0.0063113400874767875,
+        "ci_high": 0.008418175472161584
+      },
+      "predicted_sigma": {
+        "n": 80,
+        "mean": 0.004329254949492975,
+        "ci_low": 0.004204491211849295,
+        "ci_high": 0.0044429819250599864
+      },
+      "camera_movement": {
+        "n": 80,
+        "mean": 0.10738490964207839,
+        "ci_low": 0.05995882130258505,
+        "ci_high": 0.15450585702138597
+      },
+      "planning_success_rate": {
+        "n": 80,
+        "mean": 0.95,
+        "ci_low": 0.9,
+        "ci_high": 1.0
+      },
+      "safe_navigation_success_rate": {
+        "n": 80,
+        "mean": 0.925,
+        "ci_low": 0.85,
+        "ci_high": 0.9875
+      },
+      "collision_rate": {
+        "n": 80,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate": {
+        "n": 80,
+        "mean": 0.025,
+        "ci_low": 0.0,
+        "ci_high": 0.0625
+      }
+    },
+    {
+      "variant": "full_task_aware",
+      "record_count": 80,
+      "localisation_error": {
+        "n": 80,
+        "mean": 0.007376418550239747,
+        "ci_low": 0.006426072402792658,
+        "ci_high": 0.00833482735483135
+      },
+      "predicted_sigma": {
+        "n": 80,
+        "mean": 0.004320133537082092,
+        "ci_low": 0.004228894851645981,
+        "ci_high": 0.0044131691249203
+      },
+      "camera_movement": {
+        "n": 80,
+        "mean": 0.10998509646915897,
+        "ci_low": 0.05968095583507734,
+        "ci_high": 0.16400269554402136
+      },
+      "planning_success_rate": {
+        "n": 80,
+        "mean": 0.95,
+        "ci_low": 0.9,
+        "ci_high": 1.0
+      },
+      "safe_navigation_success_rate": {
+        "n": 80,
+        "mean": 0.925,
+        "ci_low": 0.85,
+        "ci_high": 0.9753124999999997
+      },
+      "collision_rate": {
+        "n": 80,
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "safety_violation_rate": {
+        "n": 80,
+        "mean": 0.025,
+        "ci_low": 0.0,
+        "ci_high": 0.0625
+      }
+    }
+  ]
+}
