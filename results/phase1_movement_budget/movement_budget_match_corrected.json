@@ -1,0 +1,345 @@
+{
+  "experiment_role": "development_hyperparameter_selection",
+  "held_out_test": false,
+  "candidate_generation": "active candidates centred on shared noisy estimated target",
+  "initial_camera_geometry": "scenario-independent nominal workspace prior",
+  "ground_truth_decision_access": false,
+  "selection_rule": "Task-Aware operating point minimises Euclidean distance to the normalised low-camera-movement / low-predicted-uncertainty ideal point. Generic weight then minimises absolute mean camera-movement mismatch.",
+  "outcomes_used_for_task_weight_selection": [
+    "camera_movement",
+    "predicted_sigma"
+  ],
+  "outcomes_used_for_generic_weight_selection": [
+    "camera_movement"
+  ],
+  "outcomes_not_used_for_selection": [
+    "realised_localisation_error",
+    "planning_success",
+    "safe_navigation_success",
+    "collision",
+    "safety_violation"
+  ],
+  "task_operating_point": {
+    "movement_weight": 0.2,
+    "mean_camera_movement": 0.06794413303443379,
+    "mean_predicted_sigma": 0.008564840719477811,
+    "normalised_camera_movement": 0.2964891717970296,
+    "normalised_predicted_sigma": 0.45959462393352135,
+    "utopia_distance": 0.5469305690318319
+  },
+  "selected_generic": {
+    "movement_weight": 0.072,
+    "mean_camera_movement": 0.06774160186946498,
+    "absolute_budget_gap": 0.0002025311649688083,
+    "relative_budget_gap": 0.0029808484695237245
+  },
+  "budget_match_within_five_percent": true,
+  "generic_candidates": [
+    {
+      "movement_weight": 0.04,
+      "mean_camera_movement": 0.07952191004824798,
+      "absolute_budget_gap": 0.011577777013814183,
+      "relative_budget_gap": 0.1704014238866896
+    },
+    {
+      "movement_weight": 0.042,
+      "mean_camera_movement": 0.07700588714282619,
+      "absolute_budget_gap": 0.009061754108392397,
+      "relative_budget_gap": 0.13337066356855182
+    },
+    {
+      "movement_weight": 0.044,
+      "mean_camera_movement": 0.07349895594417528,
+      "absolute_budget_gap": 0.005554822909741491,
+      "relative_budget_gap": 0.08175574051296425
+    },
+    {
+      "movement_weight": 0.046,
+      "mean_camera_movement": 0.07212865468948033,
+      "absolute_budget_gap": 0.004184521655046541,
+      "relative_budget_gap": 0.061587681940482544
+    },
+    {
+      "movement_weight": 0.048,
+      "mean_camera_movement": 0.07212865468948033,
+      "absolute_budget_gap": 0.004184521655046541,
+      "relative_budget_gap": 0.061587681940482544
+    },
+    {
+      "movement_weight": 0.05,
+      "mean_camera_movement": 0.07062899057257481,
+      "absolute_budget_gap": 0.0026848575381410167,
+      "relative_budget_gap": 0.03951566409391584
+    },
+    {
+      "movement_weight": 0.052,
+      "mean_camera_movement": 0.07062899057257481,
+      "absolute_budget_gap": 0.0026848575381410167,
+      "relative_budget_gap": 0.03951566409391584
+    },
+    {
+      "movement_weight": 0.054,
+      "mean_camera_movement": 0.07062899057257481,
+      "absolute_budget_gap": 0.0026848575381410167,
+      "relative_budget_gap": 0.03951566409391584
+    },
+    {
+      "movement_weight": 0.056,
+      "mean_camera_movement": 0.07062899057257481,
+      "absolute_budget_gap": 0.0026848575381410167,
+      "relative_budget_gap": 0.03951566409391584
+    },
+    {
+      "movement_weight": 0.058,
+      "mean_camera_movement": 0.07062899057257481,
+      "absolute_budget_gap": 0.0026848575381410167,
+      "relative_budget_gap": 0.03951566409391584
+    },
+    {
+      "movement_weight": 0.06,
+      "mean_camera_movement": 0.06953776785453315,
+      "absolute_budget_gap": 0.00159363482009936,
+      "relative_budget_gap": 0.023455076235820285
+    },
+    {
+      "movement_weight": 0.062,
+      "mean_camera_movement": 0.06953776785453315,
+      "absolute_budget_gap": 0.00159363482009936,
+      "relative_budget_gap": 0.023455076235820285
+    },
+    {
+      "movement_weight": 0.064,
+      "mean_camera_movement": 0.06953776785453315,
+      "absolute_budget_gap": 0.00159363482009936,
+      "relative_budget_gap": 0.023455076235820285
+    },
+    {
+      "movement_weight": 0.066,
+      "mean_camera_movement": 0.06953776785453315,
+      "absolute_budget_gap": 0.00159363482009936,
+      "relative_budget_gap": 0.023455076235820285
+    },
+    {
+      "movement_weight": 0.068,
+      "mean_camera_movement": 0.06953776785453315,
+      "absolute_budget_gap": 0.00159363482009936,
+      "relative_budget_gap": 0.023455076235820285
+    },
+    {
+      "movement_weight": 0.07,
+      "mean_camera_movement": 0.06953776785453315,
+      "absolute_budget_gap": 0.00159363482009936,
+      "relative_budget_gap": 0.023455076235820285
+    },
+    {
+      "movement_weight": 0.072,
+      "mean_camera_movement": 0.06774160186946498,
+      "absolute_budget_gap": 0.0002025311649688083,
+      "relative_budget_gap": 0.0029808484695237245
+    },
+    {
+      "movement_weight": 0.074,
+      "mean_camera_movement": 0.06774160186946498,
+      "absolute_budget_gap": 0.0002025311649688083,
+      "relative_budget_gap": 0.0029808484695237245
+    },
+    {
+      "movement_weight": 0.076,
+      "mean_camera_movement": 0.06774160186946498,
+      "absolute_budget_gap": 0.0002025311649688083,
+      "relative_budget_gap": 0.0029808484695237245
+    },
+    {
+      "movement_weight": 0.078,
+      "mean_camera_movement": 0.06774160186946498,
+      "absolute_budget_gap": 0.0002025311649688083,
+      "relative_budget_gap": 0.0029808484695237245
+    },
+    {
+      "movement_weight": 0.08,
+      "mean_camera_movement": 0.06774160186946498,
+      "absolute_budget_gap": 0.0002025311649688083,
+      "relative_budget_gap": 0.0029808484695237245
+    },
+    {
+      "movement_weight": 0.082,
+      "mean_camera_movement": 0.06774160186946498,
+      "absolute_budget_gap": 0.0002025311649688083,
+      "relative_budget_gap": 0.0029808484695237245
+    },
+    {
+      "movement_weight": 0.084,
+      "mean_camera_movement": 0.06695057418165094,
+      "absolute_budget_gap": 0.0009935588527828498,
+      "relative_budget_gap": 0.014623173604692527
+    },
+    {
+      "movement_weight": 0.086,
+      "mean_camera_movement": 0.06695057418165094,
+      "absolute_budget_gap": 0.0009935588527828498,
+      "relative_budget_gap": 0.014623173604692527
+    },
+    {
+      "movement_weight": 0.088,
+      "mean_camera_movement": 0.06695057418165094,
+      "absolute_budget_gap": 0.0009935588527828498,
+      "relative_budget_gap": 0.014623173604692527
+    },
+    {
+      "movement_weight": 0.09,
+      "mean_camera_movement": 0.06695057418165094,
+      "absolute_budget_gap": 0.0009935588527828498,
+      "relative_budget_gap": 0.014623173604692527
+    },
+    {
+      "movement_weight": 0.092,
+      "mean_camera_movement": 0.06695057418165094,
+      "absolute_budget_gap": 0.0009935588527828498,
+      "relative_budget_gap": 0.014623173604692527
+    },
+    {
+      "movement_weight": 0.094,
+      "mean_camera_movement": 0.06695057418165094,
+      "absolute_budget_gap": 0.0009935588527828498,
+      "relative_budget_gap": 0.014623173604692527
+    },
+    {
+      "movement_weight": 0.096,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.098,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.1,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.102,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.104,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.106,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.108,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.11,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.112,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.114,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.116,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.118,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.12,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.122,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.124,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.126,
+      "mean_camera_movement": 0.06639840645516369,
+      "absolute_budget_gap": 0.0015457265792701014,
+      "relative_budget_gap": 0.022749963981242263
+    },
+    {
+      "movement_weight": 0.128,
+      "mean_camera_movement": 0.06450277801558882,
+      "absolute_budget_gap": 0.0034413550188449743,
+      "relative_budget_gap": 0.05064977453021456
+    },
+    {
+      "movement_weight": 0.13,
+      "mean_camera_movement": 0.06450277801558882,
+      "absolute_budget_gap": 0.0034413550188449743,
+      "relative_budget_gap": 0.05064977453021456
+    },
+    {
+      "movement_weight": 0.132,
+      "mean_camera_movement": 0.06450277801558882,
+      "absolute_budget_gap": 0.0034413550188449743,
+      "relative_budget_gap": 0.05064977453021456
+    },
+    {
+      "movement_weight": 0.134,
+      "mean_camera_movement": 0.06450277801558882,
+      "absolute_budget_gap": 0.0034413550188449743,
+      "relative_budget_gap": 0.05064977453021456
+    },
+    {
+      "movement_weight": 0.136,
+      "mean_camera_movement": 0.06450277801558882,
+      "absolute_budget_gap": 0.0034413550188449743,
+      "relative_budget_gap": 0.05064977453021456
+    },
+    {
+      "movement_weight": 0.138,
+      "mean_camera_movement": 0.06450277801558882,
+      "absolute_budget_gap": 0.0034413550188449743,
+      "relative_budget_gap": 0.05064977453021456
+    },
+    {
+      "movement_weight": 0.14,
+      "mean_camera_movement": 0.06199604055111999,
+      "absolute_budget_gap": 0.005948092483313801,
+      "relative_budget_gap": 0.08754387196756684
+    }
+  ]
+}

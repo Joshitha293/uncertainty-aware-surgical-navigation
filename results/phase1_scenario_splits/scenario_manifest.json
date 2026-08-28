@@ -1,0 +1,818 @@
+{
+  "experiment": "phase1_examiner_proof_fairness",
+  "split_policy": {
+    "development": "Historical scenarios already used during method development.",
+    "validation": "Procedural scenarios used only after development hyperparameters were selected.",
+    "held_out": "Procedural scenarios reserved for final Phase 1 testing. No parameter tuning is permitted after inspecting held-out outcomes."
+  },
+  "config": {
+    "validation_count": 20,
+    "held_out_count": 30,
+    "validation_seed": 20261117,
+    "held_out_seed": 20261229,
+    "validation_id_base": 1000,
+    "held_out_id_base": 2000,
+    "translation_x_min": -0.004,
+    "translation_x_max": 0.004,
+    "translation_y_min": -0.01,
+    "translation_y_max": 0.01,
+    "translation_z_min": -0.006,
+    "translation_z_max": 0.008,
+    "radius_scale_min": 0.88,
+    "radius_scale_max": 1.12,
+    "safety_margin_scale_min": 0.9,
+    "safety_margin_scale_max": 1.25,
+    "occluder_probability": 0.6,
+    "occluder_radius_min": 0.004,
+    "occluder_radius_max": 0.014,
+    "initial_view_index_min": 0,
+    "initial_view_index_max_exclusive": 24
+  },
+  "development": [
+    {
+      "scenario_id": 0,
+      "name": "baseline",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 0,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 1,
+      "name": "lateral_positive",
+      "translation": [
+        0.0,
+        0.008,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 3,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2,
+      "name": "lateral_negative",
+      "translation": [
+        0.0,
+        -0.008,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 6,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 3,
+      "name": "superior_shift",
+      "translation": [
+        0.0,
+        0.0,
+        0.006
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 9,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 4,
+      "name": "larger_anatomy",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.1,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 12,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 5,
+      "name": "smaller_anatomy",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 0.9,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 15,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 6,
+      "name": "larger_safety_margin",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.2,
+      "initial_view_index": 18,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 7,
+      "name": "partial_occlusion",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 4,
+      "occluder_radius": 0.008
+    },
+    {
+      "scenario_id": 8,
+      "name": "strong_occlusion",
+      "translation": [
+        0.003,
+        -0.004,
+        0.0
+      ],
+      "radius_scale": 1.0,
+      "safety_margin_scale": 1.0,
+      "initial_view_index": 8,
+      "occluder_radius": 0.012
+    },
+    {
+      "scenario_id": 9,
+      "name": "combined_variation",
+      "translation": [
+        -0.004,
+        0.005,
+        0.003
+      ],
+      "radius_scale": 1.05,
+      "safety_margin_scale": 1.1,
+      "initial_view_index": 13,
+      "occluder_radius": 0.006
+    }
+  ],
+  "validation": [
+    {
+      "scenario_id": 1000,
+      "name": "validation_000",
+      "translation": [
+        -0.002114,
+        0.005862,
+        0.005214
+      ],
+      "radius_scale": 1.049235,
+      "safety_margin_scale": 1.152228,
+      "initial_view_index": 15,
+      "occluder_radius": 0.008673
+    },
+    {
+      "scenario_id": 1001,
+      "name": "validation_001",
+      "translation": [
+        0.001753,
+        0.004432,
+        -0.000423
+      ],
+      "radius_scale": 0.945138,
+      "safety_margin_scale": 1.158727,
+      "initial_view_index": 4,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 1002,
+      "name": "validation_002",
+      "translation": [
+        0.000238,
+        -0.00608,
+        -0.000894
+      ],
+      "radius_scale": 1.039024,
+      "safety_margin_scale": 1.117634,
+      "initial_view_index": 4,
+      "occluder_radius": 0.01267
+    },
+    {
+      "scenario_id": 1003,
+      "name": "validation_003",
+      "translation": [
+        0.003144,
+        0.000395,
+        -0.001913
+      ],
+      "radius_scale": 0.926985,
+      "safety_margin_scale": 1.186645,
+      "initial_view_index": 3,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 1004,
+      "name": "validation_004",
+      "translation": [
+        6.3e-05,
+        -0.003438,
+        0.001254
+      ],
+      "radius_scale": 1.030388,
+      "safety_margin_scale": 0.944165,
+      "initial_view_index": 6,
+      "occluder_radius": 0.006624
+    },
+    {
+      "scenario_id": 1005,
+      "name": "validation_005",
+      "translation": [
+        0.000232,
+        -0.001553,
+        0.004432
+      ],
+      "radius_scale": 1.10674,
+      "safety_margin_scale": 0.942814,
+      "initial_view_index": 3,
+      "occluder_radius": 0.009712
+    },
+    {
+      "scenario_id": 1006,
+      "name": "validation_006",
+      "translation": [
+        -0.000253,
+        -0.002542,
+        -0.004286
+      ],
+      "radius_scale": 0.904426,
+      "safety_margin_scale": 1.054536,
+      "initial_view_index": 18,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 1007,
+      "name": "validation_007",
+      "translation": [
+        0.000485,
+        0.006373,
+        0.007787
+      ],
+      "radius_scale": 0.945236,
+      "safety_margin_scale": 1.050678,
+      "initial_view_index": 20,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 1008,
+      "name": "validation_008",
+      "translation": [
+        0.00396,
+        0.007401,
+        0.004211
+      ],
+      "radius_scale": 1.048081,
+      "safety_margin_scale": 0.99577,
+      "initial_view_index": 10,
+      "occluder_radius": 0.009811
+    },
+    {
+      "scenario_id": 1009,
+      "name": "validation_009",
+      "translation": [
+        0.00372,
+        0.003069,
+        -0.000143
+      ],
+      "radius_scale": 0.974401,
+      "safety_margin_scale": 1.202748,
+      "initial_view_index": 20,
+      "occluder_radius": 0.011703
+    },
+    {
+      "scenario_id": 1010,
+      "name": "validation_010",
+      "translation": [
+        -0.001084,
+        0.006083,
+        -0.001536
+      ],
+      "radius_scale": 1.006431,
+      "safety_margin_scale": 0.926235,
+      "initial_view_index": 19,
+      "occluder_radius": 0.013944
+    },
+    {
+      "scenario_id": 1011,
+      "name": "validation_011",
+      "translation": [
+        -0.00228,
+        0.009662,
+        -0.004651
+      ],
+      "radius_scale": 1.062095,
+      "safety_margin_scale": 1.07536,
+      "initial_view_index": 16,
+      "occluder_radius": 0.013714
+    },
+    {
+      "scenario_id": 1012,
+      "name": "validation_012",
+      "translation": [
+        0.001931,
+        -0.001086,
+        0.007098
+      ],
+      "radius_scale": 1.019803,
+      "safety_margin_scale": 1.133126,
+      "initial_view_index": 23,
+      "occluder_radius": 0.009747
+    },
+    {
+      "scenario_id": 1013,
+      "name": "validation_013",
+      "translation": [
+        -0.00213,
+        0.004501,
+        0.00094
+      ],
+      "radius_scale": 1.011568,
+      "safety_margin_scale": 1.13183,
+      "initial_view_index": 1,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 1014,
+      "name": "validation_014",
+      "translation": [
+        -0.003881,
+        0.004754,
+        -0.005385
+      ],
+      "radius_scale": 0.999917,
+      "safety_margin_scale": 1.187145,
+      "initial_view_index": 14,
+      "occluder_radius": 0.013905
+    },
+    {
+      "scenario_id": 1015,
+      "name": "validation_015",
+      "translation": [
+        0.000919,
+        -0.008187,
+        -0.001449
+      ],
+      "radius_scale": 1.074425,
+      "safety_margin_scale": 1.1663,
+      "initial_view_index": 20,
+      "occluder_radius": 0.008696
+    },
+    {
+      "scenario_id": 1016,
+      "name": "validation_016",
+      "translation": [
+        -0.002859,
+        0.009214,
+        0.001006
+      ],
+      "radius_scale": 0.984649,
+      "safety_margin_scale": 0.909931,
+      "initial_view_index": 14,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 1017,
+      "name": "validation_017",
+      "translation": [
+        -0.000697,
+        0.009602,
+        0.003397
+      ],
+      "radius_scale": 1.0497,
+      "safety_margin_scale": 1.151457,
+      "initial_view_index": 22,
+      "occluder_radius": 0.013745
+    },
+    {
+      "scenario_id": 1018,
+      "name": "validation_018",
+      "translation": [
+        -0.000672,
+        0.005753,
+        0.003986
+      ],
+      "radius_scale": 0.973972,
+      "safety_margin_scale": 1.038457,
+      "initial_view_index": 19,
+      "occluder_radius": 0.013474
+    },
+    {
+      "scenario_id": 1019,
+      "name": "validation_019",
+      "translation": [
+        -0.003226,
+        -0.000674,
+        -0.000467
+      ],
+      "radius_scale": 0.979993,
+      "safety_margin_scale": 1.100721,
+      "initial_view_index": 3,
+      "occluder_radius": 0.013201
+    }
+  ],
+  "held_out": [
+    {
+      "scenario_id": 2000,
+      "name": "held_out_000",
+      "translation": [
+        -7.2e-05,
+        0.008226,
+        0.006715
+      ],
+      "radius_scale": 0.975913,
+      "safety_margin_scale": 0.907585,
+      "initial_view_index": 0,
+      "occluder_radius": 0.01305
+    },
+    {
+      "scenario_id": 2001,
+      "name": "held_out_001",
+      "translation": [
+        -0.000536,
+        0.005635,
+        -0.005362
+      ],
+      "radius_scale": 0.895117,
+      "safety_margin_scale": 1.05208,
+      "initial_view_index": 20,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2002,
+      "name": "held_out_002",
+      "translation": [
+        0.002867,
+        -0.009656,
+        0.007172
+      ],
+      "radius_scale": 0.998899,
+      "safety_margin_scale": 1.110565,
+      "initial_view_index": 11,
+      "occluder_radius": 0.011845
+    },
+    {
+      "scenario_id": 2003,
+      "name": "held_out_003",
+      "translation": [
+        0.002929,
+        0.002647,
+        -0.000733
+      ],
+      "radius_scale": 1.073648,
+      "safety_margin_scale": 1.172452,
+      "initial_view_index": 7,
+      "occluder_radius": 0.004497
+    },
+    {
+      "scenario_id": 2004,
+      "name": "held_out_004",
+      "translation": [
+        0.000528,
+        0.000432,
+        -0.005214
+      ],
+      "radius_scale": 0.950013,
+      "safety_margin_scale": 1.187538,
+      "initial_view_index": 11,
+      "occluder_radius": 0.011897
+    },
+    {
+      "scenario_id": 2005,
+      "name": "held_out_005",
+      "translation": [
+        0.003238,
+        0.008602,
+        0.00132
+      ],
+      "radius_scale": 1.03123,
+      "safety_margin_scale": 1.13336,
+      "initial_view_index": 1,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2006,
+      "name": "held_out_006",
+      "translation": [
+        0.002147,
+        -0.008203,
+        0.005397
+      ],
+      "radius_scale": 1.107596,
+      "safety_margin_scale": 1.036729,
+      "initial_view_index": 22,
+      "occluder_radius": 0.012085
+    },
+    {
+      "scenario_id": 2007,
+      "name": "held_out_007",
+      "translation": [
+        0.003023,
+        -0.009484,
+        0.004219
+      ],
+      "radius_scale": 0.962715,
+      "safety_margin_scale": 1.228653,
+      "initial_view_index": 8,
+      "occluder_radius": 0.008757
+    },
+    {
+      "scenario_id": 2008,
+      "name": "held_out_008",
+      "translation": [
+        -0.001455,
+        0.002111,
+        0.003444
+      ],
+      "radius_scale": 0.941814,
+      "safety_margin_scale": 0.972494,
+      "initial_view_index": 14,
+      "occluder_radius": 0.011452
+    },
+    {
+      "scenario_id": 2009,
+      "name": "held_out_009",
+      "translation": [
+        0.001008,
+        -0.006352,
+        -0.000376
+      ],
+      "radius_scale": 0.94755,
+      "safety_margin_scale": 1.026452,
+      "initial_view_index": 14,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2010,
+      "name": "held_out_010",
+      "translation": [
+        0.001369,
+        -0.00743,
+        -0.00095
+      ],
+      "radius_scale": 0.939406,
+      "safety_margin_scale": 0.986259,
+      "initial_view_index": 4,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2011,
+      "name": "held_out_011",
+      "translation": [
+        0.002743,
+        -0.004137,
+        -0.002438
+      ],
+      "radius_scale": 1.057226,
+      "safety_margin_scale": 1.032932,
+      "initial_view_index": 20,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2012,
+      "name": "held_out_012",
+      "translation": [
+        0.000544,
+        0.003138,
+        0.003253
+      ],
+      "radius_scale": 0.970217,
+      "safety_margin_scale": 1.19547,
+      "initial_view_index": 9,
+      "occluder_radius": 0.004437
+    },
+    {
+      "scenario_id": 2013,
+      "name": "held_out_013",
+      "translation": [
+        0.002953,
+        -0.004124,
+        -0.003235
+      ],
+      "radius_scale": 1.088142,
+      "safety_margin_scale": 1.188093,
+      "initial_view_index": 3,
+      "occluder_radius": 0.004278
+    },
+    {
+      "scenario_id": 2014,
+      "name": "held_out_014",
+      "translation": [
+        -0.002977,
+        0.003664,
+        -0.005112
+      ],
+      "radius_scale": 1.00173,
+      "safety_margin_scale": 1.232642,
+      "initial_view_index": 10,
+      "occluder_radius": 0.005699
+    },
+    {
+      "scenario_id": 2015,
+      "name": "held_out_015",
+      "translation": [
+        0.001285,
+        -0.007014,
+        -0.005016
+      ],
+      "radius_scale": 0.911981,
+      "safety_margin_scale": 0.923121,
+      "initial_view_index": 13,
+      "occluder_radius": 0.008261
+    },
+    {
+      "scenario_id": 2016,
+      "name": "held_out_016",
+      "translation": [
+        0.001846,
+        0.007058,
+        0.006834
+      ],
+      "radius_scale": 1.067575,
+      "safety_margin_scale": 1.09865,
+      "initial_view_index": 5,
+      "occluder_radius": 0.009799
+    },
+    {
+      "scenario_id": 2017,
+      "name": "held_out_017",
+      "translation": [
+        -0.002436,
+        -0.00496,
+        0.001839
+      ],
+      "radius_scale": 1.025736,
+      "safety_margin_scale": 0.918306,
+      "initial_view_index": 6,
+      "occluder_radius": 0.009105
+    },
+    {
+      "scenario_id": 2018,
+      "name": "held_out_018",
+      "translation": [
+        -0.003903,
+        0.008243,
+        0.004975
+      ],
+      "radius_scale": 0.97944,
+      "safety_margin_scale": 1.118695,
+      "initial_view_index": 16,
+      "occluder_radius": 0.006379
+    },
+    {
+      "scenario_id": 2019,
+      "name": "held_out_019",
+      "translation": [
+        0.001084,
+        -0.001805,
+        0.003951
+      ],
+      "radius_scale": 0.910754,
+      "safety_margin_scale": 0.901712,
+      "initial_view_index": 11,
+      "occluder_radius": 0.010699
+    },
+    {
+      "scenario_id": 2020,
+      "name": "held_out_020",
+      "translation": [
+        0.002002,
+        -0.007598,
+        0.007502
+      ],
+      "radius_scale": 1.00778,
+      "safety_margin_scale": 1.062115,
+      "initial_view_index": 15,
+      "occluder_radius": 0.004936
+    },
+    {
+      "scenario_id": 2021,
+      "name": "held_out_021",
+      "translation": [
+        0.003692,
+        0.007162,
+        0.006382
+      ],
+      "radius_scale": 0.956793,
+      "safety_margin_scale": 1.116057,
+      "initial_view_index": 20,
+      "occluder_radius": 0.007164
+    },
+    {
+      "scenario_id": 2022,
+      "name": "held_out_022",
+      "translation": [
+        0.00315,
+        0.006153,
+        0.004292
+      ],
+      "radius_scale": 1.091043,
+      "safety_margin_scale": 1.065389,
+      "initial_view_index": 20,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2023,
+      "name": "held_out_023",
+      "translation": [
+        0.000434,
+        -0.002775,
+        -0.002112
+      ],
+      "radius_scale": 1.014191,
+      "safety_margin_scale": 1.068401,
+      "initial_view_index": 8,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2024,
+      "name": "held_out_024",
+      "translation": [
+        0.003992,
+        0.008142,
+        0.003899
+      ],
+      "radius_scale": 1.065371,
+      "safety_margin_scale": 1.026714,
+      "initial_view_index": 19,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2025,
+      "name": "held_out_025",
+      "translation": [
+        0.001348,
+        -0.00211,
+        0.003002
+      ],
+      "radius_scale": 1.07024,
+      "safety_margin_scale": 1.187313,
+      "initial_view_index": 10,
+      "occluder_radius": 0.0
+    },
+    {
+      "scenario_id": 2026,
+      "name": "held_out_026",
+      "translation": [
+        0.001269,
+        -0.003596,
+        0.001318
+      ],
+      "radius_scale": 0.924287,
+      "safety_margin_scale": 1.071704,
+      "initial_view_index": 5,
+      "occluder_radius": 0.009676
+    },
+    {
+      "scenario_id": 2027,
+      "name": "held_out_027",
+      "translation": [
+        0.002211,
+        0.004892,
+        0.005928
+      ],
+      "radius_scale": 0.955326,
+      "safety_margin_scale": 1.080081,
+      "initial_view_index": 15,
+      "occluder_radius": 0.005268
+    },
+    {
+      "scenario_id": 2028,
+      "name": "held_out_028",
+      "translation": [
+        0.00386,
+        0.008142,
+        0.003191
+      ],
+      "radius_scale": 0.955738,
+      "safety_margin_scale": 1.065511,
+      "initial_view_index": 18,
+      "occluder_radius": 0.005051
+    },
+    {
+      "scenario_id": 2029,
+      "name": "held_out_029",
+      "translation": [
+        0.002426,
+        -0.003224,
+        5e-06
+      ],
+      "radius_scale": 0.994607,
+      "safety_margin_scale": 0.954754,
+      "initial_view_index": 21,
+      "occluder_radius": 0.007228
+    }
+  ],
+  "sha256": "490922fbc9f91743262257ff594a7440651016085207b3e8867b9e1bdce8ddd9"
+}

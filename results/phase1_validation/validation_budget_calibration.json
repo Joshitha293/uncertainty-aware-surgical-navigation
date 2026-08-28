@@ -1,0 +1,1436 @@
+{
+  "experiment_role": "validation_only_budget_calibration",
+  "held_out_executed": false,
+  "manifest_sha256": "490922fbc9f91743262257ff594a7440651016085207b3e8867b9e1bdce8ddd9",
+  "selection_information": "camera_movement_only",
+  "forbidden_for_weight_selection": [
+    "localisation_error",
+    "predicted_sigma",
+    "planning_success",
+    "safe_navigation_success",
+    "collision",
+    "safety_violation"
+  ],
+  "task_movement_weight": 0.2,
+  "development_generic_weight": 0.17,
+  "validation_trial_count": 100,
+  "target_task_camera_movement": 0.07855950964608156,
+  "match_tolerance": 0.05,
+  "selected_generic": {
+    "movement_weight": 0.265,
+    "mean_generic_camera_movement": 0.08095983970102726,
+    "target_task_camera_movement": 0.07855950964608156,
+    "absolute_budget_gap": 0.002400330054945693,
+    "relative_budget_gap": 0.030554290190448228
+  },
+  "ready_to_freeze": true,
+  "candidates": [
+    {
+      "movement_weight": 0.0,
+      "mean_generic_camera_movement": 0.22324027499949814,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.14468076535341656,
+      "relative_budget_gap": 1.8416709320770694
+    },
+    {
+      "movement_weight": 0.005,
+      "mean_generic_camera_movement": 0.22275586208639736,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.1441963524403158,
+      "relative_budget_gap": 1.8355047414365846
+    },
+    {
+      "movement_weight": 0.01,
+      "mean_generic_camera_movement": 0.21975027128065278,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.14119076163457123,
+      "relative_budget_gap": 1.7972459638642058
+    },
+    {
+      "movement_weight": 0.015,
+      "mean_generic_camera_movement": 0.20993797052278373,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.13137846087670219,
+      "relative_budget_gap": 1.6723431888586788
+    },
+    {
+      "movement_weight": 0.02,
+      "mean_generic_camera_movement": 0.20290825414914848,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.12434874450306692,
+      "relative_budget_gap": 1.5828604972621447
+    },
+    {
+      "movement_weight": 0.025,
+      "mean_generic_camera_movement": 0.2007093218055735,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.12214981215949193,
+      "relative_budget_gap": 1.5548698395622507
+    },
+    {
+      "movement_weight": 0.03,
+      "mean_generic_camera_movement": 0.1921274565582997,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.11356794691221812,
+      "relative_budget_gap": 1.4456295287973802
+    },
+    {
+      "movement_weight": 0.035,
+      "mean_generic_camera_movement": 0.18070277663392104,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.10214326698783947,
+      "relative_budget_gap": 1.3002024509573074
+    },
+    {
+      "movement_weight": 0.04,
+      "mean_generic_camera_movement": 0.17236043523907532,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.09380092559299376,
+      "relative_budget_gap": 1.1940110880983894
+    },
+    {
+      "movement_weight": 0.045,
+      "mean_generic_camera_movement": 0.16844258394062997,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0898830742945484,
+      "relative_budget_gap": 1.144139960896913
+    },
+    {
+      "movement_weight": 0.05,
+      "mean_generic_camera_movement": 0.16627945227816718,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.08771994263208562,
+      "relative_budget_gap": 1.1166050173591042
+    },
+    {
+      "movement_weight": 0.055,
+      "mean_generic_camera_movement": 0.16074505705638437,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0821855474103028,
+      "relative_budget_gap": 1.0461565732851046
+    },
+    {
+      "movement_weight": 0.06,
+      "mean_generic_camera_movement": 0.1582434030477834,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.07968389340170183,
+      "relative_budget_gap": 1.0143125098499943
+    },
+    {
+      "movement_weight": 0.065,
+      "mean_generic_camera_movement": 0.15669883462805195,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.07813932498197039,
+      "relative_budget_gap": 0.994651383823497
+    },
+    {
+      "movement_weight": 0.07,
+      "mean_generic_camera_movement": 0.1546333216753197,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.07607381202923814,
+      "relative_budget_gap": 0.9683590487257147
+    },
+    {
+      "movement_weight": 0.075,
+      "mean_generic_camera_movement": 0.15415367622681714,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.07559416658073558,
+      "relative_budget_gap": 0.9622535441131805
+    },
+    {
+      "movement_weight": 0.08,
+      "mean_generic_camera_movement": 0.15357692430298894,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.07501741465690738,
+      "relative_budget_gap": 0.9549119513966969
+    },
+    {
+      "movement_weight": 0.085,
+      "mean_generic_camera_movement": 0.14952671673985019,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.07096720709376862,
+      "relative_budget_gap": 0.903356034342411
+    },
+    {
+      "movement_weight": 0.09,
+      "mean_generic_camera_movement": 0.1457450896703272,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.06718558002424564,
+      "relative_budget_gap": 0.8552189330982766
+    },
+    {
+      "movement_weight": 0.095,
+      "mean_generic_camera_movement": 0.14546863253501965,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.06690912288893809,
+      "relative_budget_gap": 0.8516998539116445
+    },
+    {
+      "movement_weight": 0.1,
+      "mean_generic_camera_movement": 0.14363101621212004,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.06507150656603848,
+      "relative_budget_gap": 0.8283084614350588
+    },
+    {
+      "movement_weight": 0.105,
+      "mean_generic_camera_movement": 0.1420864477923886,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.06352693814630704,
+      "relative_budget_gap": 0.8086473354085615
+    },
+    {
+      "movement_weight": 0.11,
+      "mean_generic_camera_movement": 0.13915947183258284,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.06059996218650128,
+      "relative_budget_gap": 0.7713892622231244
+    },
+    {
+      "movement_weight": 0.115,
+      "mean_generic_camera_movement": 0.13902055449046172,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.060461044844380155,
+      "relative_budget_gap": 0.7696209550793176
+    },
+    {
+      "movement_weight": 0.12,
+      "mean_generic_camera_movement": 0.1317833696482477,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.053223860002166126,
+      "relative_budget_gap": 0.6774973550871808
+    },
+    {
+      "movement_weight": 0.125,
+      "mean_generic_camera_movement": 0.1317833696482477,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.053223860002166126,
+      "relative_budget_gap": 0.6774973550871808
+    },
+    {
+      "movement_weight": 0.13,
+      "mean_generic_camera_movement": 0.13099604899848322,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.052436539352401654,
+      "relative_budget_gap": 0.6674753901677022
+    },
+    {
+      "movement_weight": 0.135,
+      "mean_generic_camera_movement": 0.12677389889254437,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.048214389246462805,
+      "relative_budget_gap": 0.6137307814632939
+    },
+    {
+      "movement_weight": 0.14,
+      "mean_generic_camera_movement": 0.12632338946009466,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0477638798140131,
+      "relative_budget_gap": 0.6079961551337852
+    },
+    {
+      "movement_weight": 0.145,
+      "mean_generic_camera_movement": 0.12604693232478711,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04748742267870555,
+      "relative_budget_gap": 0.604477075947153
+    },
+    {
+      "movement_weight": 0.15,
+      "mean_generic_camera_movement": 0.12604693232478711,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04748742267870555,
+      "relative_budget_gap": 0.604477075947153
+    },
+    {
+      "movement_weight": 0.155,
+      "mean_generic_camera_movement": 0.12348595078724242,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04492644114116086,
+      "relative_budget_gap": 0.5718778203117479
+    },
+    {
+      "movement_weight": 0.16,
+      "mean_generic_camera_movement": 0.12348595078724242,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04492644114116086,
+      "relative_budget_gap": 0.5718778203117479
+    },
+    {
+      "movement_weight": 0.165,
+      "mean_generic_camera_movement": 0.12348595078724242,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04492644114116086,
+      "relative_budget_gap": 0.5718778203117479
+    },
+    {
+      "movement_weight": 0.17,
+      "mean_generic_camera_movement": 0.11998595078724242,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.041426441141160855,
+      "relative_budget_gap": 0.527325607399933
+    },
+    {
+      "movement_weight": 0.175,
+      "mean_generic_camera_movement": 0.11677601492589902,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03821650527981746,
+      "relative_budget_gap": 0.4864656799919785
+    },
+    {
+      "movement_weight": 0.18,
+      "mean_generic_camera_movement": 0.11677601492589902,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03821650527981746,
+      "relative_budget_gap": 0.4864656799919785
+    },
+    {
+      "movement_weight": 0.185,
+      "mean_generic_camera_movement": 0.11677601492589902,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03821650527981746,
+      "relative_budget_gap": 0.4864656799919785
+    },
+    {
+      "movement_weight": 0.19,
+      "mean_generic_camera_movement": 0.11677601492589902,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03821650527981746,
+      "relative_budget_gap": 0.4864656799919785
+    },
+    {
+      "movement_weight": 0.195,
+      "mean_generic_camera_movement": 0.11427601492589902,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.035716505279817456,
+      "relative_budget_gap": 0.4546426707692535
+    },
+    {
+      "movement_weight": 0.2,
+      "mean_generic_camera_movement": 0.11031604671830968,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.031756537072228114,
+      "relative_budget_gap": 0.4042354288525283
+    },
+    {
+      "movement_weight": 0.205,
+      "mean_generic_camera_movement": 0.11031604671830968,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.031756537072228114,
+      "relative_budget_gap": 0.4042354288525283
+    },
+    {
+      "movement_weight": 0.21,
+      "mean_generic_camera_movement": 0.10689818038345879,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.028338670737377225,
+      "relative_budget_gap": 0.360728712094128
+    },
+    {
+      "movement_weight": 0.215,
+      "mean_generic_camera_movement": 0.10480206389089307,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.026242554244811506,
+      "relative_budget_gap": 0.3340468183041981
+    },
+    {
+      "movement_weight": 0.22,
+      "mean_generic_camera_movement": 0.10032697677589518,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.021767467129813617,
+      "relative_budget_gap": 0.277082522890968
+    },
+    {
+      "movement_weight": 0.225,
+      "mean_generic_camera_movement": 0.09594820444264084,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.017388694796559273,
+      "relative_budget_gap": 0.22134423795282174
+    },
+    {
+      "movement_weight": 0.23,
+      "mean_generic_camera_movement": 0.09370624101676114,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.01514673137067958,
+      "relative_budget_gap": 0.1928058288413092
+    },
+    {
+      "movement_weight": 0.235,
+      "mean_generic_camera_movement": 0.091264847972713,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.01270533832663144,
+      "relative_budget_gap": 0.16172883949849304
+    },
+    {
+      "movement_weight": 0.24,
+      "mean_generic_camera_movement": 0.08947283339660932,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.010913323750527754,
+      "relative_budget_gap": 0.138917920945451
+    },
+    {
+      "movement_weight": 0.245,
+      "mean_generic_camera_movement": 0.08653068034520206,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.007971170699120497,
+      "relative_budget_gap": 0.10146665546961045
+    },
+    {
+      "movement_weight": 0.25,
+      "mean_generic_camera_movement": 0.08653068034520206,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.007971170699120497,
+      "relative_budget_gap": 0.10146665546961045
+    },
+    {
+      "movement_weight": 0.255,
+      "mean_generic_camera_movement": 0.08419468778297792,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.00563517813689636,
+      "relative_budget_gap": 0.07173133032886025
+    },
+    {
+      "movement_weight": 0.26,
+      "mean_generic_camera_movement": 0.08323925620270937,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.004679746556627812,
+      "relative_budget_gap": 0.0595694471326328
+    },
+    {
+      "movement_weight": 0.265,
+      "mean_generic_camera_movement": 0.08095983970102726,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.002400330054945693,
+      "relative_budget_gap": 0.030554290190448228
+    },
+    {
+      "movement_weight": 0.27,
+      "mean_generic_camera_movement": 0.07412156087144081,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0044379487746407514,
+      "relative_budget_gap": 0.05649155391414934
+    },
+    {
+      "movement_weight": 0.275,
+      "mean_generic_camera_movement": 0.07412156087144081,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0044379487746407514,
+      "relative_budget_gap": 0.05649155391414934
+    },
+    {
+      "movement_weight": 0.28,
+      "mean_generic_camera_movement": 0.07412156087144081,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0044379487746407514,
+      "relative_budget_gap": 0.05649155391414934
+    },
+    {
+      "movement_weight": 0.285,
+      "mean_generic_camera_movement": 0.07412156087144081,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0044379487746407514,
+      "relative_budget_gap": 0.05649155391414934
+    },
+    {
+      "movement_weight": 0.29,
+      "mean_generic_camera_movement": 0.07271016217634978,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.005849347469731786,
+      "relative_budget_gap": 0.07445753539047889
+    },
+    {
+      "movement_weight": 0.295,
+      "mean_generic_camera_movement": 0.06533590007015266,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.013223609575928899,
+      "relative_budget_gap": 0.16832601979699952
+    },
+    {
+      "movement_weight": 0.3,
+      "mean_generic_camera_movement": 0.06488539063770297,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.013674119008378588,
+      "relative_budget_gap": 0.17406064612650793
+    },
+    {
+      "movement_weight": 0.305,
+      "mean_generic_camera_movement": 0.06488539063770297,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.013674119008378588,
+      "relative_budget_gap": 0.17406064612650793
+    },
+    {
+      "movement_weight": 0.31,
+      "mean_generic_camera_movement": 0.06488539063770297,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.013674119008378588,
+      "relative_budget_gap": 0.17406064612650793
+    },
+    {
+      "movement_weight": 0.315,
+      "mean_generic_camera_movement": 0.0638535365248337,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.014705973121247856,
+      "relative_budget_gap": 0.18719532730664606
+    },
+    {
+      "movement_weight": 0.32,
+      "mean_generic_camera_movement": 0.0638535365248337,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.014705973121247856,
+      "relative_budget_gap": 0.18719532730664606
+    },
+    {
+      "movement_weight": 0.325,
+      "mean_generic_camera_movement": 0.0638535365248337,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.014705973121247856,
+      "relative_budget_gap": 0.18719532730664606
+    },
+    {
+      "movement_weight": 0.33,
+      "mean_generic_camera_movement": 0.06329121641589364,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.015268293230187927,
+      "relative_budget_gap": 0.19435321451181548
+    },
+    {
+      "movement_weight": 0.335,
+      "mean_generic_camera_movement": 0.06136824286357237,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.017191266782509193,
+      "relative_budget_gap": 0.21883113654804576
+    },
+    {
+      "movement_weight": 0.34,
+      "mean_generic_camera_movement": 0.0604528683861437,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.018106641259937863,
+      "relative_budget_gap": 0.2304831247230296
+    },
+    {
+      "movement_weight": 0.345,
+      "mean_generic_camera_movement": 0.05840198314313515,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.020157526502946416,
+      "relative_budget_gap": 0.2565892607242342
+    },
+    {
+      "movement_weight": 0.35,
+      "mean_generic_camera_movement": 0.05685741472340369,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.02170209492267787,
+      "relative_budget_gap": 0.2762503867507317
+    },
+    {
+      "movement_weight": 0.355,
+      "mean_generic_camera_movement": 0.05685741472340369,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.02170209492267787,
+      "relative_budget_gap": 0.2762503867507317
+    },
+    {
+      "movement_weight": 0.36,
+      "mean_generic_camera_movement": 0.055942040245975024,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.02261746940010654,
+      "relative_budget_gap": 0.2879023749257155
+    },
+    {
+      "movement_weight": 0.365,
+      "mean_generic_camera_movement": 0.05541228949885566,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0231472201472259,
+      "relative_budget_gap": 0.29464568009024544
+    },
+    {
+      "movement_weight": 0.37,
+      "mean_generic_camera_movement": 0.053170326072975956,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.025389183573105607,
+      "relative_budget_gap": 0.3231840892017582
+    },
+    {
+      "movement_weight": 0.375,
+      "mean_generic_camera_movement": 0.053170326072975956,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.025389183573105607,
+      "relative_budget_gap": 0.3231840892017582
+    },
+    {
+      "movement_weight": 0.38,
+      "mean_generic_camera_movement": 0.053170326072975956,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.025389183573105607,
+      "relative_budget_gap": 0.3231840892017582
+    },
+    {
+      "movement_weight": 0.385,
+      "mean_generic_camera_movement": 0.05264938153997516,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.025910128106106406,
+      "relative_budget_gap": 0.32981529827304323
+    },
+    {
+      "movement_weight": 0.39,
+      "mean_generic_camera_movement": 0.05110481312024371,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.027454696525837853,
+      "relative_budget_gap": 0.3494764242995406
+    },
+    {
+      "movement_weight": 0.395,
+      "mean_generic_camera_movement": 0.05110481312024371,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.027454696525837853,
+      "relative_budget_gap": 0.3494764242995406
+    },
+    {
+      "movement_weight": 0.4,
+      "mean_generic_camera_movement": 0.04853298334423437,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03002652630184719,
+      "relative_budget_gap": 0.38221376937203005
+    },
+    {
+      "movement_weight": 0.405,
+      "mean_generic_camera_movement": 0.047438233786004876,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.031121275860076687,
+      "relative_budget_gap": 0.3961490594872746
+    },
+    {
+      "movement_weight": 0.41,
+      "mean_generic_camera_movement": 0.047438233786004876,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.031121275860076687,
+      "relative_budget_gap": 0.3961490594872746
+    },
+    {
+      "movement_weight": 0.415,
+      "mean_generic_camera_movement": 0.047438233786004876,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.031121275860076687,
+      "relative_budget_gap": 0.3961490594872746
+    },
+    {
+      "movement_weight": 0.42,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.425,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.43,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.435,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.44,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.445,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.45,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.455,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.46,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.465,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.47,
+      "mean_generic_camera_movement": 0.04537272083327264,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.033186788812808926,
+      "relative_budget_gap": 0.4224413945850569
+    },
+    {
+      "movement_weight": 0.475,
+      "mean_generic_camera_movement": 0.044393019208543556,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03416649043753801,
+      "relative_budget_gap": 0.43491221612076575
+    },
+    {
+      "movement_weight": 0.48,
+      "mean_generic_camera_movement": 0.044393019208543556,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03416649043753801,
+      "relative_budget_gap": 0.43491221612076575
+    },
+    {
+      "movement_weight": 0.485,
+      "mean_generic_camera_movement": 0.044393019208543556,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03416649043753801,
+      "relative_budget_gap": 0.43491221612076575
+    },
+    {
+      "movement_weight": 0.49,
+      "mean_generic_camera_movement": 0.043872074675542765,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0346874349705388,
+      "relative_budget_gap": 0.4415434251920507
+    },
+    {
+      "movement_weight": 0.495,
+      "mean_generic_camera_movement": 0.043872074675542765,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0346874349705388,
+      "relative_budget_gap": 0.4415434251920507
+    },
+    {
+      "movement_weight": 0.5,
+      "mean_generic_camera_movement": 0.04306602282332641,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03549348682275515,
+      "relative_budget_gap": 0.4518038234028809
+    },
+    {
+      "movement_weight": 0.505,
+      "mean_generic_camera_movement": 0.04306602282332641,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03549348682275515,
+      "relative_budget_gap": 0.4518038234028809
+    },
+    {
+      "movement_weight": 0.51,
+      "mean_generic_camera_movement": 0.04306602282332641,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03549348682275515,
+      "relative_budget_gap": 0.4518038234028809
+    },
+    {
+      "movement_weight": 0.515,
+      "mean_generic_camera_movement": 0.04306602282332641,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03549348682275515,
+      "relative_budget_gap": 0.4518038234028809
+    },
+    {
+      "movement_weight": 0.52,
+      "mean_generic_camera_movement": 0.04306602282332641,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03549348682275515,
+      "relative_budget_gap": 0.4518038234028809
+    },
+    {
+      "movement_weight": 0.525,
+      "mean_generic_camera_movement": 0.04254507829032562,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.036014431355755945,
+      "relative_budget_gap": 0.45843503247416584
+    },
+    {
+      "movement_weight": 0.53,
+      "mean_generic_camera_movement": 0.04254507829032562,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.036014431355755945,
+      "relative_budget_gap": 0.45843503247416584
+    },
+    {
+      "movement_weight": 0.535,
+      "mean_generic_camera_movement": 0.04196832636649742,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03659118327958414,
+      "relative_budget_gap": 0.46577662519064944
+    },
+    {
+      "movement_weight": 0.54,
+      "mean_generic_camera_movement": 0.041052951889068746,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.037506557757012816,
+      "relative_budget_gap": 0.4774286133656333
+    },
+    {
+      "movement_weight": 0.545,
+      "mean_generic_camera_movement": 0.041052951889068746,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.037506557757012816,
+      "relative_budget_gap": 0.4774286133656333
+    },
+    {
+      "movement_weight": 0.55,
+      "mean_generic_camera_movement": 0.041052951889068746,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.037506557757012816,
+      "relative_budget_gap": 0.4774286133656333
+    },
+    {
+      "movement_weight": 0.555,
+      "mean_generic_camera_movement": 0.041052951889068746,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.037506557757012816,
+      "relative_budget_gap": 0.4774286133656333
+    },
+    {
+      "movement_weight": 0.56,
+      "mean_generic_camera_movement": 0.041052951889068746,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.037506557757012816,
+      "relative_budget_gap": 0.4774286133656333
+    },
+    {
+      "movement_weight": 0.565,
+      "mean_generic_camera_movement": 0.040532007356067955,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03802750229001361,
+      "relative_budget_gap": 0.48405982243691825
+    },
+    {
+      "movement_weight": 0.57,
+      "mean_generic_camera_movement": 0.040532007356067955,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03802750229001361,
+      "relative_budget_gap": 0.48405982243691825
+    },
+    {
+      "movement_weight": 0.575,
+      "mean_generic_camera_movement": 0.040532007356067955,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03802750229001361,
+      "relative_budget_gap": 0.48405982243691825
+    },
+    {
+      "movement_weight": 0.58,
+      "mean_generic_camera_movement": 0.040532007356067955,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03802750229001361,
+      "relative_budget_gap": 0.48405982243691825
+    },
+    {
+      "movement_weight": 0.585,
+      "mean_generic_camera_movement": 0.040532007356067955,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03802750229001361,
+      "relative_budget_gap": 0.48405982243691825
+    },
+    {
+      "movement_weight": 0.59,
+      "mean_generic_camera_movement": 0.04048743893633651,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.038072070709745054,
+      "relative_budget_gap": 0.4846271429297807
+    },
+    {
+      "movement_weight": 0.595,
+      "mean_generic_camera_movement": 0.04048743893633651,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.038072070709745054,
+      "relative_budget_gap": 0.4846271429297807
+    },
+    {
+      "movement_weight": 0.6,
+      "mean_generic_camera_movement": 0.040093008991908624,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03846650065417294,
+      "relative_budget_gap": 0.4896479220334797
+    },
+    {
+      "movement_weight": 0.605,
+      "mean_generic_camera_movement": 0.040093008991908624,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03846650065417294,
+      "relative_budget_gap": 0.4896479220334797
+    },
+    {
+      "movement_weight": 0.61,
+      "mean_generic_camera_movement": 0.040093008991908624,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03846650065417294,
+      "relative_budget_gap": 0.4896479220334797
+    },
+    {
+      "movement_weight": 0.615,
+      "mean_generic_camera_movement": 0.040093008991908624,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.03846650065417294,
+      "relative_budget_gap": 0.4896479220334797
+    },
+    {
+      "movement_weight": 0.62,
+      "mean_generic_camera_movement": 0.03840535112420114,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04015415852188042,
+      "relative_budget_gap": 0.5111304627890235
+    },
+    {
+      "movement_weight": 0.625,
+      "mean_generic_camera_movement": 0.03840535112420114,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04015415852188042,
+      "relative_budget_gap": 0.5111304627890235
+    },
+    {
+      "movement_weight": 0.63,
+      "mean_generic_camera_movement": 0.03840535112420114,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04015415852188042,
+      "relative_budget_gap": 0.5111304627890235
+    },
+    {
+      "movement_weight": 0.635,
+      "mean_generic_camera_movement": 0.03840535112420114,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04015415852188042,
+      "relative_budget_gap": 0.5111304627890235
+    },
+    {
+      "movement_weight": 0.64,
+      "mean_generic_camera_movement": 0.03748997664677247,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04106953299930909,
+      "relative_budget_gap": 0.5227824509640073
+    },
+    {
+      "movement_weight": 0.645,
+      "mean_generic_camera_movement": 0.03748997664677247,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04106953299930909,
+      "relative_budget_gap": 0.5227824509640073
+    },
+    {
+      "movement_weight": 0.65,
+      "mean_generic_camera_movement": 0.03748997664677247,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04106953299930909,
+      "relative_budget_gap": 0.5227824509640073
+    },
+    {
+      "movement_weight": 0.655,
+      "mean_generic_camera_movement": 0.03748997664677247,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04106953299930909,
+      "relative_budget_gap": 0.5227824509640073
+    },
+    {
+      "movement_weight": 0.66,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.665,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.67,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.675,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.68,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.685,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.69,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.695,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.7,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.705,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.71,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.715,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.72,
+      "mean_generic_camera_movement": 0.035952592955307346,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04260691669077422,
+      "relative_budget_gap": 0.5423521211209519
+    },
+    {
+      "movement_weight": 0.725,
+      "mean_generic_camera_movement": 0.035502083522857636,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04305742612322393,
+      "relative_budget_gap": 0.5480867474504606
+    },
+    {
+      "movement_weight": 0.73,
+      "mean_generic_camera_movement": 0.035502083522857636,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04305742612322393,
+      "relative_budget_gap": 0.5480867474504606
+    },
+    {
+      "movement_weight": 0.735,
+      "mean_generic_camera_movement": 0.035502083522857636,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04305742612322393,
+      "relative_budget_gap": 0.5480867474504606
+    },
+    {
+      "movement_weight": 0.74,
+      "mean_generic_camera_movement": 0.035502083522857636,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04305742612322393,
+      "relative_budget_gap": 0.5480867474504606
+    },
+    {
+      "movement_weight": 0.745,
+      "mean_generic_camera_movement": 0.035502083522857636,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04305742612322393,
+      "relative_budget_gap": 0.5480867474504606
+    },
+    {
+      "movement_weight": 0.75,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.755,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.76,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.765,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.77,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.775,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.78,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.785,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.79,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.795,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.8,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.805,
+      "mean_generic_camera_movement": 0.03536705403430505,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.043192455611776516,
+      "relative_budget_gap": 0.5498055653142802
+    },
+    {
+      "movement_weight": 0.81,
+      "mean_generic_camera_movement": 0.03484610950130426,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0437134001447773,
+      "relative_budget_gap": 0.5564367743855649
+    },
+    {
+      "movement_weight": 0.815,
+      "mean_generic_camera_movement": 0.03484610950130426,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0437134001447773,
+      "relative_budget_gap": 0.5564367743855649
+    },
+    {
+      "movement_weight": 0.82,
+      "mean_generic_camera_movement": 0.03484610950130426,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.0437134001447773,
+      "relative_budget_gap": 0.5564367743855649
+    },
+    {
+      "movement_weight": 0.825,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.83,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.835,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.84,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.845,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.85,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.855,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.86,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.865,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.87,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.875,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.88,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.885,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.89,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.895,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.9,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.905,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.91,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.915,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.92,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.925,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.93,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.935,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.94,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.945,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.95,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.955,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.96,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.965,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.97,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.975,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.98,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.985,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.99,
+      "mean_generic_camera_movement": 0.03367683027378683,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.04488267937229473,
+      "relative_budget_gap": 0.5713207678420561
+    },
+    {
+      "movement_weight": 0.995,
+      "mean_generic_camera_movement": 0.03291446660684365,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.045645043039237915,
+      "relative_budget_gap": 0.5810250502437374
+    },
+    {
+      "movement_weight": 1.0,
+      "mean_generic_camera_movement": 0.03291446660684365,
+      "target_task_camera_movement": 0.07855950964608156,
+      "absolute_budget_gap": 0.045645043039237915,
+      "relative_budget_gap": 0.5810250502437374
+    }
+  ]
+}

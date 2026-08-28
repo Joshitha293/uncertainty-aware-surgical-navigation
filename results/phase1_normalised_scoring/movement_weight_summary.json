@@ -1,0 +1,85 @@
+{
+  "purpose": "Development-stage diagnostic of normalised task-aware movement weighting.",
+  "final_test_tuning": false,
+  "movement_weights": [
+    0.0,
+    0.25,
+    0.5,
+    1.0,
+    2.0,
+    4.0,
+    8.0
+  ],
+  "summaries": [
+    {
+      "movement_weight": 0.0,
+      "scenario_count": 10,
+      "mean_camera_movement": 0.044623375770489124,
+      "median_camera_movement": 0.0,
+      "mean_predicted_sigma": 0.0020000000000000005,
+      "mean_task_alignment": 0.9561677811418556,
+      "mean_final_score": 1.3661303929183988,
+      "generic_difference_rate": 0.2
+    },
+    {
+      "movement_weight": 0.25,
+      "scenario_count": 10,
+      "mean_camera_movement": 0.01562833599002373,
+      "median_camera_movement": 0.0,
+      "mean_predicted_sigma": 0.0020000000000000005,
+      "mean_task_alignment": 0.9391425359951014,
+      "mean_final_score": 1.3546485994809274,
+      "generic_difference_rate": 0.0
+    },
+    {
+      "movement_weight": 0.5,
+      "scenario_count": 10,
+      "mean_camera_movement": 0.01562833599002373,
+      "median_camera_movement": 0.0,
+      "mean_predicted_sigma": 0.0020000000000000005,
+      "mean_task_alignment": 0.9391425359951014,
+      "mean_final_score": 1.3448808894871624,
+      "generic_difference_rate": 0.0
+    },
+    {
+      "movement_weight": 1.0,
+      "scenario_count": 10,
+      "mean_camera_movement": 0.01562833599002373,
+      "median_camera_movement": 0.0,
+      "mean_predicted_sigma": 0.0020000000000000005,
+      "mean_task_alignment": 0.9391425359951014,
+      "mean_final_score": 1.325345469499633,
+      "generic_difference_rate": 0.0
+    },
+    {
+      "movement_weight": 2.0,
+      "scenario_count": 10,
+      "mean_camera_movement": 0.01562833599002373,
+      "median_camera_movement": 0.0,
+      "mean_predicted_sigma": 0.0020000000000000005,
+      "mean_task_alignment": 0.9391425359951014,
+      "mean_final_score": 1.2862746295245735,
+      "generic_difference_rate": 0.0
+    },
+    {
+      "movement_weight": 4.0,
+      "scenario_count": 10,
+      "mean_camera_movement": 0.01562833599002373,
+      "median_camera_movement": 0.0,
+      "mean_predicted_sigma": 0.0020000000000000005,
+      "mean_task_alignment": 0.9391425359951014,
+      "mean_final_score": 1.208132949574455,
+      "generic_difference_rate": 0.0
+    },
+    {
+      "movement_weight": 8.0,
+      "scenario_count": 10,
+      "mean_camera_movement": 0.01562833599002373,
+      "median_camera_movement": 0.0,
+      "mean_predicted_sigma": 0.0020000000000000005,
+      "mean_task_alignment": 0.9391425359951014,
+      "mean_final_score": 1.0518495896742177,
+      "generic_difference_rate": 0.0
+    }
+  ]
+}
