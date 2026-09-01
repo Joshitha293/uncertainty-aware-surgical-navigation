@@ -575,3 +575,58 @@ def test_primary_analysis_uses_scenario_not_trial_as_unit():
             1.0 / 3.0
         )
     )
+
+def test_failed_plan_may_have_infinite_path_cost():
+    """Failed plans may preserve undefined path cost as positive infinity."""
+
+    record = make_record(
+        scenario_id=1,
+        repetition=0,
+        strategy=(
+            StrategyId
+            .FULL_TASK_AWARE
+            .value
+        ),
+        safe=False,
+        planning=False,
+        path_cost=float(
+            "inf"
+        ),
+    )
+
+    validate_raw_records(
+        (
+            record,
+        ),
+        require_complete_strategy_family=False,
+    )
+
+
+def test_successful_plan_requires_finite_path_cost():
+    """A successful planner must provide a finite path cost."""
+
+    record = make_record(
+        scenario_id=1,
+        repetition=0,
+        strategy=(
+            StrategyId
+            .FULL_TASK_AWARE
+            .value
+        ),
+        safe=True,
+        planning=True,
+        path_cost=float(
+            "inf"
+        ),
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="Successful planning",
+    ):
+        validate_raw_records(
+            (
+                record,
+            ),
+            require_complete_strategy_family=False,
+        )

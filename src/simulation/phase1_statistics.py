@@ -44,6 +44,23 @@ Primary inference
 
 The implementation is deterministic under the seeds frozen in the
 Phase 1 protocol.
+
+Post-held-out implementation note
+---------------------------------
+The original raw-record validator incorrectly required path_cost to be
+finite for failed planning trials. That conflicted with the already
+frozen protocol, under which path cost is only analysed for paired trials
+where BOTH strategies successfully plan.
+
+A failed planner may legitimately retain path_cost = +inf. The validator
+therefore now requires:
+
+- movement/perception metrics to always be finite;
+- successful planning -> finite path_cost;
+- failed planning -> path_cost may be +inf, but not NaN.
+
+This correction does not alter any frozen endpoint, comparison, seed,
+weight, scenario, statistical test, superiority criterion, or raw result.
 """
 
 from __future__ import annotations
@@ -394,7 +411,17 @@ def validate_raw_records(
     *,
     require_complete_strategy_family: bool = True,
 ) -> None:
-    """Verify paired-design integrity before statistical analysis."""
+    """Verify paired-design integrity before statistical analysis.
+
+    Important:
+    path_cost is conditionally defined.
+
+    A successful planner must return a finite path cost.
+
+    A failed planner may legitimately preserve an undefined path cost as
+    positive infinity. This is allowed because the frozen protocol compares
+    path cost only for pairs where both strategies successfully planned.
+    """
 
     if len(
         records
@@ -449,11 +476,12 @@ def validate_raw_records(
             record
         )
 
-        numeric_values = (
+        # These quantities are defined for every strategy/trial and must
+        # therefore always remain finite.
+        always_finite_values = (
             record.camera_movement,
             record.mean_localisation_error,
             record.mean_predicted_sigma,
-            record.path_cost,
         )
 
         if not all(
@@ -461,12 +489,35 @@ def validate_raw_records(
                 value
             )
             for value
-            in numeric_values
+            in always_finite_values
         ):
             raise ValueError(
-                "Raw statistical record contains "
-                "non-finite values."
+                "Raw statistical record contains non-finite "
+                "movement or perception values."
             )
+
+        # Path cost is only defined when planning succeeds.
+        #
+        # Failed planners may legitimately report +inf. We preserve that
+        # value rather than inventing an arbitrary finite failure cost,
+        # because the frozen statistical protocol explicitly compares path
+        # costs only when BOTH paired strategies successfully plan.
+        if record.planning_success:
+            if not np.isfinite(
+                record.path_cost
+            ):
+                raise ValueError(
+                    "Successful planning record contains "
+                    "a non-finite path cost."
+                )
+
+        else:
+            if np.isnan(
+                record.path_cost
+            ):
+                raise ValueError(
+                    "Failed planning record contains NaN path cost."
+                )
 
     for trial_key, trial_records in grouped.items():
         strategies = {
@@ -618,7 +669,7 @@ def scenario_planning_success_rates(
     int,
     float,
 ]:
-    """Return planning success proportion per scenario."""
+    """Return planning-success proportion per scenario."""
 
     strategy_records = (
         _records_for_strategy(
@@ -865,7 +916,7 @@ def sign_flip_permutation_test(
         observed
     )
 
-    # Chunking avoids allocating a 100000 x 30 matrix unnecessarily.
+    # Chunking avoids allocating a large 100000 x N matrix.
     chunk_size = 10_000
 
     remaining = int(
@@ -916,7 +967,7 @@ def sign_flip_permutation_test(
 
         remaining -= current
 
-    # +1 correction prevents zero Monte-Carlo p-values.
+    # +1 correction avoids a Monte-Carlo p-value of exactly zero.
     p_value = (
         exceedances
         + 1
@@ -1176,11 +1227,11 @@ def paired_success_path_cost_differences(
     A repetition contributes only when BOTH strategies produced a
     successful plan.
 
-    The returned effect is:
+    Returned effect:
 
         Task path cost - Comparator path cost
 
-    Lower values therefore favour Task-Aware.
+    Lower values favour Task-Aware.
     """
 
     lookup: dict[
@@ -1255,6 +1306,8 @@ def paired_success_path_cost_differences(
         ):
             continue
 
+        # Both planning_success flags are True. validate_raw_records()
+        # guarantees both path costs are therefore finite.
         grouped[
             scenario_id
         ].append(

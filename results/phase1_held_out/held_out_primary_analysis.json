@@ -1,0 +1,26 @@
+{
+  "protocol_sha256": "dc6537d3ff75832ccbe48c9b2690c8e966711b31806076cfbc2721488dbf6361",
+  "primary": {
+    "outcome": "safe_navigation_success_rate",
+    "task_strategy": "full_task_aware",
+    "comparator_strategy": "budget_matched_generic",
+    "scenario_count": 30,
+    "task_mean_success_rate": 0.6133333333333334,
+    "comparator_mean_success_rate": 0.7133333333333334,
+    "absolute_effect": -0.10000000000000002,
+    "permutation_p_value": 0.012389876101238987,
+    "confidence_interval_lower": -0.16999999999999998,
+    "confidence_interval_upper": -0.030000000000000006,
+    "alpha": 0.05,
+    "superiority_established": false
+  },
+  "movement_budget": {
+    "scenario_count": 30,
+    "task_mean_camera_movement": 0.09354355784841623,
+    "comparator_mean_camera_movement": 0.12254785579207525,
+    "absolute_gap": 0.029004297943659024,
+    "relative_gap": 0.3100619498636067,
+    "previous_validation_tolerance": 0.1,
+    "within_previous_validation_tolerance": false
+  }
+}
