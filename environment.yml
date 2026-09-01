@@ -11,3 +11,14 @@ dependencies:
   - pytest
   - matplotlib
   - pandas
+
+  # CPU PyTorch installed from conda-forge.
+  # Using the conda build avoids the Windows OpenMP runtime conflict
+  # encountered with the previous pip PyTorch installation.
+  - pytorch=2.13.0=cpu_mkl*
+
+  - pip
+  - pip:
+      # Headless OpenCV is sufficient for the image-processing and
+      # stereo-perception experiments; no GUI backend is required.
+      - opencv-python-headless==4.10.0.84

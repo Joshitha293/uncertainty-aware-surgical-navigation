@@ -1,0 +1,612 @@
+{
+  "phase": 3,
+  "benchmark": "image_driven_stereo_perception_and_uncertainty",
+  "scope": "simulation_only",
+  "claims_note": "Results validate synthetic image processing, calibrated stereo geometry and first-order uncertainty propagation. They do not constitute clinical imaging, anatomical segmentation or physical camera validation.",
+  "monte_carlo_repetitions_per_condition": 500,
+  "baseline_values_metres": [
+    0.01,
+    0.02,
+    0.04
+  ],
+  "pixel_sigma_values": [
+    0.25,
+    0.5,
+    1.0
+  ],
+  "image_driven_demonstration": {
+    "baseline_metres": 0.02,
+    "pixel_sigma": 0.5,
+    "true_position_metres": [
+      0.02,
+      -0.01,
+      0.25
+    ],
+    "estimated_position_metres": [
+      0.020499999999999977,
+      -0.010499999999999976,
+      0.24999999999999942
+    ],
+    "localisation_error_metres": 0.0007071067811865138,
+    "principal_sigma_metres": 0.008854451302365195,
+    "position_covariance_metres_squared": [
+      [
+        2.6281250501445577e-07,
+        -1.37812540415349e-07,
+        3.2812509624042156e-06
+      ],
+      [
+        -1.37812540415349e-07,
+        2.628129273764131e-07,
+        -3.2812601906234214e-06
+      ],
+      [
+        3.2812509624042156e-06,
+        -3.2812601906234214e-06,
+        7.812524263682663e-05
+      ]
+    ],
+    "base_safety_margin_metres": 0.015,
+    "two_sigma_inflated_margin_metres": 0.03270890260473039,
+    "runtime_ground_truth_error_count": 0,
+    "left_detected": true,
+    "right_detected": true,
+    "closest_ray_gap_metres": 7.384300342650183e-17
+  },
+  "monte_carlo_conditions": [
+    {
+      "baseline_metres": 0.01,
+      "pixel_sigma": 0.25,
+      "exact_disparity_pixels": 10.0,
+      "attempted_repetitions": 500,
+      "successful_reconstructions": 500,
+      "failed_reconstructions": 0,
+      "failure_fraction": 0.0,
+      "mean_error_metres": 0.007117514999659802,
+      "median_error_metres": 0.006158607714114136,
+      "p95_error_metres": 0.01656997029946136,
+      "rms_error_metres": 0.008778237232983207,
+      "bias_vector_metres": [
+        -3.2387952064477447e-05,
+        2.265671956768585e-05,
+        -0.0003746177479033812
+      ],
+      "bias_norm_metres": 0.00037669717735165057,
+      "empirical_covariance_metres_squared": [
+        [
+          3.1380717471926226e-07,
+          -1.813124415746209e-07,
+          4.651129706659619e-06
+        ],
+        [
+          -1.813124415746209e-07,
+          1.4395402463755363e-07,
+          -3.011580842391826e-06
+        ],
+        [
+          4.651129706659619e-06,
+          -3.011580842391826e-06,
+          7.661192633081152e-05
+        ]
+      ],
+      "mean_predicted_covariance_metres_squared": [
+        [
+          3.1326524770662624e-07,
+          -1.8797991903748774e-07,
+          4.70342838243449e-06
+        ],
+        [
+          -1.8797991903748774e-07,
+          1.565219481141278e-07,
+          -3.1349709424727485e-06
+        ],
+        [
+          4.70342838243449e-06,
+          -3.1349709424727485e-06,
+          7.843901559091555e-05
+        ]
+      ],
+      "empirical_principal_sigma_metres": 0.008775695352196775,
+      "mean_predicted_principal_sigma_metres": 0.008857749667276572,
+      "principal_sigma_from_mean_covariance_metres": 0.008879555359667649,
+      "predicted_rms_position_sigma_metres": 0.008883062691816167,
+      "actual_to_predicted_rms_ratio": 0.9881994012122042,
+      "mahalanobis_95_coverage": 0.956,
+      "covariance_relative_frobenius_error": 0.023852648894557762
+    },
+    {
+      "baseline_metres": 0.01,
+      "pixel_sigma": 0.5,
+      "exact_disparity_pixels": 10.0,
+      "attempted_repetitions": 500,
+      "successful_reconstructions": 500,
+      "failed_reconstructions": 0,
+      "failure_fraction": 0.0,
+      "mean_error_metres": 0.014635316616129646,
+      "median_error_metres": 0.01235989784957997,
+      "p95_error_metres": 0.03455114567830792,
+      "rms_error_metres": 0.01825084575466593,
+      "bias_vector_metres": [
+        -3.8681428160496035e-05,
+        5.227857683932852e-05,
+        -0.0014308191048668407
+      ],
+      "bias_norm_metres": 0.0014322962728893867,
+      "empirical_covariance_metres_squared": [
+        [
+          1.3823128202359478e-06,
+          -8.121074057988305e-07,
+          2.0293937776025596e-05
+        ],
+        [
+          -8.121074057988305e-07,
+          6.346647579862237e-07,
+          -1.3052120710046662e-05
+        ],
+        [
+          2.0293937776025596e-05,
+          -1.3052120710046662e-05,
+          0.000329688331186582
+        ]
+      ],
+      "mean_predicted_covariance_metres_squared": [
+        [
+          1.2806349869050582e-06,
+          -7.680380599216325e-07,
+          1.9193728947542804e-05
+        ],
+        [
+          -7.680380599216325e-07,
+          6.351897189157668e-07,
+          -1.2754744915943054e-05
+        ],
+        [
+          1.9193728947542804e-05,
+          -1.2754744915943054e-05,
+          0.0003187625939418513
+        ]
+      ],
+      "empirical_principal_sigma_metres": 0.018205904942065167,
+      "mean_predicted_principal_sigma_metres": 0.01770632883880735,
+      "principal_sigma_from_mean_covariance_metres": 0.017900539652749237,
+      "predicted_rms_position_sigma_metres": 0.017907496157968935,
+      "actual_to_predicted_rms_ratio": 1.0191735122357797,
+      "mahalanobis_95_coverage": 0.928,
+      "covariance_relative_frobenius_error": 0.03332164013202336
+    },
+    {
+      "baseline_metres": 0.01,
+      "pixel_sigma": 1.0,
+      "exact_disparity_pixels": 10.0,
+      "attempted_repetitions": 500,
+      "successful_reconstructions": 500,
+      "failed_reconstructions": 0,
+      "failure_fraction": 0.0,
+      "mean_error_metres": 0.026986298090541438,
+      "median_error_metres": 0.021518168022766848,
+      "p95_error_metres": 0.06994758957425978,
+      "rms_error_metres": 0.035472697066795025,
+      "bias_vector_metres": [
+        -9.232633652048217e-05,
+        5.480359872624048e-05,
+        -0.0011068725978559484
+      ],
+      "bias_norm_metres": 0.0011120676844207894,
+      "empirical_covariance_metres_squared": [
+        [
+          5.295780635220162e-06,
+          -3.1123880129079628e-06,
+          7.706115398821427e-05
+        ],
+        [
+          -3.1123880129079628e-06,
+          2.528133514736312e-06,
+          -5.0479930414836866e-05
+        ],
+        [
+          7.706115398821427e-05,
+          -5.0479930414836866e-05,
+          0.0012517708179721628
+        ]
+      ],
+      "mean_predicted_covariance_metres_squared": [
+        [
+          5.7946311787019275e-06,
+          -3.514008101128702e-06,
+          8.786049898734508e-05
+        ],
+        [
+          -3.514008101128702e-06,
+          2.857597574100134e-06,
+          -5.85191115837292e-05
+        ],
+        [
+          8.786049898734508e-05,
+          -5.85191115837292e-05,
+          0.0014631295411913485
+        ]
+      ],
+      "empirical_principal_sigma_metres": 0.03547609660613363,
+      "mean_predicted_principal_sigma_metres": 0.03668416212568309,
+      "principal_sigma_from_mean_covariance_metres": 0.03835034216399354,
+      "predicted_rms_position_sigma_metres": 0.03836380807407094,
+      "actual_to_predicted_rms_ratio": 0.9246396238430267,
+      "mahalanobis_95_coverage": 0.922,
+      "covariance_relative_frobenius_error": 0.16861908137277593
+    },
+    {
+      "baseline_metres": 0.02,
+      "pixel_sigma": 0.25,
+      "exact_disparity_pixels": 20.0,
+      "attempted_repetitions": 500,
+      "successful_reconstructions": 500,
+      "failed_reconstructions": 0,
+      "failure_fraction": 0.0,
+      "mean_error_metres": 0.0035892095372581016,
+      "median_error_metres": 0.0029819452098694636,
+      "p95_error_metres": 0.008860154555363008,
+      "rms_error_metres": 0.004558572860133241,
+      "bias_vector_metres": [
+        -1.5461840738100405e-05,
+        4.545243574694029e-06,
+        -0.0003386719431414892
+      ],
+      "bias_norm_metres": 0.00033905517667393866,
+      "empirical_covariance_metres_squared": [
+        [
+          6.168716451796008e-08,
+          -3.424533812982876e-08,
+          8.184573061463094e-07
+        ],
+        [
+          -3.424533812982876e-08,
+          6.975123612571058e-08,
+          -8.915362644735649e-07
+        ],
+        [
+          8.184573061463094e-07,
+          -8.915362644735649e-07,
+          2.0575603792055676e-05
+        ]
+      ],
+      "mean_predicted_covariance_metres_squared": [
+        [
+          6.233457122928896e-08,
+          -3.118640336412522e-08,
+          7.789010529001767e-07
+        ],
+        [
+          -3.118640336412522e-08,
+          6.240926057508957e-08,
+          -7.798275326022838e-07
+        ],
+        [
+          7.789010529001767e-07,
+          -7.798275326022838e-07,
+          1.947647632835726e-05
+        ]
+      ],
+      "empirical_principal_sigma_metres": 0.004543884968410003,
+      "mean_predicted_principal_sigma_metres": 0.00441737509325854,
+      "principal_sigma_from_mean_covariance_metres": 0.00442028841047835,
+      "predicted_rms_position_sigma_metres": 0.004427326525134738,
+      "actual_to_predicted_rms_ratio": 1.029644602505235,
+      "mahalanobis_95_coverage": 0.948,
+      "covariance_relative_frobenius_error": 0.053851281465514406
+    },
+    {
+      "baseline_metres": 0.02,
+      "pixel_sigma": 0.5,
+      "exact_disparity_pixels": 20.0,
+      "attempted_repetitions": 500,
+      "successful_reconstructions": 500,
+      "failed_reconstructions": 0,
+      "failure_fraction": 0.0,
+      "mean_error_metres": 0.007334063179680409,
+      "median_error_metres": 0.006205549903600459,
+      "p95_error_metres": 0.017367881662253757,
+      "rms_error_metres": 0.009192649162956314,
+      "bias_vector_metres": [
+        5.045098269702161e-05,
+        -3.1942601040425865e-05,
+        0.0004844595699129837
+      ],
+      "bias_norm_metres": 0.00048812570747359344,
+      "empirical_covariance_metres_squared": [
+        [
+          2.512888910300558e-07,
+          -1.4184594562380813e-07,
+          3.280040873786278e-06
+        ],
+        [
+          -1.4184594562380813e-07,
+          2.6859943472061367e-07,
+          -3.4321806069817994e-06
+        ],
+        [
+          3.280040873786278e-06,
+          -3.4321806069817994e-06,
+          8.391551440661884e-05
+        ]
+      ],
+      "mean_predicted_covariance_metres_squared": [
+        [
+          2.539003421772705e-07,
+          -1.2788915588270245e-07,
+          3.1925881810226958e-06
+        ],
+        [
+          -1.2788915588270245e-07,
+          2.5348522405530825e-07,
+          -3.1873552011848774e-06
+        ],
+        [
+          3.1925881810226958e-06,
+          -3.1873552011848774e-06,
+          7.95735736467643e-05
+        ]
+      ],
+      "empirical_principal_sigma_metres": 0.009175212632058768,
+      "mean_predicted_principal_sigma_metres": 0.008910732991733578,
+      "principal_sigma_from_mean_covariance_metres": 0.008934748952300429,
+      "predicted_rms_position_sigma_metres": 0.008948796523164267,
+      "actual_to_predicted_rms_ratio": 1.0272497691908433,
+      "mahalanobis_95_coverage": 0.968,
+      "covariance_relative_frobenius_error": 0.051761781991508785
+    },
+    {
+      "baseline_metres": 0.02,
+      "pixel_sigma": 1.0,
+      "exact_disparity_pixels": 20.0,
+      "attempted_repetitions": 500,
+      "successful_reconstructions": 500,
+      "failed_reconstructions": 0,
+      "failure_fraction": 0.0,
+      "mean_error_metres": 0.014632436393151106,
+      "median_error_metres": 0.012173850063204287,
+      "p95_error_metres": 0.03574207609223197,
+      "rms_error_metres": 0.018434304203370264,
+      "bias_vector_metres": [
+        8.024910290457266e-06,
+        -3.858650656112236e-06,
+        -0.00030307364244914857
+      ],
+      "bias_norm_metres": 0.0003032044213355903,
+      "empirical_covariance_metres_squared": [
+        [
+          1.1588594362259175e-06,
+          -5.103334369049221e-07,
+          1.4058962810110664e-05
+        ],
+        [
+          -5.103334369049221e-07,
+          9.612534109418523e-07,
+          -1.2786590206728079e-05
+        ],
+        [
+          1.4058962810110664e-05,
+          -1.2786590206728079e-05,
+          0.0003382923506210458
+        ]
+      ],
+      "mean_predicted_covariance_metres_squared": [
+        [
+          1.026237292966254e-06,
+          -5.206404204276772e-07,
+          1.3012549461199672e-05
+        ],
+        [
+          -5.206404204276772e-07,
+          1.023776758735904e-06,
+          -1.2988270450708092e-05
+        ],
+        [
+          1.3012549461199672e-05,
+          -1.2988270450708092e-05,
+          0.00032452588318341387
+        ]
+      ],
+      "empirical_principal_sigma_metres": 0.018421767794927674,
+      "mean_predicted_principal_sigma_metres": 0.01784897372005743,
+      "principal_sigma_from_mean_covariance_metres": 0.018043533032905488,
+      "predicted_rms_position_sigma_metres": 0.018071411047151688,
+      "actual_to_predicted_rms_ratio": 1.0200810636906947,
+      "mahalanobis_95_coverage": 0.93,
+      "covariance_relative_frobenius_error": 0.0408103606126074
+    },
+    {
+      "baseline_metres": 0.04,
+      "pixel_sigma": 0.25,
+      "exact_disparity_pixels": 40.0,
+      "attempted_repetitions": 500,
+      "successful_reconstructions": 500,
+      "failed_reconstructions": 0,
+      "failure_fraction": 0.0,
+      "mean_error_metres": 0.0018348057803995856,
+      "median_error_metres": 0.0014552225070161601,
+      "p95_error_metres": 0.004499511121025492,
+      "rms_error_metres": 0.0023051134289171463,
+      "bias_vector_metres": [
+        9.117929585648533e-06,
+        1.6240730311262373e-06,
+        0.00012897552581954275
+      ],
+      "bias_norm_metres": 0.0001293076197042031,
+      "empirical_covariance_metres_squared": [
+        [
+          3.3299071262771046e-08,
+          -1.8930825290653708e-10,
+          -4.612392656828971e-10
+        ],
+        [
+          -1.8930825290653708e-10,
+          3.8854398498933024e-08,
+          -1.8317471269328073e-07
+        ],
+        [
+          -4.612392656828971e-10,
+          -1.8317471269328073e-07,
+          5.235288874587592e-06
+        ]
+      ],
+      "mean_predicted_covariance_metres_squared": [
+        [
+          3.1287818061473976e-08,
+          -7.141319442939985e-12,
+          1.7461111617443133e-10
+        ],
+        [
+          -7.141319442939985e-12,
+          3.9110057471382205e-08,
+          -1.957052455594414e-07
+        ],
+        [
+          1.7461111617443133e-10,
+          -1.957052455594414e-07,
+          4.896089315431039e-06
+        ]
+      ],
+      "empirical_principal_sigma_metres": 0.0022894841850415897,
+      "mean_predicted_principal_sigma_metres": 0.002214120816008718,
+      "principal_sigma_from_mean_covariance_metres": 0.0022144891581738373,
+      "predicted_rms_position_sigma_metres": 0.0022285616865960643,
+      "actual_to_predicted_rms_ratio": 1.0343502909439353,
+      "mahalanobis_95_coverage": 0.954,
+      "covariance_relative_frobenius_error": 0.06479838272108746
+    },
+    {
+      "baseline_metres": 0.04,
+      "pixel_sigma": 0.5,
+      "exact_disparity_pixels": 40.0,
+      "attempted_repetitions": 500,
+      "successful_reconstructions": 500,
+      "failed_reconstructions": 0,
+      "failure_fraction": 0.0,
+      "mean_error_metres": 0.0036976663166659453,
+      "median_error_metres": 0.00315980932502016,
+      "p95_error_metres": 0.00845039744254723,
+      "rms_error_metres": 0.004468248078012487,
+      "bias_vector_metres": [
+        2.5615070303370345e-05,
+        2.6110643092724054e-05,
+        0.00014439619069567605
+      ],
+      "bias_norm_metres": 0.00014895689778182233,
+      "empirical_covariance_metres_squared": [
+        [
+          1.191905535356208e-07,
+          1.1529443337808064e-09,
+          -9.65044847967061e-09
+        ],
+        [
+          1.1529443337808064e-09,
+          1.4802441317014226e-07,
+          -6.33518114653878e-07
+        ],
+        [
+          -9.65044847967061e-09,
+          -6.33518114653878e-07,
+          1.9715803800093343e-05
+        ]
+      ],
+      "mean_predicted_covariance_metres_squared": [
+        [
+          1.2522301160548665e-07,
+          -7.949532834629494e-11,
+          2.018764392867985e-09
+        ],
+        [
+          -7.949532834629494e-11,
+          1.5641258115382942e-07,
+          -7.823473366966278e-07
+        ],
+        [
+          2.018764392867985e-09,
+          -7.823473366966278e-07,
+          1.9624555696253187e-05
+        ]
+      ],
+      "empirical_principal_sigma_metres": 0.004442555305114044,
+      "mean_predicted_principal_sigma_metres": 0.004430729185645307,
+      "principal_sigma_from_mean_covariance_metres": 0.0044335025350363865,
+      "predicted_rms_position_sigma_metres": 0.004461635494862002,
+      "actual_to_predicted_rms_ratio": 1.0014820984722081,
+      "mahalanobis_95_coverage": 0.962,
+      "covariance_relative_frobenius_error": 0.011665156892484867
+    },
+    {
+      "baseline_metres": 0.04,
+      "pixel_sigma": 1.0,
+      "exact_disparity_pixels": 40.0,
+      "attempted_repetitions": 500,
+      "successful_reconstructions": 500,
+      "failed_reconstructions": 0,
+      "failure_fraction": 0.0,
+      "mean_error_metres": 0.00715750947450452,
+      "median_error_metres": 0.006532464851062876,
+      "p95_error_metres": 0.01601497080738057,
+      "rms_error_metres": 0.008693354587570182,
+      "bias_vector_metres": [
+        1.8389502745693966e-05,
+        -4.54953941393772e-05,
+        8.714007001901081e-05
+      ],
+      "bias_norm_metres": 0.00010000698226648612,
+      "empirical_covariance_metres_squared": [
+        [
+          5.291710062875562e-07,
+          3.325457289304287e-08,
+          -3.633591584047451e-07
+        ],
+        [
+          3.325457289304287e-08,
+          6.473418172716807e-07,
+          -3.1615730051722888e-06
+        ],
+        [
+          -3.633591584047451e-07,
+          -3.1615730051722888e-06,
+          7.453933145372078e-05
+        ]
+      ],
+      "mean_predicted_covariance_metres_squared": [
+        [
+          5.016218208207258e-07,
+          -1.5684059826076995e-10,
+          4.4437462072722875e-09
+        ],
+        [
+          -1.5684059826076995e-10,
+          6.290859948864956e-07,
+          -3.173531390103738e-06
+        ],
+        [
+          4.4437462072722875e-09,
+          -3.173531390103738e-06,
+          7.898729711431825e-05
+        ]
+      ],
+      "empirical_principal_sigma_metres": 0.008641536229605146,
+      "mean_predicted_principal_sigma_metres": 0.00887361595644578,
+      "principal_sigma_from_mean_covariance_metres": 0.0088946959598731,
+      "predicted_rms_position_sigma_metres": 0.008950866155296116,
+      "actual_to_predicted_rms_ratio": 0.9712305420215039,
+      "mahalanobis_95_coverage": 0.952,
+      "covariance_relative_frobenius_error": 0.05997178445416665
+    }
+  ],
+  "expected_trends": {
+    "uncertainty_increases_with_pixel_noise": {
+      "0.010_m_baseline": true,
+      "0.020_m_baseline": true,
+      "0.040_m_baseline": true
+    },
+    "uncertainty_decreases_with_larger_baseline": {
+      "0.25_pixel_sigma": true,
+      "0.50_pixel_sigma": true,
+      "1.00_pixel_sigma": true
+    },
+    "all_expected_noise_trends_hold": true,
+    "all_expected_baseline_trends_hold": true
+  }
+}

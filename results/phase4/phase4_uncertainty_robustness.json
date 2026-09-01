@@ -1,0 +1,103 @@
+{
+  "phase": 4,
+  "experiment": "learned_perception_uncertainty_and_robustness",
+  "scope": "independent_synthetic_engineering_evaluation",
+  "robustness_seed": 4811,
+  "scenario_count": 40,
+  "ensemble_samples_per_image": 10,
+  "conditions": [
+    {
+      "condition": "clean",
+      "samples": 40,
+      "dice": 0.9303091737720477,
+      "iou": 0.8758676300523287,
+      "detection_rate": 1.0,
+      "mean_centroid_error_pixels": 0.8849559789346653,
+      "brier_score": 0.1634473405939416,
+      "expected_calibration_error": 0.3970464445285163,
+      "mean_predictive_entropy": 0.6728324186445638,
+      "mean_foreground_entropy": 0.6728324186445638,
+      "mean_probability_variance": 4.0505001182331345e-05,
+      "mean_centroid_principal_sigma_pixels": 0.0884824191145385
+    },
+    {
+      "condition": "mild",
+      "samples": 40,
+      "dice": 0.9299208754525037,
+      "iou": 0.8750489104445173,
+      "detection_rate": 1.0,
+      "mean_centroid_error_pixels": 0.8825467351424476,
+      "brier_score": 0.16420306803286028,
+      "expected_calibration_error": 0.39787296759095625,
+      "mean_predictive_entropy": 0.6730499159642698,
+      "mean_foreground_entropy": 0.6730499159642698,
+      "mean_probability_variance": 4.016530100676949e-05,
+      "mean_centroid_principal_sigma_pixels": 0.0868486884595677
+    },
+    {
+      "condition": "moderate",
+      "samples": 40,
+      "dice": 0.9180350921181469,
+      "iou": 0.8555466382951519,
+      "detection_rate": 1.0,
+      "mean_centroid_error_pixels": 0.9159521957396628,
+      "brier_score": 0.1663095555286994,
+      "expected_calibration_error": 0.3985167580419026,
+      "mean_predictive_entropy": 0.6745563546846236,
+      "mean_foreground_entropy": 0.6745563546846236,
+      "mean_probability_variance": 2.2081457374075236e-05,
+      "mean_centroid_principal_sigma_pixels": 0.08641419040229395
+    },
+    {
+      "condition": "severe",
+      "samples": 40,
+      "dice": 0.8072849711567238,
+      "iou": 0.6888361459619236,
+      "detection_rate": 1.0,
+      "mean_centroid_error_pixels": 1.3138291870437147,
+      "brier_score": 0.17606258530231428,
+      "expected_calibration_error": 0.3996551304556811,
+      "mean_predictive_entropy": 0.6785068905552215,
+      "mean_foreground_entropy": 0.6785068905552215,
+      "mean_probability_variance": 1.0581520496089376e-05,
+      "mean_centroid_principal_sigma_pixels": 0.24999488848714804
+    },
+    {
+      "condition": "colour_shift_ood",
+      "samples": 40,
+      "dice": 0.07688978864413645,
+      "iou": 0.04778663591868781,
+      "detection_rate": 1.0,
+      "mean_centroid_error_pixels": 14.875165243867945,
+      "brier_score": 0.19827236300482076,
+      "expected_calibration_error": 0.39753465802552657,
+      "mean_predictive_entropy": 0.6830908636183434,
+      "mean_foreground_entropy": 0.6830908636183434,
+      "mean_probability_variance": 1.6088854754028227e-05,
+      "mean_centroid_principal_sigma_pixels": 2.2743355982478257
+    }
+  ],
+  "trend_analysis": {
+    "dice_clean_to_severe_change": -0.12302420261532387,
+    "foreground_entropy_clean_to_severe_change": 0.00567447191065773,
+    "brier_clean_to_severe_change": 0.012615244708372692,
+    "severity_vs_dice_correlation": -0.8241665701551725,
+    "severity_vs_entropy_correlation": 0.910288427117397,
+    "colour_shift_ood": {
+      "condition": "colour_shift_ood",
+      "samples": 40,
+      "dice": 0.07688978864413645,
+      "iou": 0.04778663591868781,
+      "detection_rate": 1.0,
+      "mean_centroid_error_pixels": 14.875165243867945,
+      "brier_score": 0.19827236300482076,
+      "expected_calibration_error": 0.39753465802552657,
+      "mean_predictive_entropy": 0.6830908636183434,
+      "mean_foreground_entropy": 0.6830908636183434,
+      "mean_probability_variance": 1.6088854754028227e-05,
+      "mean_centroid_principal_sigma_pixels": 2.2743355982478257
+    },
+    "interpretation_note": "Uncertainty is not required to increase monotonically. Failure to increase under performance degradation would indicate overconfident behaviour under distribution shift."
+  },
+  "claims_note": "This experiment evaluates synthetic segmentation robustness and perturbation-based predictive uncertainty. It does not establish clinical calibration, anatomical generalisation or medical-device performance."
+}

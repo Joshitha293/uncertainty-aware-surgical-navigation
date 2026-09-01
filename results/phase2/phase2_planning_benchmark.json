@@ -1,0 +1,222 @@
+{
+  "phase": 2,
+  "benchmark": "advanced_robot_kinematics_and_motion_planning",
+  "scope": "simulation_only",
+  "claims_note": "Results characterise the simplified simulated RCM-constrained instrument and do not constitute clinical or physical robot validation.",
+  "planner_seed_set": [
+    7,
+    17,
+    27
+  ],
+  "workspace": {
+    "sample_count": 441,
+    "tip_minimum_metres": [
+      0.01767766952966369,
+      -0.25980762113533157,
+      -0.21213203435596426
+    ],
+    "tip_maximum_metres": [
+      0.3,
+      0.25980762113533157,
+      0.21213203435596426
+    ],
+    "minimum_manipulability": 0.0014539300415914325,
+    "maximum_manipulability": 0.0740220330081702,
+    "mean_manipulability": 0.02683021903901467,
+    "minimum_condition_number": 1.0995574287564271,
+    "maximum_condition_number": 3.376186185589148,
+    "mean_condition_number": 1.8962737957364506,
+    "minimum_singular_value": 0.07404804896930609,
+    "maximum_singular_value": 0.6283185307179588,
+    "near_singular_count": 0,
+    "near_singular_fraction": 0.0
+  },
+  "viewpoint_reachability": {
+    "candidate_count": 3,
+    "reachable_count": 2,
+    "rejected_count": 1,
+    "rejection_reasons": [
+      [],
+      [],
+      [
+        "inverse_kinematics_unreachable"
+      ]
+    ]
+  },
+  "rrt_trials": [
+    {
+      "planner": "RRT",
+      "success": true,
+      "iterations": 141,
+      "planning_time_seconds": 0.7697566000279039,
+      "raw_waypoint_count": 19,
+      "raw_path_cost": 2.646309336132232,
+      "raw_path_safe": true,
+      "smoothed_waypoint_count": 3,
+      "smoothed_path_cost": 2.330188855677851,
+      "smoothed_path_safe": true,
+      "trajectory_duration_seconds": 2.3800000000000017,
+      "trajectory_sample_count": 120,
+      "cartesian_tip_distance_metres": 0.28762659571637317,
+      "minimum_joint_limit_margin": 0.19999999999999996,
+      "minimum_manipulability": 0.010136252350362382,
+      "maximum_condition_number": 1.8981665904303748,
+      "maximum_rcm_error_metres": 1.5111763946588776e-17,
+      "acceleration_energy": 21.873318734882897
+    },
+    {
+      "planner": "RRT",
+      "success": true,
+      "iterations": 184,
+      "planning_time_seconds": 0.6657644000370055,
+      "raw_waypoint_count": 26,
+      "raw_path_cost": 2.1365053916636403,
+      "raw_path_safe": true,
+      "smoothed_waypoint_count": 5,
+      "smoothed_path_cost": 1.7346346400204289,
+      "smoothed_path_safe": true,
+      "trajectory_duration_seconds": 1.8800000000000012,
+      "trajectory_sample_count": 95,
+      "cartesian_tip_distance_metres": 0.3124931796048487,
+      "minimum_joint_limit_margin": 0.19999999999999996,
+      "minimum_manipulability": 0.020337719010706055,
+      "maximum_condition_number": 1.8981665904303748,
+      "maximum_rcm_error_metres": 1.1362750218656052e-17,
+      "acceleration_energy": 86.54371519258216
+    },
+    {
+      "planner": "RRT",
+      "success": true,
+      "iterations": 268,
+      "planning_time_seconds": 1.4726279999595135,
+      "raw_waypoint_count": 26,
+      "raw_path_cost": 2.8566223059038176,
+      "raw_path_safe": true,
+      "smoothed_waypoint_count": 3,
+      "smoothed_path_cost": 2.1368223533939212,
+      "smoothed_path_safe": true,
+      "trajectory_duration_seconds": 2.2400000000000015,
+      "trajectory_sample_count": 113,
+      "cartesian_tip_distance_metres": 0.2718006269120071,
+      "minimum_joint_limit_margin": 0.19999999999999996,
+      "minimum_manipulability": 0.013157152861140773,
+      "maximum_condition_number": 1.8981665904303748,
+      "maximum_rcm_error_metres": 1.3056396678987819e-17,
+      "acceleration_energy": 90.22411933625487
+    }
+  ],
+  "rrt_star_trials": [
+    {
+      "planner": "RRT*",
+      "success": true,
+      "iterations": 500,
+      "planning_time_seconds": 6.230734500102699,
+      "raw_waypoint_count": 5,
+      "raw_path_cost": 1.6720127996523044,
+      "raw_path_safe": true,
+      "smoothed_waypoint_count": 5,
+      "smoothed_path_cost": 1.6720127996523044,
+      "smoothed_path_safe": true,
+      "trajectory_duration_seconds": 1.8000000000000012,
+      "trajectory_sample_count": 91,
+      "cartesian_tip_distance_metres": 0.2991573639300916,
+      "minimum_joint_limit_margin": 0.19999999999999996,
+      "minimum_manipulability": 0.020337719010706055,
+      "maximum_condition_number": 1.8981665904303748,
+      "maximum_rcm_error_metres": 7.614118444565598e-18,
+      "acceleration_energy": 76.72827067224338
+    },
+    {
+      "planner": "RRT*",
+      "success": true,
+      "iterations": 500,
+      "planning_time_seconds": 5.087740899994969,
+      "raw_waypoint_count": 5,
+      "raw_path_cost": 1.6373531506706325,
+      "raw_path_safe": true,
+      "smoothed_waypoint_count": 5,
+      "smoothed_path_cost": 1.6373531506706325,
+      "smoothed_path_safe": true,
+      "trajectory_duration_seconds": 1.700000000000001,
+      "trajectory_sample_count": 86,
+      "cartesian_tip_distance_metres": 0.28740754159365806,
+      "minimum_joint_limit_margin": 0.19999999999999996,
+      "minimum_manipulability": 0.020337719010706055,
+      "maximum_condition_number": 1.8981665904303748,
+      "maximum_rcm_error_metres": 1.1433140045267788e-17,
+      "acceleration_energy": 108.91243802937282
+    },
+    {
+      "planner": "RRT*",
+      "success": true,
+      "iterations": 500,
+      "planning_time_seconds": 4.280318700009957,
+      "raw_waypoint_count": 6,
+      "raw_path_cost": 1.995063749932128,
+      "raw_path_safe": true,
+      "smoothed_waypoint_count": 4,
+      "smoothed_path_cost": 1.983780131880709,
+      "smoothed_path_safe": true,
+      "trajectory_duration_seconds": 2.2400000000000015,
+      "trajectory_sample_count": 113,
+      "cartesian_tip_distance_metres": 0.3440301059191159,
+      "minimum_joint_limit_margin": 0.19999999999999996,
+      "minimum_manipulability": 0.020337719010706055,
+      "maximum_condition_number": 1.9207255653616964,
+      "maximum_rcm_error_metres": 1.184506510439461e-17,
+      "acceleration_energy": 196.8035104860914
+    }
+  ],
+  "astar_trial": {
+    "planner": "A* configuration grid",
+    "success": true,
+    "iterations": 260,
+    "planning_time_seconds": 2.411414899979718,
+    "raw_waypoint_count": 13,
+    "raw_path_cost": 3.168928027592628,
+    "raw_path_safe": true,
+    "smoothed_waypoint_count": 3,
+    "smoothed_path_cost": 2.3341492811641458,
+    "smoothed_path_safe": true,
+    "trajectory_duration_seconds": 2.700000000000002,
+    "trajectory_sample_count": 136,
+    "cartesian_tip_distance_metres": 0.37849547670686023,
+    "minimum_joint_limit_margin": 0.1666666666666667,
+    "minimum_manipulability": 0.01908245189051408,
+    "maximum_condition_number": 1.8981665904303748,
+    "maximum_rcm_error_metres": 1.3447872870528273e-17,
+    "acceleration_energy": 79.9610094436776
+  },
+  "summary": {
+    "RRT": {
+      "trial_count": 3,
+      "success_count": 3,
+      "success_rate": 1.0,
+      "mean_planning_time_seconds": 0.969383000008141,
+      "mean_raw_path_cost": 2.5464790112332296,
+      "mean_smoothed_path_cost": 2.0672152830307335,
+      "mean_trajectory_duration_seconds": 2.1666666666666683,
+      "maximum_rcm_error_metres": 1.5111763946588776e-17
+    },
+    "RRT*": {
+      "trial_count": 3,
+      "success_count": 3,
+      "success_rate": 1.0,
+      "mean_planning_time_seconds": 5.199598033369209,
+      "mean_raw_path_cost": 1.768143233418355,
+      "mean_smoothed_path_cost": 1.7643820274012152,
+      "mean_trajectory_duration_seconds": 1.9133333333333347,
+      "maximum_rcm_error_metres": 1.184506510439461e-17
+    },
+    "A* configuration grid": {
+      "trial_count": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "mean_planning_time_seconds": 2.411414899979718,
+      "mean_raw_path_cost": 3.168928027592628,
+      "mean_smoothed_path_cost": 2.3341492811641458,
+      "mean_trajectory_duration_seconds": 2.700000000000002,
+      "maximum_rcm_error_metres": 1.3447872870528273e-17
+    }
+  }
+}

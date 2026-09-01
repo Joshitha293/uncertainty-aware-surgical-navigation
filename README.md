@@ -1236,40 +1236,56 @@ No physical surgical robot implementation is claimed.
 
 # Current Limitations
 
-Important limitations include:
+Important limitations of the current system include:
 
-- simulation-only validation
-- simplified anatomical geometry
-- engineered scene variations rather than independent patient anatomies
-- simulated rather than learned visual perception
-- simplified camera and observation models
-- isotropic Gaussian localisation uncertainty
-- synthetic rather than physical illumination degradation
-- no deformable tissue model
-- no force or tactile sensing
-- no dynamic anatomy
-- no calibration-drift model
-- no realistic specular-reflection model
-- no patient data
-- no animal or cadaver experiments
-- no physical robotic-platform validation
-- no clinical validation
-- active candidate generation remains simplified
-- task relevance is based on estimated synthetic geometry
-- no real endoscopic image pipeline
-- no physical camera calibration
-- no image-to-robot registration experiment
-- no real-time physical control loop
+- all quantitative validation remains simulation-only
+- anatomical geometry remains simplified and synthetic
+- no patient, animal, cadaver, or clinical data are used
+- no physical surgical robot has yet been validated
+- no physical endoscope or calibrated stereo-camera experiment has yet been performed
+- no clinical image-to-patient registration has been performed
+- no deformable-tissue or biomechanical tissue model is currently included
+- no force, tactile, or contact sensing is currently included
+- no physical camera-calibration drift experiment has been performed
+- no real-time physical control loop has yet been evaluated
+- no clinical safety, efficacy, or medical-device performance claim is supported
+
+The project now includes learned visual perception, but this remains a synthetic-image experiment. A compact Tiny U-Net was trained for synthetic marker segmentation and evaluated on a held-out scenario split. Strong 2-D segmentation performance did not guarantee accurate downstream stereo localisation.
+
+In the Phase 4 final learned-stereo experiment:
+
+- clean-condition mean 3-D localisation error was approximately 31.8 mm
+- moderate-degradation mean 3-D localisation error was approximately 14.1 mm
+- colour-shift out-of-distribution mean 3-D localisation error was approximately 112.3 mm
+- nominal 95% covariance coverage was 66.7% under clean and moderate conditions
+- nominal 95% covariance coverage fell to 0% under colour-shift distribution shift
+
+The unexpectedly lower error in the moderate condition than the clean condition must not be interpreted as evidence that degradation improves localisation. The experiment used only six targets per condition and instead indicates sensitivity of stereo depth estimation to learned centroid/disparity behaviour.
+
+Predictive uncertainty also has important limitations. Perturbation-based probability variance was not a reliable out-of-distribution detector, and pixel-level foreground probabilities were not well calibrated. The current uncertainty estimates are engineering approximations rather than Bayesian posterior uncertainty or clinically calibrated confidence.
+
+Phase 5 adds rigid registration and temporal state estimation, but those results also remain limited to controlled synthetic conditions. RANSAC performed strongly against deliberately injected correspondence outliers, and ICP performed strongly when initial alignment was already sufficiently close. These results do not establish robustness to arbitrary initialisation, real anatomy, non-rigid registration, or physical sensor error.
+
+Validation-based Kalman process-noise selection produced 95.3% empirical coverage for a nominal 95% positional uncertainty region on a disjoint synthetic held-out set. In the final integrated registration-tracking-navigation benchmark, coverage increased to 99.3%, indicating that the integrated uncertainty representation was conservative rather than perfectly calibrated.
+
+The final Phase 5 integration benchmark used synthetic uncertain 3-D observations that conform to the learned-stereo software interface. It did not rerun the trained Tiny U-Net image pipeline inside every temporal tracking trial. Learned image-to-stereo behaviour is evaluated separately in Phase 4.
+
+The Phase 1 conclusions also remain unchanged:
+
+- Full Task-Aware superiority over the movement-budget Generic comparator was not established
 - held-out movement-budget matching did not remain within the previous 10% tolerance
-- Random Active used substantially greater movement than structured strategies
-- the current task-weighted information objective reduced held-out performance relative to Alignment-Only
+- Random Active required substantially greater viewpoint movement
+- Alignment-Only performed better than the current Full Task-Aware formulation in the held-out mechanism analysis
+- the explicit task-weighted information term remains a mechanism bottleneck
 
-Results demonstrate behaviour under the implemented simulated perturbations only.
+Results therefore demonstrate engineering behaviour only under the implemented simulated scenarios and perturbations.
 
 They do not establish:
 
 - patient generalisation
 - anatomical generalisation
+- clinical image segmentation performance
+- clinical registration accuracy
 - physical sensor performance
 - physical robot performance
 - surgical safety
@@ -1339,191 +1355,263 @@ for held-out navigation feasibility.
 The next stages therefore focus on addressing the limitations revealed by Phase 1 rather than tuning the existing formulation against the held-out test set.
 
 ---
+# Development Roadmap
 
-# Next Research Phases
+The project uses a ten-phase engineering roadmap. Phases 1–5 are now technically complete; repository packaging for Phases 2–5 is being consolidated before Phase 6 begins.
 
-The broader project roadmap continues with:
+## Phase 1 — Held-Out Experimental Validation — Complete
 
-## Phase 2 — Advanced Robot Kinematics and Reachable Viewpoint Planning
+Phase 1 established the experimental framework for comparing Fixed View, Generic Active Perception, Task-Aware Active Perception, mechanism ablations, random exploration, and oracle diagnostics.
 
-- explicit robot degrees of freedom
-- forward and inverse kinematics
-- Jacobians
-- workspace analysis
+Key outcomes include:
+
+- frozen development, validation, and held-out scenario separation
+- information-isolation tests
+- movement-budget analysis
+- statistical comparison
+- mechanism ablation
+- uncertainty calibration experiments
+- synthetic degradation experiments
+- efficiency evaluation
+- reproducible evidence artifacts
+
+The primary held-out experiment did not establish superiority of Full Task-Aware Active Perception over the movement-budget Generic comparator. This negative result is retained as part of the project's scientific evidence.
+
+## Phase 2 — Robot Kinematics and Advanced Motion Planning — Complete
+
+Implemented capabilities include:
+
+- explicit robot kinematics
+- forward kinematics and homogeneous tool transforms
+- Jacobian analysis
+- workspace and reachability analysis
 - singularity and manipulability analysis
-- joint limits
-- RCM-constrained endoscope motion
-- viewpoint reachability
-- collision-aware viewpoint feasibility
-- execution-cost-aware candidate selection
+- joint-limit handling
+- RCM-constrained motion
+- collision-aware configuration and edge validation
+- RRT
+- RRT*
+- A*
+- path smoothing
+- trajectory timing and execution metrics
+- robot-reachable active-perception viewpoint filtering
 
-## Phase 3 — Genuine Image-Based Surgical Perception
+The Phase 2 planning benchmark evaluates planners under controlled simulated conditions. No universal planner-dominance claim is made because the planners expose different runtime and path-quality trade-offs.
 
-- synthetic/endoscopic-like image generation
-- anatomy and instrument visibility
-- occlusion
-- lighting degradation
-- image filtering
+Evidence:
+
+- `results/phase2/phase2_planning_benchmark.json`
+
+## Phase 3 — Camera Geometry, Image Processing and Stereo 3-D Perception — Complete
+
+Implemented capabilities include:
+
+- explicit camera projection conventions
+- world-to-camera and camera-to-world geometry
+- pixel projection and pixel-to-ray geometry
+- OpenCV-based image processing
+- filtering
 - thresholding
-- edge detection
 - morphology
-- contours
-- visual localisation
-- camera projection
-- pixel-to-ray geometry
+- contour extraction
+- image-driven marker localisation
+- calibrated stereo geometry
+- triangulation
+- point-cloud transformation
+- numerical triangulation Jacobians
+- pixel-to-world covariance propagation
+- Monte Carlo stereo-uncertainty evaluation
 
-## Phase 4 — Machine Learning / Deep Learning Perception
+The synthetic stereo benchmark showed the expected broad trends: localisation uncertainty increased with pixel noise and decreased with stereo baseline. Predicted and empirical uncertainty were approximately consistent in the tested calibrated-camera simulation, but this must not be interpreted as physical-camera calibration evidence.
 
-- labelled datasets
-- PyTorch training pipeline
-- segmentation
-- held-out image testing
-- Dice / IoU / precision / recall
-- localisation accuracy
-- inference latency
-- predictive uncertainty
+Evidence:
 
-## Phase 5 — 3-D Perception and Registration
+- `results/phase3/phase3_stereo_uncertainty_benchmark.json`
 
-- 3-D target localisation
-- camera coordinate frames
-- rigid registration
-- fiducial registration
-- image-to-robot transforms
-- FRE
-- TRE
-- registration uncertainty propagation
+## Phase 4 — Learned Perception and Uncertainty — Complete
 
-## Phase 6 — Dynamic Anatomy and State Estimation
+Implemented capabilities include:
 
-- time-varying anatomy
-- respiratory-like motion
-- temporal observations
-- Kalman filtering
-- covariance propagation
-- prediction and update
-- tracking robustness
-- occlusion recovery
+- leakage-resistant synthetic scenario-level train/validation/test splitting
+- PyTorch segmentation dataset pipeline
+- compact Tiny U-Net
+- BCE plus soft-Dice training objective
+- validation-only model selection
+- one-time held-out test evaluation
+- Dice and IoU evaluation
+- centroid localisation evaluation
+- comparison against classical HSV segmentation
+- perturbation-based predictive uncertainty
+- predictive entropy
+- probability variance
+- Brier score
+- pixel-level foreground-probability calibration error
+- image-degradation and colour-shift OOD evaluation
+- learned stereo centroid uncertainty
+- 4-D stereo pixel covariance
+- Jacobian propagation into 3-D world covariance
+- integration with `PositionUncertainty`
+- uncertainty-aware planner-margin propagation
 
-## Phase 7 — Model Mismatch and Generalisation
+The selected Tiny U-Net achieved strong held-out 2-D segmentation performance, but downstream stereo localisation remained substantially less reliable. Colour-shift OOD produced particularly large localisation errors and failed covariance coverage.
 
-- procedural scene randomisation
-- biased uncertainty
-- under-confidence
-- over-confidence
-- heavy-tailed errors
-- outliers
-- temporal correlation
-- drift
-- visual failure modes
-- large post-freeze robustness evaluation
+This phase therefore demonstrates both successful software integration and an important negative scientific result: good 2-D segmentation metrics alone do not establish reliable 3-D navigation performance.
 
-## Phase 8 — Medical-Device-Style Safety Engineering
+Evidence:
 
-- hazard analysis
-- FMEA
-- safety supervisor
-- system states
-- uncertainty monitoring
+- `results/phase4/phase4_segmentation_training.json`
+- `results/phase4/phase4_uncertainty_robustness.json`
+- `results/phase4/phase4_final_integration_benchmark.json`
+- `results/phase4/tiny_unet_best.pt`
+
+## Phase 5 — Registration, Tracking and State Estimation — Complete
+
+Implemented capabilities include:
+
+- SVD/Kabsch corresponding-landmark rigid registration
+- reflection correction
+- fiducial registration error
+- independent target registration error
+- RANSAC outlier rejection
+- trimmed iterative closest point
+- transform error metrics
+- 6-state constant-velocity Kalman filtering
+- position and velocity estimation
+- heteroscedastic measurement covariance
+- Mahalanobis innovation gating
+- dropout prediction
+- Joseph-form covariance update
+- validation-only process-noise selection
+- disjoint held-out uncertainty evaluation
+- registration covariance propagation
+- temporal `EstimatedStructure` generation
+- tracked uncertainty propagation into planner geometry
+
+In the synthetic robust-registration benchmark, RANSAC substantially reduced registration error relative to naive registration in the deliberately contaminated correspondence trials. ICP achieved low error under the tested nearby-initialisation conditions.
+
+Validation-only process-noise tuning selected:
+
+`acceleration_sigma = 0.025 m/s^2`
+
+On a disjoint synthetic held-out tracking set, nominal 95% positional covariance coverage was 95.3%.
+
+The final registration-tracking-navigation integration benchmark produced:
+
+- mean registration translation error: approximately 1.005 mm
+- mean registration rotation error: approximately 0.340 degrees
+- raw registered position RMSE: approximately 10.065 mm
+- clean raw registered position RMSE: approximately 5.016 mm
+- tracked position RMSE: approximately 2.417 mm
+- tracked dropout RMSE: approximately 2.703 mm
+- tracker lower RMSE in 100% of the tested trials
+- outlier-rejection precision: approximately 97.7%
+- outlier-rejection recall: 100%
+- nominal tracked 95% covariance coverage: approximately 99.3%
+- mean raw planner safety margin: approximately 14.548 mm
+- mean tracked planner safety margin: approximately 9.182 mm
+- mean tracked dropout safety margin: approximately 9.455 mm
+
+The approximately 99.3% coverage indicates conservative integrated covariance rather than perfect calibration.
+
+Evidence:
+
+- `results/phase5/phase5_registration_benchmark.json`
+- `results/phase5/phase5_tracking_benchmark.json`
+- `results/phase5/phase5_tracking_calibration_benchmark.json`
+- `results/phase5/phase5_final_integration_benchmark.json`
+
+## Phase 6 — Robust Planning Under Uncertainty — Next
+
+Planned work includes:
+
+- uncertainty-aware planning objectives beyond scalar obstacle inflation
+- chance-constrained or risk-bounded planning concepts
+- robustness to uncertainty miscalibration
+- heavy-tailed and non-Gaussian localisation failures
+- correlated estimation errors
+- planning under state-estimation drift
+- replanning under evolving uncertainty
+- explicit comparison of safety, efficiency, and conservatism
+
+## Phase 7 — Safety and Autonomous Task Execution
+
+Planned work includes:
+
+- supervisory safety logic
+- state-machine-based autonomous execution
+- stale-data detection
+- uncertainty thresholds
 - clearance monitoring
 - joint-limit monitoring
-- stale-data detection
-- timeout handling
+- timeout and recovery behaviour
 - fault injection
-- ISO 14971 awareness
-- IEC 62366 awareness
+- hazard-oriented verification
+- medical-device safety-engineering awareness
 
-## Phase 9 — Preliminary Benchtop Validation
+## Phase 8 — ROS 2 and Gazebo Surgical Robotics System
 
-- camera
-- physical phantom
-- known geometry
-- fiducials
-- calibration
-- localisation-error measurement
-- repeatability
-- registration
-- viewpoint accuracy
-- preliminary simulation-to-real comparison
+Planned work includes:
 
-## Phase 10 — ROS 2 and Gazebo Deployment
-
-- surgical/endoscopic robot model
-- URDF / Xacro
-- TF2
-- RViz
-- Gazebo
-- ros2_control
-- camera nodes
-- perception nodes
-- state-estimation nodes
-- viewpoint planner
-- motion planner
-- safety supervisor
+- ROS 2 nodes
+- TF2 frame graph
+- URDF / Xacro robot representation
+- Gazebo simulation
+- RViz visualisation
+- camera and perception nodes
+- registration and state-estimation nodes
+- viewpoint-selection node
+- motion-planning node
+- safety-supervisor node
+- ros2_control integration
 - trajectory execution
-- rosbag2
-- QoS
-- lifecycle management
+- rosbag2 evidence capture
+- QoS and lifecycle considerations
 
-## Phase 11 — Control and Real-Time Behaviour
+## Phase 9 — Control and Real-Time Trajectory Execution
+
+Planned work includes:
 
 - trajectory tracking
-- position control
-- velocity control
-- PID
-- tracking error
+- position and velocity control
+- feedback control
+- PID evaluation where appropriate
+- command-versus-execution error
 - settling behaviour
 - loop-frequency measurement
 - perception latency
+- state-estimation latency
 - planning latency
 - control latency
-- latency stress testing
+- real-time stress evaluation
 
-## Phase 12 — Final End-to-End Image-Guided Experiment
+## Phase 10 — Final End-to-End Experiment and Verification
+
+The final target architecture is:
 
 ```text
-image
-  ↓
-segmentation / detection
-  ↓
-3-D localisation
-  ↓
+image observation
+        →
+learned / classical perception
+        →
+stereo 3-D localisation + covariance
+        →
 registration
-  ↓
-state estimate + covariance
-  ↓
+        →
+temporal state estimate + covariance
+        →
 task-aware viewpoint selection
-  ↓
-reachability / singularity / collision checks
-  ↓
-uncertainty-aware planning
-  ↓
+        →
+robot reachability / singularity / collision checks
+        →
+robust uncertainty-aware motion planning
+        →
 safety supervisor
-  ↓
-trajectory execution
-  ↓
-Gazebo / preliminary benchtop system
-  ↓
-targeting and navigation evaluation
-```
-
-## Phase 13 — Final Verification and Portfolio Packaging
-
-- full regression
-- ROS integration tests
-- C++ tests where introduced
-- fresh environment build
-- CI
-- requirements
-- traceability
-- architecture documentation
-- frozen experiment configurations
-- publication-quality plots
-- demonstration media
-- reproducibility instructions
-- explicit simulation-versus-physical evidence separation
-- final tagged GitHub release
-
+        →
+trajectory execution and feedback control
+        →
+ROS 2 / Gazebo system
+        →
+end-to-end quantitative evaluation
 ---
 
 # Research Scope
@@ -1548,11 +1636,35 @@ Those capabilities require later project phases and separate evidence.
 
 # Status
 
-Phase 1 has completed its:
+Current engineering status:
 
-- final held-out simulation experiment
-- frozen primary statistical analysis
-- secondary and mechanism analysis
-- full repository regression test
+| Phase | Status |
+|---|---|
+| Phase 1 — Held-Out Experimental Validation | Complete |
+| Phase 2 — Robot Kinematics and Advanced Motion Planning | Complete |
+| Phase 3 — Camera Geometry, Image Processing and Stereo Perception | Complete |
+| Phase 4 — Learned Perception and Uncertainty | Complete |
+| Phase 5 — Registration, Tracking and State Estimation | Complete |
+| Phase 6 — Robust Planning Under Uncertainty | Next |
+| Phase 7 — Safety and Autonomous Task Execution | Planned |
+| Phase 8 — ROS 2 and Gazebo Surgical Robotics System | Planned |
+| Phase 9 — Control and Real-Time Trajectory Execution | Planned |
+| Phase 10 — Final End-to-End Experiment and Verification | Planned |
 
-The remaining Phase 1 repository work is final documentation, traceability updating, evidence commit, and repository freeze before progressing to Phase 2.
+Phases 1–5 are technically complete in simulation.
+
+Phase 1 has been frozen and committed previously.
+
+Phases 2–5 currently have completed implementation, quantitative evidence, and regression tests and are undergoing consolidated repository documentation and traceability packaging before being committed and frozen.
+
+The latest completed full regression before final repository packaging contained:
+
+`822 passed`
+
+A subsequent full-suite invocation was manually interrupted and is not considered release verification. The final consolidated Phases 2–5 release regression subsequently completed successfully with 822 tests passing.
+
+The current research position is:
+
+**Task-aware active perception coupled with uncertainty-aware motion planning for simulated surgical navigation, extended with robot-aware planning, image-based and learned stereo perception, rigid registration, and covariance-aware temporal state estimation.**
+
+All reported results remain simulation evidence unless explicitly stated otherwise.

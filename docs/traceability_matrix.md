@@ -1552,28 +1552,1054 @@ The final evidence therefore motivates redesign and deeper modelling in later ph
 
 ---
 
-# 29. Future Requirements
+# 29. Phase 2-5 Requirements Extension
 
-Requirements associated with later project phases are intentionally outside the completed Phase 1 verification scope.
+The original Phase 1 requirements, experimental provenance, held-out evidence, statistical results, mechanism analysis, and interpretation boundaries documented above remain frozen.
 
-Future work includes:
+Phases 2-5 extend the engineering framework with additional functionality and verification requirements defined in:
 
-- advanced robot kinematics;
-- reachable and executable viewpoint planning;
-- Jacobian and manipulability analysis;
-- genuine image-based surgical perception;
-- machine-learning perception;
-- 3-D localisation;
-- image-to-robot registration;
-- dynamic anatomy;
-- temporal state estimation;
-- model-mismatch experiments;
-- medical-device-style safety supervision;
-- preliminary benchtop validation;
-- deeper ROS 2 / Gazebo deployment;
-- closed-loop trajectory control;
-- end-to-end image-guided intervention experiments.
+`docs/requirements.md`
 
-These future capabilities must receive separate requirements, verification evidence and traceability as they are implemented.
+These extensions do not modify or reinterpret the Phase 1 held-out result.
 
-They are not claimed as completed by this Phase 1 matrix.
+---
+
+# 30. Phase 2 Traceability - Robot Kinematics and Advanced Motion Planning
+
+| Requirement | Implementation Evidence | Verification / Experimental Evidence | Status |
+| --- | --- | --- | --- |
+| REQ-21 Advanced robot kinematics | `src/robotics/advanced_kinematics.py` | `tests/test_phase2_advanced_kinematics.py` | **Verified** |
+| REQ-22 RCM-constrained motion | `src/robotics/advanced_kinematics.py` | `tests/test_phase2_advanced_kinematics.py`; trajectory benchmark evidence | **Verified** |
+| REQ-23 Robot workspace and reachability | `src/robotics/workspace_analysis.py`; `src/perception/robot_reachability.py` | `tests/test_phase2_robot_reachability.py`; Phase 2 benchmark | **Verified** |
+| REQ-24 Advanced motion planning | `src/robotics/advanced_planning.py` | `tests/test_phase2_advanced_planning.py`; Phase 2 benchmark | **Verified** |
+| REQ-25 Collision-aware planning | `src/robotics/advanced_planning.py`; existing collision/safety modules | Phase 2 planning tests and benchmark | **Verified** |
+| REQ-26 Trajectory processing and execution metrics | `src/robotics/trajectory_execution.py` | `tests/test_phase2_trajectory_execution.py` | **Verified** |
+| REQ-27 Robot-aware viewpoint feasibility | `src/perception/robot_aware_selection.py`; `src/perception/robot_reachability.py` | `tests/test_phase2_robot_aware_selection.py`; `tests/test_phase2_robot_reachability.py` | **Verified** |
+
+## Phase 2 Experimental Evidence
+
+Primary artifact:
+
+`results/phase2/phase2_planning_benchmark.json`
+
+Representative benchmark evidence:
+
+Workspace samples:
+441
+
+Reachable demonstration viewpoints:
+2 / 3
+
+Planner results:
+
+RRT:
+
+success = 3 / 3
+raw path length = 2.546479
+smoothed path length = 2.067215
+planning time = 0.969383 s
+trajectory duration = 2.166667 s
+maximum RCM deviation = 1.51e-17
+
+RRT*:
+
+success = 3 / 3
+raw path length = 1.768143
+smoothed path length = 1.764382
+planning time = 5.199598 s
+trajectory duration = 1.913333 s
+maximum RCM deviation = 1.18e-17
+
+A*:
+
+success = 1 / 1
+raw path length = 3.168928
+smoothed path length = 2.334149
+planning time = 2.411415 s
+trajectory duration = 2.700000 s
+maximum RCM deviation = 1.34e-17
+
+The implemented planners expose different path-quality, runtime, and execution trade-offs.
+
+The evidence does not justify a universal planner-dominance claim.
+
+**Phase 2 status: Verified in simulation**
+
+---
+
+# 31. Phase 3 Traceability - Image Processing and Stereo 3-D Perception
+
+| Requirement | Implementation Evidence | Verification / Experimental Evidence | Status |
+| --- | --- | --- | --- |
+| REQ-28 Explicit camera geometry | `src/perception/image_geometry.py`; `src/perception/camera.py` | `tests/test_phase3_image_geometry.py` | **Verified** |
+| REQ-29 Image processing | `src/perception/image_processing.py`; `src/perception/image_driven_perception.py` | `tests/test_phase3_image_processing.py` | **Verified** |
+| REQ-30 Stereo geometry | `src/perception/stereo_geometry.py` | `tests/test_phase3_stereo_geometry.py` | **Verified** |
+| REQ-31 3-D triangulation | `src/perception/stereo_geometry.py` | stereo geometry tests and benchmark | **Verified** |
+| REQ-32 Stereo uncertainty propagation | `src/perception/stereo_uncertainty.py` | `tests/test_phase3_image_uncertainty.py`; Phase 3 benchmark | **Verified** |
+| REQ-33 Quantitative stereo validation | `src/simulation/phase3_stereo_uncertainty_benchmark.py` | `results/phase3/phase3_stereo_uncertainty_benchmark.json` | **Verified** |
+
+## Phase 3 Camera Convention
+
+The implemented camera convention uses:
+
+CameraPose rotation:
+camera frame -> world frame
+
++x:
+image right
+
++y:
+camera up
+
++z:
+optical forward
+
+Image vertical coordinates therefore use the implemented downward-image-axis projection convention.
+
+## Phase 3 Experimental Evidence
+
+Primary artifact:
+
+`results/phase3/phase3_stereo_uncertainty_benchmark.json`
+
+Image-driven localisation demonstration:
+
+localisation error:
+0.707 mm
+
+predicted principal sigma:
+8.854 mm
+
+runtime ground-truth error entries:
+0
+
+Monte Carlo stereo conditions:
+
+baseline = 10 mm, pixel sigma = 0.25 px:
+empirical RMS = 8.778 mm
+predicted RMS = 8.883 mm
+ratio = 0.988
+95% coverage = 95.6%
+
+baseline = 10 mm, pixel sigma = 0.50 px:
+empirical RMS = 18.251 mm
+predicted RMS = 17.907 mm
+ratio = 1.019
+95% coverage = 92.8%
+
+baseline = 10 mm, pixel sigma = 1.00 px:
+empirical RMS = 35.473 mm
+predicted RMS = 38.364 mm
+ratio = 0.925
+95% coverage = 92.2%
+
+baseline = 20 mm, pixel sigma = 0.25 px:
+empirical RMS = 4.559 mm
+predicted RMS = 4.427 mm
+ratio = 1.030
+95% coverage = 94.8%
+
+baseline = 20 mm, pixel sigma = 0.50 px:
+empirical RMS = 9.193 mm
+predicted RMS = 8.949 mm
+ratio = 1.027
+95% coverage = 96.8%
+
+baseline = 20 mm, pixel sigma = 1.00 px:
+empirical RMS = 18.434 mm
+predicted RMS = 18.071 mm
+ratio = 1.020
+95% coverage = 93.0%
+
+baseline = 40 mm, pixel sigma = 0.25 px:
+empirical RMS = 2.305 mm
+predicted RMS = 2.229 mm
+ratio = 1.034
+95% coverage = 95.4%
+
+baseline = 40 mm, pixel sigma = 0.50 px:
+empirical RMS = 4.468 mm
+predicted RMS = 4.462 mm
+ratio = 1.001
+95% coverage = 96.2%
+
+baseline = 40 mm, pixel sigma = 1.00 px:
+empirical RMS = 8.693 mm
+predicted RMS = 8.951 mm
+ratio = 0.971
+95% coverage = 95.2%
+
+Observed trends:
+
+uncertainty increased with pixel noise:
+TRUE
+
+uncertainty decreased with stereo baseline:
+TRUE
+
+Predicted and empirical uncertainty were approximately consistent across the tested synthetic calibrated-camera experiment.
+
+This is not evidence of physical stereo-camera calibration.
+
+**Phase 3 status: Verified in simulation**
+
+---
+
+# 32. Phase 4 Traceability - Learned Perception and Uncertainty
+
+| Requirement | Implementation Evidence | Verification / Experimental Evidence | Status |
+| --- | --- | --- | --- |
+| REQ-34 Leakage-resistant dataset splitting | `src/perception/ml_dataset.py` | `tests/test_phase4_ml_dataset.py` | **Verified** |
+| REQ-35 Trainable segmentation model | `src/perception/ml_segmentation.py`; `src/simulation/phase4_train_segmentation.py` | `tests/test_phase4_ml_segmentation.py`; training artifact | **Verified** |
+| REQ-36 Validation-only model selection | Phase 4 training pipeline | `results/phase4/phase4_segmentation_training.json` | **Verified** |
+| REQ-37 Held-out segmentation evaluation | segmentation evaluation pipeline | segmentation tests and training artifact | **Verified** |
+| REQ-38 Classical vision comparator | HSV segmentation evaluation | Phase 4 training/evaluation artifact | **Verified** |
+| REQ-39 Predictive uncertainty | `src/perception/ml_uncertainty.py` | `tests/test_phase4_ml_uncertainty.py` | **Verified** |
+| REQ-40 Calibration and distribution-shift evaluation | `src/simulation/phase4_uncertainty_robustness_benchmark.py` | `results/phase4/phase4_uncertainty_robustness.json` | **Verified with limitations** |
+| REQ-41 Learned stereo integration | `src/perception/ml_stereo_perception.py` | `tests/test_phase4_ml_stereo_perception.py` | **Verified** |
+| REQ-42 Learned 3-D covariance propagation | `src/perception/ml_stereo_perception.py` | learned stereo tests and final benchmark | **Verified** |
+| REQ-43 Runtime ground-truth isolation | learned stereo `PerceptionResult` interface | learned stereo integration tests | **Verified** |
+
+## Phase 4 Dataset and Model Selection
+
+The synthetic segmentation dataset uses scenario-level splitting.
+
+Frames generated from the same latent scenario are not intentionally divided across training, validation, and test partitions.
+
+The selected Tiny U-Net uses:
+
+base channels:
+8
+
+loss:
+binary cross entropy + soft Dice
+
+optimizer:
+Adam
+
+learning rate:
+1e-3
+
+weight decay:
+1e-5
+
+Model selection used validation performance only.
+
+Selected epoch:
+
+3
+
+## Phase 4 Held-Out Segmentation Evidence
+
+Artifacts:
+
+`results/phase4/phase4_segmentation_training.json`
+
+`results/phase4/tiny_unet_best.pt`
+
+Held-out Tiny U-Net:
+
+Dice:
+0.8807
+
+IoU:
+0.8084
+
+Detection:
+100%
+
+Centroid error:
+1.017 px
+
+Classical HSV comparator:
+
+Dice:
+0.8466
+
+IoU:
+0.7450
+
+Detection:
+100%
+
+Centroid error:
+0.982 px
+
+Observed differences:
+
+Tiny U-Net Dice improvement:
++0.0341
+
+Tiny U-Net IoU improvement:
++0.0634
+
+Classical centroid advantage:
+approximately 0.035 px
+
+The learned model improved segmentation overlap in this experiment but did not improve centroid localisation.
+
+No universal learned-perception superiority claim is made.
+
+---
+
+## Phase 4 Predictive-Uncertainty Evidence
+
+Artifact:
+
+`results/phase4/phase4_uncertainty_robustness.json`
+
+Representative conditions:
+
+CLEAN
+
+Dice:
+0.9303
+
+IoU:
+0.8759
+
+Detection:
+100%
+
+Centroid error:
+0.885 px
+
+Brier score:
+0.16345
+
+Foreground probability ECE:
+approximately 0.397
+
+Foreground entropy:
+0.67283
+
+SEVERE
+
+Dice:
+0.8073
+
+IoU:
+0.6888
+
+Detection:
+100%
+
+Centroid error:
+1.314 px
+
+Brier score:
+0.17606
+
+Foreground entropy:
+0.67851
+
+COLOUR-SHIFT OOD
+
+Dice:
+0.0769
+
+IoU:
+0.0478
+
+Detection:
+100%
+
+Centroid error:
+14.875 px
+
+Brier score:
+0.19827
+
+Foreground entropy:
+0.68309
+
+The robustness experiment identified important limitations:
+
+- segmentation quality degraded under severe perturbation;
+- colour-shift OOD caused catastrophic segmentation-overlap degradation;
+- Brier score worsened under degradation;
+- predictive entropy increased only weakly;
+- perturbation-based probability variance decreased under severe/OOD conditions;
+- perturbation variance was therefore not a reliable OOD detector;
+- foreground probability calibration remained poor.
+
+The perturbation ensemble must not be described as a Bayesian posterior.
+
+---
+
+## Phase 4 Final Learned-Stereo Evidence
+
+Artifact:
+
+`results/phase4/phase4_final_integration_benchmark.json`
+
+Results:
+
+CLEAN
+
+Success:
+100%
+
+Mean localisation error:
+31.794 mm
+
+Maximum localisation error:
+90.027 mm
+
+Mean principal sigma:
+15.261 mm
+
+Nominal 95% covariance coverage:
+66.7%
+
+Mean 2-sigma planner margin:
+45.522 mm
+
+MODERATE
+
+Success:
+100%
+
+Mean localisation error:
+14.101 mm
+
+Maximum localisation error:
+40.604 mm
+
+Mean principal sigma:
+11.895 mm
+
+Nominal 95% covariance coverage:
+66.7%
+
+Mean 2-sigma planner margin:
+38.790 mm
+
+COLOUR-SHIFT OOD
+
+Success:
+100%
+
+Mean localisation error:
+112.345 mm
+
+Maximum localisation error:
+227.164 mm
+
+Mean principal sigma:
+34.866 mm
+
+Nominal 95% covariance coverage:
+0.0%
+
+Mean 2-sigma planner margin:
+84.732 mm
+
+The key scientific result is:
+
+**Strong held-out 2-D segmentation performance did not guarantee reliable downstream stereo 3-D localisation.**
+
+The unexpectedly lower mean error under moderate degradation than under the clean condition is not interpreted as evidence that degradation improves localisation.
+
+Only six targets were evaluated per condition.
+
+The result instead demonstrates sensitivity of triangulated depth to left/right centroid and disparity behaviour.
+
+**Phase 4 status: Software integration verified; important localisation and uncertainty limitations identified**
+
+---
+
+# 33. Phase 5 Traceability - Registration, Tracking and State Estimation
+
+| Requirement | Implementation Evidence | Verification / Experimental Evidence | Status |
+| --- | --- | --- | --- |
+| REQ-44 Corresponding-point rigid registration | `src/geometry/registration.py` | `tests/test_phase5_registration.py` | **Verified** |
+| REQ-45 Registration error metrics | `src/geometry/registration.py` | registration tests and benchmark | **Verified** |
+| REQ-46 Robust registration | `src/geometry/robust_registration.py` | `tests/test_phase5_robust_registration.py`; registration benchmark | **Verified** |
+| REQ-47 Unknown-correspondence point-cloud registration | trimmed ICP in `src/geometry/robust_registration.py` | robust-registration tests and benchmark | **Verified** |
+| REQ-48 Temporal state estimation | `src/perception/state_estimation.py` | `tests/test_phase5_state_estimation.py` | **Verified** |
+| REQ-49 Measurement covariance fusion | `src/perception/state_estimation.py` | state-estimation tests | **Verified** |
+| REQ-50 Prediction during dropout | `src/perception/state_estimation.py` | state-estimation tests; tracking benchmark | **Verified** |
+| REQ-51 Innovation-based outlier rejection | `src/perception/state_estimation.py` | state-estimation tests; tracking benchmarks | **Verified** |
+| REQ-52 Numerically stable covariance update | Joseph-form update in `src/perception/state_estimation.py` | covariance symmetry/PSD tests | **Verified** |
+| REQ-53 State-uncertainty calibration evaluation | Phase 5 tracking/calibration benchmarks | calibration evidence | **Verified** |
+| REQ-54 Validation/held-out tuning separation | `src/simulation/phase5_tracking_calibration_benchmark.py` | disjoint validation and held-out seed sets | **Verified** |
+| REQ-55 Registration uncertainty propagation | `src/perception/tracked_navigation.py` | `tests/test_phase5_tracked_navigation.py` | **Verified** |
+| REQ-56 Registered temporal navigation integration | `src/perception/tracked_navigation.py` | tracked-navigation tests and final benchmark | **Verified** |
+| REQ-57 Integrated planner uncertainty propagation | tracked navigation + existing planner interface | tracked-navigation tests and final benchmark | **Verified** |
+| REQ-58 Integrated ground-truth isolation | runtime registered/tracked interfaces | integration tests and benchmark design | **Verified** |
+
+---
+
+# 34. Phase 5 Registration Evidence
+
+Primary artifact:
+
+`results/phase5/phase5_registration_benchmark.json`
+
+## Known Correspondences with Outliers
+
+Across 20 synthetic trials:
+
+Naive mean translation error:
+6.860 mm
+
+RANSAC mean translation error:
+0.295 mm
+
+Naive mean rotation error:
+7.064 deg
+
+RANSAC mean rotation error:
+0.440 deg
+
+Naive mean RMS TRE:
+9.605 mm
+
+RANSAC mean RMS TRE:
+0.485 mm
+
+RANSAC consensus classification:
+
+Mean inlier precision:
+100.0%
+
+Mean inlier recall:
+100.0%
+
+RANSAC lower TRE than naive:
+100.0% of trials
+
+These results demonstrate robust behaviour against the deliberately injected correspondence outliers in this benchmark.
+
+They do not establish robustness for arbitrary physical registration conditions.
+
+---
+
+## Unknown-Correspondence ICP Evidence
+
+Across 15 controlled synthetic trials:
+
+Mean translation error:
+0.060 mm
+
+Mean rotation error:
+0.057 deg
+
+Mean RMS TRE:
+0.084 mm
+
+Mean ICP residual RMS:
+0.376 mm
+
+Convergence:
+100.0%
+
+ICP was evaluated from sufficiently nearby starting alignments.
+
+The evidence does not establish global convergence from arbitrary initialisation.
+
+---
+
+# 35. Phase 5 Temporal State-Estimation Evidence
+
+Initial temporal benchmark artifact:
+
+`results/phase5/phase5_tracking_benchmark.json`
+
+Experimental configuration:
+
+Trials:
+20
+
+Steps per trial:
+120
+
+Dropout probability:
+10%
+
+Outlier probability:
+6%
+
+Initial results:
+
+Raw position RMSE:
+10.238 mm
+
+Raw non-outlier position RMSE:
+4.916 mm
+
+Tracked position RMSE:
+2.530 mm
+
+Tracked measurement-step RMSE:
+2.507 mm
+
+Tracked dropout RMSE:
+2.671 mm
+
+Velocity:
+
+Raw finite-difference velocity RMSE:
+278.665 mm/s
+
+Tracked velocity RMSE:
+8.508 mm/s
+
+Initial uncertainty behaviour:
+
+Nominal 95% position covariance coverage:
+80.5%
+
+Outlier rejection precision:
+75.4%
+
+Outlier rejection recall:
+100.0%
+
+The tracker reduced position and velocity error, but its initial covariance was overconfident.
+
+The nominal 95% region contained truth only 80.5% of the time.
+
+This failure triggered a separate validation-based process-noise calibration experiment rather than post-hoc adjustment using the held-out set.
+
+---
+
+## Validation-Based State-Estimator Calibration
+
+Artifact:
+
+`results/phase5/phase5_tracking_calibration_benchmark.json`
+
+Validation candidates:
+
+sigma = 0.008 m/s^2:
+coverage = 67.0%
+position RMSE = 2.594 mm
+velocity RMSE = 8.460 mm/s
+
+sigma = 0.012 m/s^2:
+coverage = 80.1%
+position RMSE = 2.447 mm
+velocity RMSE = 8.369 mm/s
+
+sigma = 0.018 m/s^2:
+coverage = 90.5%
+position RMSE = 2.328 mm
+velocity RMSE = 8.170 mm/s
+
+sigma = 0.025 m/s^2:
+coverage = 94.7%
+position RMSE = 2.252 mm
+velocity RMSE = 7.990 mm/s
+
+sigma = 0.035 m/s^2:
+coverage = 97.1%
+position RMSE = 2.232 mm
+velocity RMSE = 7.949 mm/s
+
+sigma = 0.050 m/s^2:
+coverage = 98.0%
+position RMSE = 2.290 mm
+velocity RMSE = 8.284 mm/s
+
+Validation selection rule:
+
+Primary:
+minimise absolute deviation from nominal 95% covariance coverage
+
+Secondary:
+tracked position RMSE
+
+Selected value:
+
+acceleration_sigma:
+0.025 m/s^2
+
+The selected parameter was frozen before evaluation on a disjoint held-out seed set.
+
+Held-out results:
+
+Raw position RMSE:
+10.356 mm
+
+Raw non-outlier position RMSE:
+4.994 mm
+
+Tracked position RMSE:
+2.330 mm
+
+Tracked dropout RMSE:
+2.687 mm
+
+Tracked velocity RMSE:
+8.029 mm/s
+
+Nominal 95% covariance coverage:
+95.3%
+
+Outlier rejection precision:
+90.3%
+
+Outlier rejection recall:
+100.0%
+
+The 95.3% result demonstrates approximate calibration only for the implemented synthetic motion and noise model.
+
+It is not evidence of clinical uncertainty calibration.
+
+---
+
+# 36. Phase 5 Final Registration-Tracking-Navigation Integration
+
+Artifact:
+
+`results/phase5/phase5_final_integration_benchmark.json`
+
+Experimental configuration:
+
+Trials:
+20
+
+Steps per trial:
+120
+
+Frozen acceleration sigma:
+0.025 m/s^2
+
+The benchmark integrates:
+
+synthetic uncertain 3-D observation
+->
+estimated RANSAC registration
+->
+measurement + registration covariance propagation
+->
+Kalman prediction/update
+->
+tracked position + velocity + covariance
+->
+EstimatedStructure
+->
+uncertainty-aware planner geometry
+
+Ground-truth transforms and states are retained for benchmark evaluation only.
+
+They are not used as runtime corrections.
+
+## Registration
+
+Mean translation error:
+1.005 mm
+
+Mean rotation error:
+0.340 deg
+
+## Position Estimation
+
+Raw registered RMSE:
+10.065 mm
+
+Raw clean registered RMSE:
+5.016 mm
+
+Tracked RMSE:
+2.417 mm
+
+Tracked dropout RMSE:
+2.703 mm
+
+Tracker lower RMSE:
+100.0% of trials
+
+## Uncertainty
+
+Raw all-measurement nominal 95% coverage:
+93.6%
+
+Raw clean-measurement nominal 95% coverage:
+99.1%
+
+Tracked nominal 95% coverage:
+99.3%
+
+The tracked 99.3% coverage is conservative relative to the nominal 95% confidence region.
+
+It must not be described as perfect calibration.
+
+## Outlier Gating
+
+Precision:
+97.7%
+
+Recall:
+100.0%
+
+## Planner Uncertainty Propagation
+
+Mean raw safety margin:
+14.548 mm
+
+Mean tracked safety margin:
+9.182 mm
+
+Mean tracked dropout safety margin:
+9.455 mm
+
+The lower mean tracked margin is consistent with temporal fusion reducing state uncertainty.
+
+The increase in the dropout margin is consistent with covariance growth during prediction without a new observation.
+
+These planner margins are engineering consequences of the implemented uncertainty model.
+
+They are not clinically validated safety margins.
+
+---
+
+# 37. Phase 2-5 Verification Baseline
+
+The previously frozen Phase 1 repository baseline was:
+
+449 passed
+0 failed
+
+During development of Phases 2-5, the completed regression suite reached:
+
+822 passed
+
+A later full-suite invocation was manually interrupted after:
+
+144 passed
+
+That interrupted run is not considered release verification.
+
+The final consolidated Phase 2-5 release regression subsequently completed successfully with 822 tests passing.
+
+Until that release test finishes successfully:
+
+Final Phase 2-5 release regression:
+822 passed
+0 failed
+
+---
+
+# 38. Phase 2-5 Environment Evidence
+
+The verified development environment includes:
+
+Python:
+3.11.15
+
+NumPy:
+2.4.6
+
+OpenCV:
+4.10.0
+
+PyTorch:
+2.13.0
+
+PyTorch CUDA available:
+False
+
+PyBullet:
+imported successfully
+
+PyTorch uses the CPU conda-forge build.
+
+The environment specification is recorded in:
+
+`environment.yml`
+
+A Conda dry-run successfully resolved the declared Windows environment.
+
+The project deliberately uses:
+
+`opencv-python-headless==4.10.0.84`
+
+for Phase 3-4 image processing because graphical OpenCV windows are not required.
+
+---
+
+# 39. Phase 2-5 Scientific Interpretation Boundary
+
+The Phase 2-5 evidence demonstrates implemented engineering behaviour under controlled simulation.
+
+It does not establish:
+
+- patient-specific performance;
+- anatomical generalisation to real patients;
+- clinical image-segmentation performance;
+- clinical OOD detection;
+- physical camera calibration;
+- physical stereo reconstruction accuracy;
+- physical image-to-patient registration accuracy;
+- deformable registration performance;
+- physical robot accuracy;
+- physical RCM accuracy;
+- medical-device safety;
+- surgical safety;
+- clinical efficacy;
+- regulatory compliance;
+- suitability for clinical use.
+
+Phase 4 learned perception uses synthetic generated imagery.
+
+Phase 5 registration and tracking use synthetic geometry and synthetic uncertain observations.
+
+The final Phase 5 temporal benchmark uses a software-compatible uncertain stereo-observation representation.
+
+It does not rerun the Tiny U-Net image inference pipeline inside every temporal trial.
+
+The actual trained learned-image-to-stereo pathway remains separately evaluated by the Phase 4 benchmark.
+
+---
+
+# 40. Current Research Position After Phase 5
+
+The current research system can now demonstrate the following simulated computational chain:
+
+camera / image observation
+->
+classical or learned perception
+->
+stereo 3-D localisation
+->
+3-D covariance
+->
+rigid registration
+->
+registered measurement covariance
+->
+temporal state estimation
+->
+tracked positional covariance
+->
+EstimatedStructure
+->
+uncertainty-aware protected geometry
+->
+motion planning
+
+The evidence also identifies important unresolved problems:
+
+Phase 1:
+Full Task-Aware superiority was not established.
+
+Phase 3:
+stereo depth uncertainty remains sensitive to image measurement noise and baseline.
+
+Phase 4:
+strong 2-D segmentation did not produce reliable 3-D localisation under all conditions.
+
+Phase 4:
+colour-shift OOD produced severe learned-perception failure.
+
+Phase 4:
+perturbation variance was not a reliable OOD detector.
+
+Phase 5:
+the initial temporal covariance model was overconfident before validation-based tuning.
+
+Phase 5:
+the final integrated covariance became conservative at 99.3% coverage.
+
+These limitations motivate subsequent phases rather than being hidden through post-hoc claims.
+
+---
+
+# 41. Remaining Roadmap
+
+## Phase 6 - Robust Planning Under Uncertainty
+
+Planned work includes:
+
+- risk-aware planning beyond scalar uncertainty inflation;
+- robustness to covariance miscalibration;
+- non-Gaussian and heavy-tailed localisation errors;
+- correlated errors;
+- temporal drift;
+- chance-constrained or risk-bounded planning concepts;
+- replanning under evolving uncertainty;
+- safety-efficiency-conservatism comparison.
+
+## Phase 7 - Safety and Autonomous Task Execution
+
+Planned work includes:
+
+- supervisory safety logic;
+- autonomous state-machine execution;
+- stale-data detection;
+- uncertainty thresholds;
+- clearance monitoring;
+- joint-limit monitoring;
+- timeout and recovery behaviour;
+- fault injection;
+- hazard-oriented verification.
+
+## Phase 8 - ROS 2 and Gazebo Surgical Robotics System
+
+Planned work includes:
+
+- ROS 2 nodes;
+- TF2;
+- URDF / Xacro;
+- Gazebo;
+- RViz;
+- ros2_control;
+- perception nodes;
+- registration and state-estimation nodes;
+- active-perception node;
+- motion-planning node;
+- safety-supervisor node;
+- trajectory execution;
+- rosbag2;
+- QoS and lifecycle considerations.
+
+## Phase 9 - Control and Real-Time Trajectory Execution
+
+Planned work includes:
+
+- trajectory tracking;
+- feedback control;
+- position and velocity control;
+- PID evaluation where appropriate;
+- execution-error measurement;
+- settling behaviour;
+- loop-rate measurement;
+- perception latency;
+- estimation latency;
+- planning latency;
+- control latency.
+
+## Phase 10 - Final End-to-End Experiment and Verification
+
+The final target system is:
+
+image
+->
+perception
+->
+stereo localisation + covariance
+->
+registration
+->
+temporal state estimate
+->
+task-aware viewpoint selection
+->
+robot feasibility
+->
+robust uncertainty-aware planning
+->
+safety supervisor
+->
+trajectory execution
+->
+feedback control
+->
+ROS 2 / Gazebo
+->
+quantitative end-to-end verification
+
+Later-phase capabilities are not claimed as complete by the current Phase 1-5 evidence.

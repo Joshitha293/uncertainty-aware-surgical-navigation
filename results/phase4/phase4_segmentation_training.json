@@ -1,0 +1,186 @@
+{
+  "phase": 4,
+  "experiment": "tiny_unet_vs_classical_segmentation",
+  "scope": "synthetic_engineering_images_only",
+  "claims_note": "Results quantify segmentation of synthetic navigation markers. They do not constitute clinical tissue segmentation validation.",
+  "random_seed": 4401,
+  "device": "cpu",
+  "epochs": 12,
+  "batch_size": 16,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "dataset_config": {
+    "width": 96,
+    "height": 96,
+    "scenario_count": 100,
+    "frames_per_scenario": 2,
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15,
+    "minimum_marker_radius": 6,
+    "maximum_marker_radius": 14,
+    "seed": 4401
+  },
+  "split_summary": {
+    "train_samples": 140,
+    "validation_samples": 30,
+    "test_samples": 30,
+    "train_scenarios": 70,
+    "validation_scenarios": 15,
+    "test_scenarios": 15,
+    "scenario_leakage": false
+  },
+  "best_epoch": 3,
+  "best_validation_dice": 0.8866500309574243,
+  "training_history": [
+    {
+      "epoch": 1,
+      "training_loss": 0.7658253378338284,
+      "validation": {
+        "dice": 0.0855731398234909,
+        "iou": 0.04573867859598312,
+        "pixel_accuracy": 0.1882957175925926,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 25.925454719046318
+      }
+    },
+    {
+      "epoch": 2,
+      "training_loss": 0.7071585191620721,
+      "validation": {
+        "dice": 0.8155847967602617,
+        "iou": 0.7206923000877854,
+        "pixel_accuracy": 0.9914930555555554,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 3.9642871085092155
+      }
+    },
+    {
+      "epoch": 3,
+      "training_loss": 0.6836373408635458,
+      "validation": {
+        "dice": 0.8866500309574243,
+        "iou": 0.8237238995235975,
+        "pixel_accuracy": 0.9943250868055558,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 1.080877148872098
+      }
+    },
+    {
+      "epoch": 4,
+      "training_loss": 0.6656300756666396,
+      "validation": {
+        "dice": 0.848058671740145,
+        "iou": 0.7519305884265776,
+        "pixel_accuracy": 0.9914713541666667,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 1.1275344559003948
+      }
+    },
+    {
+      "epoch": 5,
+      "training_loss": 0.6520933972464668,
+      "validation": {
+        "dice": 0.8187700060348891,
+        "iou": 0.7072936638766357,
+        "pixel_accuracy": 0.9895109953703701,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 1.312896101810639
+      }
+    },
+    {
+      "epoch": 6,
+      "training_loss": 0.639648973941803,
+      "validation": {
+        "dice": 0.7939850011381737,
+        "iou": 0.671271691305578,
+        "pixel_accuracy": 0.9873878761574074,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 1.2544273838441355
+      }
+    },
+    {
+      "epoch": 7,
+      "training_loss": 0.6277750730514526,
+      "validation": {
+        "dice": 0.793549322233882,
+        "iou": 0.6706251326042706,
+        "pixel_accuracy": 0.9873227719907407,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 1.1233987550008364
+      }
+    },
+    {
+      "epoch": 8,
+      "training_loss": 0.6164588001039293,
+      "validation": {
+        "dice": 0.7880270845775862,
+        "iou": 0.6635339733019429,
+        "pixel_accuracy": 0.9869393807870369,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 1.624215154607261
+      }
+    },
+    {
+      "epoch": 9,
+      "training_loss": 0.6038396093580458,
+      "validation": {
+        "dice": 0.8105810599990686,
+        "iou": 0.6951919045631668,
+        "pixel_accuracy": 0.9886827256944444,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 1.169386291468714
+      }
+    },
+    {
+      "epoch": 10,
+      "training_loss": 0.592966099580129,
+      "validation": {
+        "dice": 0.8216858779316645,
+        "iou": 0.7110996230174912,
+        "pixel_accuracy": 0.9894639756944444,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 1.0511289211356432
+      }
+    },
+    {
+      "epoch": 11,
+      "training_loss": 0.5816603170500861,
+      "validation": {
+        "dice": 0.8186345110958615,
+        "iou": 0.7074168392063037,
+        "pixel_accuracy": 0.9893012152777777,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 1.2066167409432864
+      }
+    },
+    {
+      "epoch": 12,
+      "training_loss": 0.5702569683392843,
+      "validation": {
+        "dice": 0.8291853405215618,
+        "iou": 0.7230021313272353,
+        "pixel_accuracy": 0.9900535300925927,
+        "detection_rate": 1.0,
+        "mean_centroid_error_pixels": 1.106704600707747
+      }
+    }
+  ],
+  "held_out_test": {
+    "tiny_unet": {
+      "dice": 0.880673255011094,
+      "iou": 0.8083869877936297,
+      "pixel_accuracy": 0.9928385416666665,
+      "detection_rate": 1.0,
+      "mean_centroid_error_pixels": 1.0166895558850197
+    },
+    "classical_hsv_opencv": {
+      "dice": 0.846616813568597,
+      "iou": 0.7449888185608899,
+      "pixel_accuracy": 0.9887622974537037,
+      "detection_rate": 1.0,
+      "mean_centroid_error_pixels": 0.9820446901608546
+    },
+    "tiny_unet_higher_dice": true,
+    "dice_difference_unet_minus_classical": 0.034056441442496976
+  }
+}
