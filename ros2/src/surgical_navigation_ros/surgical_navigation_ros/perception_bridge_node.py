@@ -95,12 +95,6 @@ class SimulatedPerceptionBridgeNode(Node):
             make_phase2_structures()
         )
 
-        self._uncertainty = (
-            PositionUncertainty.isotropic(
-                sigma
-            )
-        )
-
         self._rng = np.random.default_rng(
             seed
         )
@@ -131,15 +125,34 @@ class SimulatedPerceptionBridgeNode(Node):
         self,
     ) -> None:
         """Publish one uncertain observation for every protected structure."""
+        sigma = float(
+            self.get_parameter(
+                'position_sigma_m'
+            ).value
+        )
+
+        if (
+            not np.isfinite(sigma)
+            or sigma < 0.0
+        ):
+            self.get_logger().error(
+                'position_sigma_m must be finite and non-negative.'
+            )
+            return
+
+        uncertainty = (
+            PositionUncertainty.isotropic(
+                sigma
+            )
+        )
+
         for index, structure in enumerate(
             self._structures
         ):
             estimate = (
                 make_estimated_structure(
                     true_structure=structure,
-                    uncertainty=(
-                        self._uncertainty
-                    ),
+                    uncertainty=uncertainty,
                     rng=self._rng,
                 )
             )

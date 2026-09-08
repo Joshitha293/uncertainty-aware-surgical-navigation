@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib
+import os
 import threading
 import time
 
@@ -1358,10 +1359,69 @@ class NavigationExecutionNode(Node):
             ),
         )
 
+        speed_scale_text = os.environ.get(
+            'SURGICAL_NAVIGATION_SPEED_SCALE',
+            '1.0',
+        )
+
+        try:
+            speed_scale = float(
+                speed_scale_text
+            )
+        except ValueError as exc:
+            raise ValueError(
+                'SURGICAL_NAVIGATION_SPEED_SCALE '
+                'must be numeric.'
+            ) from exc
+
+        if (
+            not np.isfinite(
+                speed_scale
+            )
+            or speed_scale <= 0.0
+            or speed_scale > 1.0
+        ):
+            raise ValueError(
+                'SURGICAL_NAVIGATION_SPEED_SCALE '
+                'must be in the interval (0, 1].'
+            )
+
+        base_time_config = (
+            _trajectory_module
+            .TimeParameterisationConfig()
+        )
+
+        scaled_velocities = tuple(
+            float(value)
+            * speed_scale
+            for value in (
+                base_time_config
+                .maximum_joint_velocities
+            )
+        )
+
+        time_config = (
+            _trajectory_module
+            .TimeParameterisationConfig(
+                maximum_joint_velocities=(
+                    scaled_velocities
+                ),
+                sample_period=(
+                    base_time_config
+                    .sample_period
+                ),
+                minimum_segment_duration=(
+                    base_time_config
+                    .minimum_segment_duration
+                ),
+            )
+        )
+
         timed_trajectory = (
             time_parameterise_path(
                 self._instrument,
                 smoothed_path,
+                config=time_config,
             )
         )
 
