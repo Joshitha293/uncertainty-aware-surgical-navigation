@@ -1,0 +1,176 @@
+{
+  "benchmark": "phase6_chance_constraint",
+  "repetitions_per_condition": 300,
+  "base_seed": 66001,
+  "chance_threshold": 0.05,
+  "scalar_sigma_multiplier": 1.6448536269514715,
+  "selected_clearance_mm": 55.00000000000001,
+  "covariance_principal_sigmas_mm": [
+    1.0,
+    2.0,
+    10.0
+  ],
+  "conditions": {
+    "tangential_major_axis": {
+      "estimated_centre_m": [
+        0.10778760396466804,
+        -0.02368380089651724,
+        0.021211082165934075
+      ],
+      "covariance_eigenvalues_m2": [
+        9.999999999999995e-07,
+        4.000000000000001e-06,
+        0.00010000000000000002
+      ],
+      "principal_sigma_mm": 10.0,
+      "strategies": {
+        "deterministic": {
+          "direct_edge_accepted": true,
+          "planning_success": true,
+          "planning_iterations": 0,
+          "planning_time_seconds": 0.0024051000000326894,
+          "path_cost": 1.6773616862815874,
+          "estimated_max_point_risk": 0.045296445110338625,
+          "safe_navigation_rate": 0.9966666666666667,
+          "safe_navigation_95_ci": [
+            0.9813633063054688,
+            0.9994113422781488
+          ],
+          "conditional_truth_safety_rate_given_plan": 0.9966666666666667,
+          "collision_rate_given_plan": 0.0,
+          "safety_violation_rate_given_plan": 0.0033333333333333335,
+          "mean_minimum_truth_safety_clearance_mm": 3.686475011827723
+        },
+        "scalar_principal_sigma": {
+          "direct_edge_accepted": false,
+          "planning_success": false,
+          "planning_iterations": 0,
+          "planning_time_seconds": 0.00031569999919156544,
+          "path_cost": null,
+          "estimated_max_point_risk": null,
+          "safe_navigation_rate": 0.0,
+          "safe_navigation_95_ci": [
+            8.673617379884035e-19,
+            0.012642971224546034
+          ],
+          "conditional_truth_safety_rate_given_plan": null,
+          "collision_rate_given_plan": null,
+          "safety_violation_rate_given_plan": null,
+          "mean_minimum_truth_safety_clearance_mm": null
+        },
+        "anisotropic_chance": {
+          "direct_edge_accepted": true,
+          "planning_success": true,
+          "planning_iterations": 0,
+          "planning_time_seconds": 0.07298090000040247,
+          "path_cost": 1.6773616862815874,
+          "estimated_max_point_risk": 0.045296445110338625,
+          "safe_navigation_rate": 0.9966666666666667,
+          "safe_navigation_95_ci": [
+            0.9813633063054688,
+            0.9994113422781488
+          ],
+          "conditional_truth_safety_rate_given_plan": 0.9966666666666667,
+          "collision_rate_given_plan": 0.0,
+          "safety_violation_rate_given_plan": 0.0033333333333333335,
+          "mean_minimum_truth_safety_clearance_mm": 3.686475011827723
+        }
+      },
+      "paired_comparisons": {
+        "chance_minus_deterministic": {
+          "safe_navigation_rate_difference": 0.0,
+          "difference_percentage_points": 0.0,
+          "first_only_safe_count": 0,
+          "second_only_safe_count": 0
+        },
+        "chance_minus_scalar": {
+          "safe_navigation_rate_difference": 0.9966666666666667,
+          "difference_percentage_points": 99.66666666666667,
+          "first_only_safe_count": 299,
+          "second_only_safe_count": 0
+        }
+      }
+    },
+    "radial_major_axis": {
+      "estimated_centre_m": [
+        0.10778760396466804,
+        -0.02368380089651724,
+        0.021211082165934075
+      ],
+      "covariance_eigenvalues_m2": [
+        9.999999999999964e-07,
+        4.000000000000001e-06,
+        0.00010000000000000002
+      ],
+      "principal_sigma_mm": 10.0,
+      "strategies": {
+        "deterministic": {
+          "direct_edge_accepted": true,
+          "planning_success": true,
+          "planning_iterations": 0,
+          "planning_time_seconds": 0.0024539999994885875,
+          "path_cost": 1.6773616862815874,
+          "estimated_max_point_risk": 0.31435535684679994,
+          "safe_navigation_rate": 0.7,
+          "safe_navigation_95_ci": [
+            0.6458824752950584,
+            0.749060336215123
+          ],
+          "conditional_truth_safety_rate_given_plan": 0.7,
+          "collision_rate_given_plan": 0.043333333333333335,
+          "safety_violation_rate_given_plan": 0.3,
+          "mean_minimum_truth_safety_clearance_mm": 3.8206447543815103
+        },
+        "scalar_principal_sigma": {
+          "direct_edge_accepted": false,
+          "planning_success": false,
+          "planning_iterations": 0,
+          "planning_time_seconds": 0.00023049999981594738,
+          "path_cost": null,
+          "estimated_max_point_risk": null,
+          "safe_navigation_rate": 0.0,
+          "safe_navigation_95_ci": [
+            8.673617379884035e-19,
+            0.012642971224546034
+          ],
+          "conditional_truth_safety_rate_given_plan": null,
+          "collision_rate_given_plan": null,
+          "safety_violation_rate_given_plan": null,
+          "mean_minimum_truth_safety_clearance_mm": null
+        },
+        "anisotropic_chance": {
+          "direct_edge_accepted": false,
+          "planning_success": false,
+          "planning_iterations": 0,
+          "planning_time_seconds": 0.0030133000000205357,
+          "path_cost": null,
+          "estimated_max_point_risk": null,
+          "safe_navigation_rate": 0.0,
+          "safe_navigation_95_ci": [
+            8.673617379884035e-19,
+            0.012642971224546034
+          ],
+          "conditional_truth_safety_rate_given_plan": null,
+          "collision_rate_given_plan": null,
+          "safety_violation_rate_given_plan": null,
+          "mean_minimum_truth_safety_clearance_mm": null
+        }
+      },
+      "paired_comparisons": {
+        "chance_minus_deterministic": {
+          "safe_navigation_rate_difference": -0.7,
+          "difference_percentage_points": -70.0,
+          "first_only_safe_count": 0,
+          "second_only_safe_count": 210
+        },
+        "chance_minus_scalar": {
+          "safe_navigation_rate_difference": 0.0,
+          "difference_percentage_points": 0.0,
+          "first_only_safe_count": 0,
+          "second_only_safe_count": 0
+        }
+      }
+    }
+  },
+  "interpretation_boundary": "Controlled simulation mechanism evidence only; not a clinical collision probability or medical-device safety validation."
+}

@@ -1,0 +1,9 @@
+geometry_msgs/PoseStamped target
+---
+bool success
+string terminal_state
+string message
+---
+float32 progress
+string safety_state
+geometry_msgs/PoseStamped current_pose

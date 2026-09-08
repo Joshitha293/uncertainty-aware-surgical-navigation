@@ -1,0 +1,765 @@
+<?xml version="1.0"?>
+
+<robot
+  xmlns:xacro="http://www.ros.org/wiki/xacro"
+  name="surgical_navigation_instrument">
+
+  <!--
+    ================================================================
+    RESEARCH MODEL CONTRACT
+    ================================================================
+
+    Phase 2 core configuration:
+
+        q_core = [yaw, pitch, insertion, roll]
+
+    ROS controller configuration:
+
+        q_ros = [yaw, pitch, roll, insertion]
+
+    Kinematic convention:
+
+        yaw       : rotation about +Z
+        pitch     : rotation about local -Y
+        roll      : rotation about local +X
+        insertion : translation along local +X
+
+    The robot_base origin represents the remote centre of motion (RCM).
+
+    At q = [0, 0, insertion, 0], the instrument tip lies on +X.
+
+    The resulting tip direction is:
+
+        [
+            cos(pitch) * cos(yaw),
+            cos(pitch) * sin(yaw),
+            sin(pitch)
+        ]
+
+    This reproduces the Phase 2 SurgicalInstrument forward-position
+    convention.
+
+    This URDF is a research simulation model and does not represent
+    clinically validated surgical hardware.
+    ================================================================
+  -->
+
+  <xacro:property name="base_radius" value="0.035"/>
+  <xacro:property name="base_height" value="0.05"/>
+
+  <xacro:property name="yaw_radius" value="0.020"/>
+  <xacro:property name="yaw_height" value="0.020"/>
+
+  <xacro:property name="pitch_radius" value="0.016"/>
+
+  <xacro:property name="roll_radius" value="0.008"/>
+  <xacro:property name="roll_length" value="0.030"/>
+
+  <xacro:property name="tool_radius" value="0.006"/>
+  <xacro:property name="tool_visual_length" value="0.030"/>
+
+  <xacro:property name="tip_radius" value="0.004"/>
+
+  <!-- Visual-only surgical-instrument presentation geometry. -->
+  <!-- These values do NOT modify validated collision geometry. -->
+  <xacro:property name="display_shaft_length" value="0.10"/>
+  <xacro:property name="display_shaft_radius" value="0.0045"/>
+  <xacro:property name="display_wrist_radius" value="0.0085"/>
+  <xacro:property name="display_wrist_length" value="0.018"/>
+  <xacro:property name="display_trocar_radius" value="0.016"/>
+  <xacro:property name="display_trocar_length" value="0.012"/>
+
+
+  <!-- ============================================================= -->
+  <!-- ROBOT BASE / RCM                                               -->
+  <!-- ============================================================= -->
+
+  <link name="robot_base">
+
+    <visual>
+      <origin
+        xyz="0 0 -0.025"
+        rpy="0 0 0"/>
+
+      <geometry>
+        <cylinder
+          radius="${base_radius}"
+          length="${base_height}"/>
+      </geometry>
+
+      <material name="base_material">
+        <color rgba="0.25 0.25 0.30 1.0"/>
+      </material>
+    </visual>
+
+    <!-- Visual-only compact actuator housing. -->
+    <visual name="actuator_housing">
+      <origin xyz="-0.050 0 -0.010" rpy="0 0 0"/>
+
+      <geometry>
+        <box size="0.070 0.060 0.045"/>
+      </geometry>
+
+      <material name="actuator_housing_material">
+        <color rgba="0.16 0.18 0.22 1.0"/>
+      </material>
+    </visual>
+
+    <!-- Left actuator module. -->
+    <visual name="actuator_motor_left">
+      <origin
+        xyz="-0.045 0.038 -0.010"
+        rpy="${pi / 2.0} 0 0"/>
+
+      <geometry>
+        <cylinder radius="0.015" length="0.018"/>
+      </geometry>
+
+      <material name="actuator_motor_left_material">
+        <color rgba="0.28 0.32 0.38 1.0"/>
+      </material>
+    </visual>
+
+    <!-- Right actuator module. -->
+    <visual name="actuator_motor_right">
+      <origin
+        xyz="-0.045 -0.038 -0.010"
+        rpy="${pi / 2.0} 0 0"/>
+
+      <geometry>
+        <cylinder radius="0.015" length="0.018"/>
+      </geometry>
+
+      <material name="actuator_motor_right_material">
+        <color rgba="0.28 0.32 0.38 1.0"/>
+      </material>
+    </visual>
+
+    <!--
+      Visual representation of the trocar / RCM entry port.
+      robot_base origin remains the actual RCM.
+    -->
+    <visual name="trocar_outer">
+      <origin
+        xyz="0.006 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder
+          radius="${display_trocar_radius}"
+          length="${display_trocar_length}"/>
+      </geometry>
+
+      <material name="trocar_outer_material">
+        <color rgba="0.20 0.45 0.70 1.0"/>
+      </material>
+    </visual>
+
+    <visual name="trocar_inner">
+      <origin
+        xyz="0.014 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder radius="0.010" length="0.010"/>
+      </geometry>
+
+      <material name="trocar_inner_material">
+        <color rgba="0.70 0.75 0.82 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 0 -0.025"
+        rpy="0 0 0"/>
+
+      <geometry>
+        <cylinder
+          radius="${base_radius}"
+          length="${base_height}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin
+        xyz="0 0 -0.025"
+        rpy="0 0 0"/>
+
+      <mass value="0.30"/>
+
+      <inertia
+        ixx="0.00012"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00012"
+        iyz="0.0"
+        izz="0.00018"/>
+    </inertial>
+
+  </link>
+
+
+  <!-- ============================================================= -->
+  <!-- YAW                                                            -->
+  <!-- ============================================================= -->
+
+  <link name="yaw_link">
+
+    <visual>
+      <geometry>
+        <cylinder
+          radius="${yaw_radius}"
+          length="${yaw_height}"/>
+      </geometry>
+
+      <material name="yaw_material">
+        <color rgba="0.20 0.45 0.80 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder
+          radius="${yaw_radius}"
+          length="${yaw_height}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.08"/>
+
+      <inertia
+        ixx="0.00002"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00002"
+        iyz="0.0"
+        izz="0.00002"/>
+    </inertial>
+
+  </link>
+
+  <joint name="yaw_joint" type="revolute">
+
+    <parent link="robot_base"/>
+    <child link="yaw_link"/>
+
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0"/>
+
+    <axis xyz="0 0 1"/>
+
+    <limit
+      lower="${-pi / 3.0}"
+      upper="${pi / 3.0}"
+      effort="5.0"
+      velocity="0.75"/>
+
+    <dynamics
+      damping="0.05"
+      friction="0.01"/>
+
+  </joint>
+
+
+  <!-- ============================================================= -->
+  <!-- PITCH                                                          -->
+  <!-- ============================================================= -->
+
+  <link name="pitch_link">
+
+    <visual>
+      <geometry>
+        <sphere radius="${pitch_radius}"/>
+      </geometry>
+
+      <material name="pitch_material">
+        <color rgba="0.20 0.70 0.50 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <sphere radius="${pitch_radius}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.06"/>
+
+      <inertia
+        ixx="0.00001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00001"
+        iyz="0.0"
+        izz="0.00001"/>
+    </inertial>
+
+  </link>
+
+  <!--
+    Phase 2 uses:
+
+        Rz(yaw) @ Ry(-pitch)
+
+    Therefore positive Phase 2 pitch is represented by rotation
+    around local -Y.
+  -->
+
+  <joint name="pitch_joint" type="revolute">
+
+    <parent link="yaw_link"/>
+    <child link="pitch_link"/>
+
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0"/>
+
+    <axis xyz="0 -1 0"/>
+
+    <limit
+      lower="${-pi / 4.0}"
+      upper="${pi / 4.0}"
+      effort="5.0"
+      velocity="0.75"/>
+
+    <dynamics
+      damping="0.05"
+      friction="0.01"/>
+
+  </joint>
+
+
+  <!-- ============================================================= -->
+  <!-- ROLL                                                           -->
+  <!-- ============================================================= -->
+
+  <link name="roll_link">
+
+    <visual>
+      <origin
+        xyz="0.015 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder
+          radius="${roll_radius}"
+          length="${roll_length}"/>
+      </geometry>
+
+      <material name="roll_material">
+        <color rgba="0.80 0.55 0.20 1.0"/>
+      </material>
+    </visual>
+
+    <!-- Visual roll-actuator collar. -->
+    <visual name="roll_actuator_collar">
+      <origin
+        xyz="0.013 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder radius="0.012" length="0.012"/>
+      </geometry>
+
+      <material name="roll_actuator_collar_material">
+        <color rgba="0.22 0.24 0.29 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0.015 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder
+          radius="${roll_radius}"
+          length="${roll_length}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin
+        xyz="0.015 0 0"
+        rpy="0 0 0"/>
+
+      <mass value="0.04"/>
+
+      <inertia
+        ixx="0.000005"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00001"
+        iyz="0.0"
+        izz="0.00001"/>
+    </inertial>
+
+  </link>
+
+  <joint name="roll_joint" type="revolute">
+
+    <parent link="pitch_link"/>
+    <child link="roll_link"/>
+
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0"/>
+
+    <axis xyz="1 0 0"/>
+
+    <limit
+      lower="${-pi}"
+      upper="${pi}"
+      effort="3.0"
+      velocity="1.5"/>
+
+    <dynamics
+      damping="0.03"
+      friction="0.005"/>
+
+  </joint>
+
+
+  <!-- ============================================================= -->
+  <!-- INSERTION                                                      -->
+  <!-- ============================================================= -->
+
+  <!--
+    Phase 2 validated insertion range:
+
+        0.05 m <= insertion <= 0.30 m
+
+    The instrument frame moves directly along local +X from the RCM.
+
+    The short cylindrical geometry below is primarily a simulation
+    representation. Planner safety remains calculated by the research-core
+    finite-shaft model rather than inferred from this visual geometry.
+  -->
+
+  <link name="instrument">
+
+    <!--
+      Visual shaft follows the 100 mm proximal shaft used by the
+      research safety model. Collision geometry below remains unchanged.
+    -->
+    <visual name="long_surgical_shaft">
+      <origin
+        xyz="-0.050 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder
+          radius="${display_shaft_radius}"
+          length="${display_shaft_length}"/>
+      </geometry>
+
+      <material name="instrument_material">
+        <color rgba="0.78 0.82 0.88 1.0"/>
+      </material>
+    </visual>
+
+    <!-- Distal wrist / tool-head housing. -->
+    <visual name="distal_wrist">
+      <origin
+        xyz="-0.010 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder
+          radius="${display_wrist_radius}"
+          length="${display_wrist_length}"/>
+      </geometry>
+
+      <material name="distal_wrist_material">
+        <color rgba="0.18 0.55 0.62 1.0"/>
+      </material>
+    </visual>
+
+    <!-- Shaft depth markers. -->
+    <visual name="shaft_marker_25">
+      <origin
+        xyz="-0.025 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder radius="0.0052" length="0.002"/>
+      </geometry>
+
+      <material name="shaft_marker_material">
+        <color rgba="0.10 0.12 0.14 1.0"/>
+      </material>
+    </visual>
+
+    <visual name="shaft_marker_50">
+      <origin
+        xyz="-0.050 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder radius="0.0052" length="0.002"/>
+      </geometry>
+
+      <material name="shaft_marker_material_50">
+        <color rgba="0.10 0.12 0.14 1.0"/>
+      </material>
+    </visual>
+
+    <visual name="shaft_marker_75">
+      <origin
+        xyz="-0.075 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder radius="0.0052" length="0.002"/>
+      </geometry>
+
+      <material name="shaft_marker_material_75">
+        <color rgba="0.10 0.12 0.14 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="-0.015 0 0"
+        rpy="0 ${pi / 2.0} 0"/>
+
+      <geometry>
+        <cylinder
+          radius="${tool_radius}"
+          length="${tool_visual_length}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin
+        xyz="-0.015 0 0"
+        rpy="0 0 0"/>
+
+      <mass value="0.03"/>
+
+      <inertia
+        ixx="0.000001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00001"
+        iyz="0.0"
+        izz="0.00001"/>
+    </inertial>
+
+  </link>
+
+  <joint name="insertion_joint" type="prismatic">
+
+    <parent link="roll_link"/>
+    <child link="instrument"/>
+
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0"/>
+
+    <axis xyz="1 0 0"/>
+
+    <limit
+      lower="0.05"
+      upper="0.30"
+      effort="10.0"
+      velocity="0.08"/>
+
+    <dynamics
+      damping="0.10"
+      friction="0.02"/>
+
+  </joint>
+
+
+  <!-- ============================================================= -->
+  <!-- INSTRUMENT TIP                                                 -->
+  <!-- ============================================================= -->
+
+  <link name="instrument_tip">
+
+    <!-- Kinematic tip marker. -->
+    <visual name="kinematic_tip">
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+
+      <material name="tip_material">
+        <color rgba="0.95 0.20 0.15 1.0"/>
+      </material>
+    </visual>
+
+    <!--
+      Visual micro-grasper jaws.
+      These are presentation geometry only and are not articulated DOFs.
+    -->
+    <visual name="tool_jaw_left">
+      <origin
+        xyz="-0.006 0.0026 0"
+        rpy="0 0 -0.12"/>
+
+      <geometry>
+        <box size="0.013 0.0023 0.003"/>
+      </geometry>
+
+      <material name="tool_jaw_left_material">
+        <color rgba="0.82 0.86 0.90 1.0"/>
+      </material>
+    </visual>
+
+    <visual name="tool_jaw_right">
+      <origin
+        xyz="-0.006 -0.0026 0"
+        rpy="0 0 0.12"/>
+
+      <geometry>
+        <box size="0.013 0.0023 0.003"/>
+      </geometry>
+
+      <material name="tool_jaw_right_material">
+        <color rgba="0.82 0.86 0.90 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <sphere radius="${tip_radius}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.005"/>
+
+      <inertia
+        ixx="0.000001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.000001"
+        iyz="0.0"
+        izz="0.000001"/>
+    </inertial>
+
+  </link>
+
+  <joint
+    name="instrument_tip_joint"
+    type="fixed">
+
+    <parent link="instrument"/>
+    <child link="instrument_tip"/>
+
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0"/>
+
+  </joint>
+
+
+  <!-- ============================================================= -->
+  <!-- ROS 2 CONTROL                                                  -->
+  <!-- ============================================================= -->
+
+  <ros2_control
+    name="GazeboSimSystem"
+    type="system">
+
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+
+
+    <!-- ROS order: yaw, pitch, roll, insertion -->
+
+    <joint name="yaw_joint">
+
+      <command_interface name="position">
+        <param name="min">${-pi / 3.0}</param>
+        <param name="max">${pi / 3.0}</param>
+      </command_interface>
+
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+
+      <state_interface name="velocity"/>
+
+    </joint>
+
+
+    <joint name="pitch_joint">
+
+      <command_interface name="position">
+        <param name="min">${-pi / 4.0}</param>
+        <param name="max">${pi / 4.0}</param>
+      </command_interface>
+
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+
+      <state_interface name="velocity"/>
+
+    </joint>
+
+
+    <joint name="roll_joint">
+
+      <command_interface name="position">
+        <param name="min">${-pi}</param>
+        <param name="max">${pi}</param>
+      </command_interface>
+
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+
+      <state_interface name="velocity"/>
+
+    </joint>
+
+
+    <joint name="insertion_joint">
+
+      <command_interface name="position">
+        <param name="min">0.05</param>
+        <param name="max">0.30</param>
+      </command_interface>
+
+      <state_interface name="position">
+        <param name="initial_value">0.05</param>
+      </state_interface>
+
+      <state_interface name="velocity"/>
+
+    </joint>
+
+  </ros2_control>
+
+
+  <!-- ============================================================= -->
+  <!-- GAZEBO HARMONIC                                                -->
+  <!-- ============================================================= -->
+
+  <gazebo>
+
+    <plugin
+      filename="libgz_ros2_control-system.so"
+      name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+
+      <parameters>
+        $(find surgical_navigation_description)/config/controllers.yaml
+      </parameters>
+
+      <controller_manager_name>
+        controller_manager
+      </controller_manager_name>
+
+    </plugin>
+
+  </gazebo>
+
+</robot>

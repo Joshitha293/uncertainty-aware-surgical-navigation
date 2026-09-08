@@ -1,0 +1,243 @@
+{
+  "benchmark": "phase6_robustness_stress",
+  "repetitions_per_condition": 500,
+  "base_seed": 67501,
+  "reported_chance_threshold": 0.05,
+  "robust_policy": {
+    "covariance_std_scale": 1.1,
+    "bias_bound_mm": 1.0,
+    "contamination_probability": 0.005,
+    "effective_gaussian_threshold": 0.04522613065326634
+  },
+  "planner_decisions": {
+    "nominal_chance": true,
+    "robust_chance": false
+  },
+  "stress_conditions": {
+    "calibrated_gaussian": {
+      "candidate_truth_safety_violation_rate": 0.004,
+      "candidate_truth_collision_rate": 0.0,
+      "longest_truth_violation_run": 1,
+      "policies": {
+        "nominal_chance": {
+          "trajectory_released": true,
+          "reported_probability_threshold": 0.05,
+          "truth_candidate_safety_violation_rate": 0.004,
+          "truth_candidate_collision_rate": 0.0,
+          "unsafe_release_rate": 0.004,
+          "unsafe_release_95_ci": [
+            0.0010976305226827934,
+            0.014465715215177033
+          ],
+          "safe_release_rate": 0.996,
+          "conservative_safe_block_rate": 0.0,
+          "longest_truth_violation_run": 1,
+          "mean_minimum_truth_safety_clearance_mm": 3.910389238024415
+        },
+        "robust_chance": {
+          "trajectory_released": false,
+          "reported_probability_threshold": 0.04522613065326634,
+          "truth_candidate_safety_violation_rate": 0.004,
+          "truth_candidate_collision_rate": 0.0,
+          "unsafe_release_rate": 0.0,
+          "unsafe_release_95_ci": [
+            4.336808689942018e-19,
+            0.007624340461552241
+          ],
+          "safe_release_rate": 0.0,
+          "conservative_safe_block_rate": 0.996,
+          "longest_truth_violation_run": 1,
+          "mean_minimum_truth_safety_clearance_mm": 3.910389238024415
+        }
+      }
+    },
+    "covariance_underestimated": {
+      "candidate_truth_safety_violation_rate": 0.016,
+      "candidate_truth_collision_rate": 0.0,
+      "longest_truth_violation_run": 2,
+      "policies": {
+        "nominal_chance": {
+          "trajectory_released": true,
+          "reported_probability_threshold": 0.05,
+          "truth_candidate_safety_violation_rate": 0.016,
+          "truth_candidate_collision_rate": 0.0,
+          "unsafe_release_rate": 0.016,
+          "unsafe_release_95_ci": [
+            0.008129253033388314,
+            0.03125110853339426
+          ],
+          "safe_release_rate": 0.984,
+          "conservative_safe_block_rate": 0.0,
+          "longest_truth_violation_run": 2,
+          "mean_minimum_truth_safety_clearance_mm": 4.470226950956638
+        },
+        "robust_chance": {
+          "trajectory_released": false,
+          "reported_probability_threshold": 0.04522613065326634,
+          "truth_candidate_safety_violation_rate": 0.016,
+          "truth_candidate_collision_rate": 0.0,
+          "unsafe_release_rate": 0.0,
+          "unsafe_release_95_ci": [
+            4.336808689942018e-19,
+            0.007624340461552241
+          ],
+          "safe_release_rate": 0.0,
+          "conservative_safe_block_rate": 0.984,
+          "longest_truth_violation_run": 2,
+          "mean_minimum_truth_safety_clearance_mm": 4.470226950956638
+        }
+      }
+    },
+    "covariance_overestimated": {
+      "candidate_truth_safety_violation_rate": 0.0,
+      "candidate_truth_collision_rate": 0.0,
+      "longest_truth_violation_run": 0,
+      "policies": {
+        "nominal_chance": {
+          "trajectory_released": true,
+          "reported_probability_threshold": 0.05,
+          "truth_candidate_safety_violation_rate": 0.0,
+          "truth_candidate_collision_rate": 0.0,
+          "unsafe_release_rate": 0.0,
+          "unsafe_release_95_ci": [
+            4.336808689942018e-19,
+            0.007624340461552241
+          ],
+          "safe_release_rate": 1.0,
+          "conservative_safe_block_rate": 0.0,
+          "longest_truth_violation_run": 0,
+          "mean_minimum_truth_safety_clearance_mm": 3.7254086253876286
+        },
+        "robust_chance": {
+          "trajectory_released": false,
+          "reported_probability_threshold": 0.04522613065326634,
+          "truth_candidate_safety_violation_rate": 0.0,
+          "truth_candidate_collision_rate": 0.0,
+          "unsafe_release_rate": 0.0,
+          "unsafe_release_95_ci": [
+            4.336808689942018e-19,
+            0.007624340461552241
+          ],
+          "safe_release_rate": 0.0,
+          "conservative_safe_block_rate": 1.0,
+          "longest_truth_violation_run": 0,
+          "mean_minimum_truth_safety_clearance_mm": 3.7254086253876286
+        }
+      }
+    },
+    "heavy_tailed_contamination": {
+      "candidate_truth_safety_violation_rate": 0.002,
+      "candidate_truth_collision_rate": 0.0,
+      "longest_truth_violation_run": 1,
+      "policies": {
+        "nominal_chance": {
+          "trajectory_released": true,
+          "reported_probability_threshold": 0.05,
+          "truth_candidate_safety_violation_rate": 0.002,
+          "truth_candidate_collision_rate": 0.0,
+          "unsafe_release_rate": 0.002,
+          "unsafe_release_95_ci": [
+            0.00035313639455927456,
+            0.011240706705146758
+          ],
+          "safe_release_rate": 0.998,
+          "conservative_safe_block_rate": 0.0,
+          "longest_truth_violation_run": 1,
+          "mean_minimum_truth_safety_clearance_mm": 4.188080305314777
+        },
+        "robust_chance": {
+          "trajectory_released": false,
+          "reported_probability_threshold": 0.04522613065326634,
+          "truth_candidate_safety_violation_rate": 0.002,
+          "truth_candidate_collision_rate": 0.0,
+          "unsafe_release_rate": 0.0,
+          "unsafe_release_95_ci": [
+            4.336808689942018e-19,
+            0.007624340461552241
+          ],
+          "safe_release_rate": 0.0,
+          "conservative_safe_block_rate": 0.998,
+          "longest_truth_violation_run": 1,
+          "mean_minimum_truth_safety_clearance_mm": 4.188080305314777
+        }
+      }
+    },
+    "orientation_mismatch": {
+      "candidate_truth_safety_violation_rate": 0.322,
+      "candidate_truth_collision_rate": 0.042,
+      "longest_truth_violation_run": 5,
+      "policies": {
+        "nominal_chance": {
+          "trajectory_released": true,
+          "reported_probability_threshold": 0.05,
+          "truth_candidate_safety_violation_rate": 0.322,
+          "truth_candidate_collision_rate": 0.042,
+          "unsafe_release_rate": 0.322,
+          "unsafe_release_95_ci": [
+            0.2825360924255015,
+            0.36417817277881126
+          ],
+          "safe_release_rate": 0.678,
+          "conservative_safe_block_rate": 0.0,
+          "longest_truth_violation_run": 5,
+          "mean_minimum_truth_safety_clearance_mm": 3.825659307843679
+        },
+        "robust_chance": {
+          "trajectory_released": false,
+          "reported_probability_threshold": 0.04522613065326634,
+          "truth_candidate_safety_violation_rate": 0.322,
+          "truth_candidate_collision_rate": 0.042,
+          "unsafe_release_rate": 0.0,
+          "unsafe_release_95_ci": [
+            4.336808689942018e-19,
+            0.007624340461552241
+          ],
+          "safe_release_rate": 0.0,
+          "conservative_safe_block_rate": 0.678,
+          "longest_truth_violation_run": 5,
+          "mean_minimum_truth_safety_clearance_mm": 3.825659307843679
+        }
+      }
+    },
+    "temporally_correlated_drift": {
+      "candidate_truth_safety_violation_rate": 0.22,
+      "candidate_truth_collision_rate": 0.0,
+      "longest_truth_violation_run": 34,
+      "policies": {
+        "nominal_chance": {
+          "trajectory_released": true,
+          "reported_probability_threshold": 0.05,
+          "truth_candidate_safety_violation_rate": 0.22,
+          "truth_candidate_collision_rate": 0.0,
+          "unsafe_release_rate": 0.22,
+          "unsafe_release_95_ci": [
+            0.18590093257162363,
+            0.25836869808684565
+          ],
+          "safe_release_rate": 0.78,
+          "conservative_safe_block_rate": 0.0,
+          "longest_truth_violation_run": 34,
+          "mean_minimum_truth_safety_clearance_mm": 1.375421015598393
+        },
+        "robust_chance": {
+          "trajectory_released": false,
+          "reported_probability_threshold": 0.04522613065326634,
+          "truth_candidate_safety_violation_rate": 0.22,
+          "truth_candidate_collision_rate": 0.0,
+          "unsafe_release_rate": 0.0,
+          "unsafe_release_95_ci": [
+            4.336808689942018e-19,
+            0.007624340461552241
+          ],
+          "safe_release_rate": 0.0,
+          "conservative_safe_block_rate": 0.78,
+          "longest_truth_violation_run": 34,
+          "mean_minimum_truth_safety_clearance_mm": 1.375421015598393
+        }
+      }
+    }
+  },
+  "interpretation_boundary": "Simulation stress testing only. Unsafe-release rate is conditional on this controlled candidate trajectory and does not constitute clinical risk.",
+  "trial_csv": "results\\phase6_robustness_stress\\phase6_robustness_stress_trials.csv",
+  "summary_json": "results\\phase6_robustness_stress\\phase6_robustness_stress_summary.json"
+}

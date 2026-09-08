@@ -974,3 +974,39 @@ Later requirements will be introduced separately for:
 - Phase 10 - final end-to-end experiment and verification.
 
 Capabilities belonging to those future phases are not claimed as complete by this document.
+
+---
+
+# Final ROS 2 Runtime Requirements
+
+##  - Complete ROS 2 Runtime Bringup
+
+The system shall provide reproducible ROS 2 Jazzy bringup integrating simulation, perception, navigation execution, runtime safety supervision, robot state, controllers, and research visualisation.
+
+##  - Navigation Action Interface
+
+The runtime shall expose a ROS 2 navigation action accepting a target pose and reporting execution progress, current tool pose, safety state, success or failure, and explicit terminal state.
+
+##  - Runtime Perception Uncertainty
+
+Runtime anatomical estimates shall contain explicit positional uncertainty capable of influencing autonomous execution behaviour rather than serving only as an offline metric.
+
+##  - Runtime Safety Monitoring
+
+Runtime safety evaluation shall use relevant live execution information including localisation uncertainty, predicted clearance, trajectory tracking error, joint state, joint-limit proximity, and execution progression.
+
+##  - Autonomous Safety Intervention
+
+Runtime safety conditions shall support autonomous replanning, perception reacquisition, execution recovery, and stopping. Critical conditions shall be capable of terminating an active navigation action.
+
+##  - Gazebo and ros2_control Execution
+
+Planner-generated trajectories shall execute through a ROS 2 joint trajectory controller connected to the simulated surgical instrument in Gazebo Harmonic.
+
+##  - Runtime Research Visualisation
+
+The runtime shall visualise the target, RCM, protected anatomy, safety boundary, uncertainty envelope, real planner-derived tool-tip path, and live autonomous safety state.
+
+##  - Reproducible A/B/C Uncertainty Demonstrations
+
+The launch system shall provide reproducible A/B/C demonstrations using the same target and execution architecture while changing localisation uncertainty: A = 0.003 m, B = 0.020 m, and C = 0.035 m. The demonstrations shall distinguish nominal execution, recoverable uncertainty handling, and critical autonomous stopping.

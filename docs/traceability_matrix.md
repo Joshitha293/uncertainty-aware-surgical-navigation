@@ -21,7 +21,7 @@ It does **not** constitute:
 
 # 2. Current Verification Status
 
-All 20 currently defined functional requirements are implemented and computationally verified for the present Phase 1 system scope.
+The requirements baseline now spans the original experimental framework and the later planning, perception, risk-management, autonomous-safety, and ROS 2 runtime extensions. Historical Phase 1 evidence is retained below together with final runtime verification evidence.
 
 The final repository-wide local regression baseline following the Phase 1 held-out experiment and statistical-analysis updates is:
 
@@ -2603,3 +2603,34 @@ ROS 2 / Gazebo
 quantitative end-to-end verification
 
 Later-phase capabilities are not claimed as complete by the current Phase 1-5 evidence.
+
+---
+
+# Final ROS 2 Runtime Traceability
+
+The final ROS 2 runtime extends the historical experimental traceability with live Gazebo and autonomous-safety evidence.
+
+| Requirement | Runtime evidence | Status |
+|---|---|---|
+|  | Complete ROS 2/Gazebo/ros2_control bringup verified | Verified |
+|  | ExecuteNavigation action accepted goals and returned progress, safety state, and explicit terminal results | Verified |
+|  | Runtime uncertainty verified at 0.003 m, 0.020 m, and 0.035 m | Verified |
+|  | Runtime uncertainty, clearance, tracking, joint, and execution telemetry integrated | Verified |
+|  | Reacquisition, recovery/replanning behaviour, manual STOP, and autonomous critical STOP demonstrated | Verified |
+|  | Planner trajectory executed through ros2_control in Gazebo | Verified |
+|  | Target, anatomy, uncertainty, safety boundary, live status, and planner-derived path visualised | Verified |
+|  | Same target: A completed, B reacquired then safely aborted, C autonomously stopped | Verified |
+
+## Final A/B/C Runtime Evidence
+
+| Case | Sigma | Behaviour | Outcome |
+|---|---:|---|---|
+| A | 0.003 m | SAFE / normal execution | Completed / SUCCEEDED |
+| B | 0.020 m | REACQUIRE | Safe ABORTED result when uncertainty persisted |
+| C | 0.035 m | STOP | Autonomous stopped / ABORTED result |
+
+The planner-derived path is published on /navigation/planned_path_marker. Live research markers are published on /navigation/demo_markers.
+
+The final targeted ROS regression reported 29 tests, 0 errors, 0 failures, and 2 skipped. The final complete core regression reported 1031 passed tests.
+
+Full runtime evidence is recorded in docs/final_ros2_runtime_evidence.md.

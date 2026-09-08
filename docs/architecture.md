@@ -1001,3 +1001,168 @@ Controlled statistical comparison
 The key research principle is that perception, task reasoning, planning, and ground-truth evaluation remain logically separated while exposing explicit interfaces through which uncertainty can propagate.
 
 This modular structure supports the final objective of determining whether task-aware active perception provides a measurable safety or efficiency benefit over fixed-view and task-agnostic perception under matched simulated surgical-navigation conditions.
+
+---
+
+# Final ROS 2 Runtime Architecture
+
+The final implementation exposes the research-core algorithms through ROS 2 adapters while retaining the planning, geometry, uncertainty, and safety logic as middleware-independent Python modules.
+
+```text
+                     RESEARCH CORE
+        ┌────────────────────────────────┐
+        │ Geometry                       │
+        │ Instrument kinematics          │
+        │ Uncertainty representation     │
+        │ Collision-aware planning       │
+        │ Risk-aware planning            │
+        │ Runtime safety logic           │
+        └───────────────┬────────────────┘
+                        |
+                        v
+                   ROS 2 ADAPTERS
+                        |
+        ┌───────────────┼────────────────┐
+        |               |                |
+        v               v                v
+Simulated          Navigation        Runtime Safety
+Perception         Execution         Monitor
+Bridge                 |                |
+        |               v                |
+        |        Collision-aware RRT     |
+        |               |                |
+        |        Shortcut smoothing      |
+        |               |                |
+        |        Time parameterisation   |
+        |               |                |
+        |               v                |
+        |      FollowJointTrajectory     |
+        |               |                |
+        |               v                |
+        |          ros2_control          |
+        |               |                |
+        |               v                |
+        |        Gazebo Harmonic         |
+        |               |                |
+        └───────────────┼────────────────┘
+                        |
+                        v
+               Autonomous Supervisor
+                        |
+          ┌─────────────┼─────────────┐
+          |             |             |
+          v             v             v
+       REPLAN       REACQUIRE      RECOVER
+                                        |
+                                        v
+                                       STOP
+```
+
+## Runtime Safety Inputs
+
+The runtime safety layer evaluates relevant live execution information including:
+
+```text
+localisation uncertainty
+predicted path clearance
+trajectory tracking error
+joint state
+joint-limit proximity
+execution progression
+```
+
+Safety evaluation therefore continues during execution rather than ending after offline trajectory planning.
+
+## ROS 2 Action Interface
+
+Navigation is exposed through:
+
+```text
+/navigation/execute_navigation
+```
+
+The custom action accepts a target pose and reports:
+
+- execution progress
+- current tool pose
+- current safety state
+- final success/failure result
+- explicit terminal state
+
+Planner-generated trajectories are executed through the ROS 2 joint trajectory controller and `ros2_control`.
+
+## Runtime Visualisation Architecture
+
+Presentation geometry is deliberately separated from the research collision model.
+
+```text
+Robot Xacro
+    |
+    +-- actuator housing
+    +-- trocar / RCM visual
+    +-- long instrument shaft
+    +-- distal wrist / tool head
+
+Gazebo Research Scene SDF
+    |
+    +-- anatomical context
+    +-- target
+    +-- safety boundary
+    +-- uncertainty envelope
+
+ROS Visualisation Markers
+    |
+    +-- live protected anatomy
+    +-- RCM
+    +-- target
+    +-- planner-derived tool-tip path
+    +-- live autonomous safety state
+```
+
+Visual-only presentation geometry does not replace the collision geometry used by the research planner.
+
+## Planner-Path Visualisation
+
+The runtime publishes:
+
+```text
+/navigation/planned_path_marker
+```
+
+The displayed path is generated from:
+
+```text
+RRT output
+    |
+    v
+shortcut-smoothed joint-space path
+    |
+    v
+instrument forward kinematics
+    |
+    v
+tool-tip XYZ points
+```
+
+This ensures the visual path represents the real planner result.
+
+## Reproducible A/B/C Demonstration Architecture
+
+```text
+demo_case:=A
+    |
+    +-- position_sigma_m = 0.003
+    +-- model_demo_a.sdf
+
+demo_case:=B
+    |
+    +-- position_sigma_m = 0.020
+    +-- model_demo_b.sdf
+
+demo_case:=C
+    |
+    +-- position_sigma_m = 0.035
+    +-- model_demo_c.sdf
+```
+
+The robot, planner, controller, and target remain fixed between the final A/B/C demonstrations.

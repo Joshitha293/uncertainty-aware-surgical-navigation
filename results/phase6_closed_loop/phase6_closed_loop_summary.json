@@ -1,0 +1,306 @@
+{
+  "benchmark": "phase6_closed_loop_execution",
+  "repetitions_per_scenario": 30,
+  "base_seed": 69101,
+  "execution_samples": 36,
+  "maximum_execution_steps": 60,
+  "initialisation": "controlled nominal mean with non-zero covariance; routine observations are noisy except in the isolated recoverable structure-update scenario",
+  "recoverable_structure_update": {
+    "update_index": 11,
+    "centre_m": [
+      0.0420764,
+      0.00799174,
+      0.02476202
+    ],
+    "physical_radius_mm": 5.0,
+    "safety_margin_mm": 4.0,
+    "position_sigma_mm": 2.0,
+    "development_future_unsafe_samples": 1,
+    "development_future_collision_samples": 0,
+    "development_replan_successes": 3,
+    "development_replan_trials": 3,
+    "frozen_before_final_evaluation": true
+  },
+  "strategies": [
+    "open_loop_nominal",
+    "static_robust",
+    "closed_loop_adaptive"
+  ],
+  "scenarios": {
+    "stable": {
+      "open_loop_nominal": {
+        "completion_rate": 1.0,
+        "completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safe_completion_rate": 1.0,
+        "safe_completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 0.0,
+        "mean_replans": 0.0,
+        "mean_reacquisitions": 0.0,
+        "mean_stops": 0.0,
+        "mean_final_progress": 1.0,
+        "mean_executed_steps": 35.0,
+        "mean_total_planning_iterations": 0.0
+      },
+      "static_robust": {
+        "completion_rate": 0.0,
+        "completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safe_completion_rate": 0.0,
+        "safe_completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 1.0,
+        "mean_replans": 0.0,
+        "mean_reacquisitions": 0.0,
+        "mean_stops": 0.0,
+        "mean_final_progress": 0.0,
+        "mean_executed_steps": 0.0,
+        "mean_total_planning_iterations": 0.0
+      },
+      "closed_loop_adaptive": {
+        "completion_rate": 1.0,
+        "completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safe_completion_rate": 1.0,
+        "safe_completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 0.0,
+        "mean_replans": 1.7,
+        "mean_reacquisitions": 1.5333333333333334,
+        "mean_stops": 0.0,
+        "mean_final_progress": 1.0,
+        "mean_executed_steps": 34.06666666666667,
+        "mean_total_planning_iterations": 8.6
+      }
+    },
+    "recoverable_structure_update": {
+      "open_loop_nominal": {
+        "completion_rate": 1.0,
+        "completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safe_completion_rate": 0.0,
+        "safe_completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safety_violation_episode_rate": 1.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.02857142857142857,
+        "initial_block_rate": 0.0,
+        "mean_replans": 0.0,
+        "mean_reacquisitions": 0.0,
+        "mean_stops": 0.0,
+        "mean_final_progress": 1.0,
+        "mean_executed_steps": 35.0,
+        "mean_total_planning_iterations": 0.0
+      },
+      "static_robust": {
+        "completion_rate": 0.0,
+        "completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safe_completion_rate": 0.0,
+        "safe_completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 1.0,
+        "mean_replans": 0.0,
+        "mean_reacquisitions": 0.0,
+        "mean_stops": 0.0,
+        "mean_final_progress": 0.0,
+        "mean_executed_steps": 0.0,
+        "mean_total_planning_iterations": 0.0
+      },
+      "closed_loop_adaptive": {
+        "completion_rate": 1.0,
+        "completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safe_completion_rate": 1.0,
+        "safe_completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 0.0,
+        "mean_replans": 1.0666666666666667,
+        "mean_reacquisitions": 0.1,
+        "mean_stops": 0.0,
+        "mean_final_progress": 1.0,
+        "mean_executed_steps": 34.0,
+        "mean_total_planning_iterations": 227.6
+      }
+    },
+    "transient_uncertainty_spike": {
+      "open_loop_nominal": {
+        "completion_rate": 1.0,
+        "completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safe_completion_rate": 1.0,
+        "safe_completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 0.0,
+        "mean_replans": 0.0,
+        "mean_reacquisitions": 0.0,
+        "mean_stops": 0.0,
+        "mean_final_progress": 1.0,
+        "mean_executed_steps": 35.0,
+        "mean_total_planning_iterations": 0.0
+      },
+      "static_robust": {
+        "completion_rate": 0.0,
+        "completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safe_completion_rate": 0.0,
+        "safe_completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 1.0,
+        "mean_replans": 0.0,
+        "mean_reacquisitions": 0.0,
+        "mean_stops": 0.0,
+        "mean_final_progress": 0.0,
+        "mean_executed_steps": 0.0,
+        "mean_total_planning_iterations": 0.0
+      },
+      "closed_loop_adaptive": {
+        "completion_rate": 1.0,
+        "completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safe_completion_rate": 1.0,
+        "safe_completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 0.0,
+        "mean_replans": 4.566666666666666,
+        "mean_reacquisitions": 4.433333333333334,
+        "mean_stops": 0.0,
+        "mean_final_progress": 1.0,
+        "mean_executed_steps": 34.0,
+        "mean_total_planning_iterations": 4.233333333333333
+      }
+    },
+    "severe_perception_loss": {
+      "open_loop_nominal": {
+        "completion_rate": 1.0,
+        "completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safe_completion_rate": 1.0,
+        "safe_completion_95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 0.0,
+        "mean_replans": 0.0,
+        "mean_reacquisitions": 0.0,
+        "mean_stops": 0.0,
+        "mean_final_progress": 1.0,
+        "mean_executed_steps": 35.0,
+        "mean_total_planning_iterations": 0.0
+      },
+      "static_robust": {
+        "completion_rate": 0.0,
+        "completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safe_completion_rate": 0.0,
+        "safe_completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 1.0,
+        "mean_replans": 0.0,
+        "mean_reacquisitions": 0.0,
+        "mean_stops": 0.0,
+        "mean_final_progress": 0.0,
+        "mean_executed_steps": 0.0,
+        "mean_total_planning_iterations": 0.0
+      },
+      "closed_loop_adaptive": {
+        "completion_rate": 0.0,
+        "completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safe_completion_rate": 0.0,
+        "safe_completion_95_ci": [
+          0.0,
+          0.11351339317396876
+        ],
+        "safety_violation_episode_rate": 0.0,
+        "collision_episode_rate": 0.0,
+        "unsafe_executed_step_rate": 0.0,
+        "initial_block_rate": 0.0,
+        "mean_replans": 1.3666666666666667,
+        "mean_reacquisitions": 1.1666666666666667,
+        "mean_stops": 1.0,
+        "mean_final_progress": 0.32092925367781755,
+        "mean_executed_steps": 11.0,
+        "mean_total_planning_iterations": 6.4
+      }
+    }
+  },
+  "interpretation_boundary": "Dynamic simulation evidence only. No clinical efficacy, patient safety, medical-device validation, or real-robot validation claim is supported.",
+  "trial_csv": "results\\phase6_closed_loop\\phase6_closed_loop_trials.csv",
+  "summary_json": "results\\phase6_closed_loop\\phase6_closed_loop_summary.json"
+}

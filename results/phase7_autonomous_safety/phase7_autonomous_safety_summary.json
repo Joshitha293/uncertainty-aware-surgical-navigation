@@ -1,0 +1,1065 @@
+{
+  "benchmark": "phase7_autonomous_safety",
+  "repetitions_per_scenario": 30,
+  "base_seed": 71001,
+  "episode_steps": 30,
+  "scenario_count": 15,
+  "total_episodes": 450,
+  "scenarios": {
+    "nominal": {
+      "fault": null,
+      "expected_action": "continue",
+      "expected_terminal_state": "completed",
+      "should_complete": true,
+      "detection": null,
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "recovery_success": null,
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": null,
+      "maximum_response_latency_steps": null,
+      "mean_replans": 0.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 0.0,
+      "mean_failures": 0.0
+    },
+    "temporary_stale_perception": {
+      "fault": "stale_perception",
+      "expected_action": "reacquire",
+      "expected_terminal_state": "completed",
+      "should_complete": true,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "recovery_success": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 1.0,
+      "mean_reacquisitions": 1.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 0.0,
+      "mean_failures": 0.0
+    },
+    "persistent_perception_recovery_failure": {
+      "fault": "stale_perception",
+      "expected_action": "stop",
+      "expected_terminal_state": "stopped",
+      "should_complete": false,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "recovery_success": null,
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 0.0,
+      "mean_reacquisitions": 2.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 1.0,
+      "mean_failures": 0.0
+    },
+    "recoverable_uncertainty": {
+      "fault": "uncertainty_recoverable",
+      "expected_action": "reacquire",
+      "expected_terminal_state": "completed",
+      "should_complete": true,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "recovery_success": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 1.0,
+      "mean_reacquisitions": 1.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 0.0,
+      "mean_failures": 0.0
+    },
+    "critical_uncertainty": {
+      "fault": "uncertainty_critical",
+      "expected_action": "stop",
+      "expected_terminal_state": "stopped",
+      "should_complete": false,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "recovery_success": null,
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 0.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 1.0,
+      "mean_failures": 0.0
+    },
+    "recoverable_clearance": {
+      "fault": "clearance_recoverable",
+      "expected_action": "replan",
+      "expected_terminal_state": "completed",
+      "should_complete": true,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "recovery_success": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 1.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 0.0,
+      "mean_failures": 0.0
+    },
+    "critical_clearance": {
+      "fault": "clearance_critical",
+      "expected_action": "stop",
+      "expected_terminal_state": "stopped",
+      "should_complete": false,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "recovery_success": null,
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 0.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 1.0,
+      "mean_failures": 0.0
+    },
+    "recoverable_joint_limit_approach": {
+      "fault": "joint_limit_approach",
+      "expected_action": "recover",
+      "expected_terminal_state": "completed",
+      "should_complete": true,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "recovery_success": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 1.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 1.0,
+      "mean_stops": 0.0,
+      "mean_failures": 0.0
+    },
+    "joint_limit_violation": {
+      "fault": "joint_limit_violation",
+      "expected_action": "stop",
+      "expected_terminal_state": "stopped",
+      "should_complete": false,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "recovery_success": null,
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 0.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 1.0,
+      "mean_failures": 0.0
+    },
+    "recoverable_tracking_error": {
+      "fault": "tracking_error_recoverable",
+      "expected_action": "recover",
+      "expected_terminal_state": "completed",
+      "should_complete": true,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "recovery_success": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 1.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 1.0,
+      "mean_stops": 0.0,
+      "mean_failures": 0.0
+    },
+    "critical_tracking_error": {
+      "fault": "tracking_error_critical",
+      "expected_action": "stop",
+      "expected_terminal_state": "stopped",
+      "should_complete": false,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "recovery_success": null,
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 0.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 1.0,
+      "mean_failures": 0.0
+    },
+    "invalid_runtime_data": {
+      "fault": "invalid_numerical_data",
+      "expected_action": "stop",
+      "expected_terminal_state": "stopped",
+      "should_complete": false,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "recovery_success": null,
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 0.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 1.0,
+      "mean_failures": 0.0
+    },
+    "execution_timeout": {
+      "fault": "execution_timeout",
+      "expected_action": "stop",
+      "expected_terminal_state": "stopped",
+      "should_complete": false,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "recovery_success": null,
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 0.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 1.0,
+      "mean_failures": 0.0
+    },
+    "replanning_failure": {
+      "fault": "clearance_recoverable",
+      "expected_action": "fail",
+      "expected_terminal_state": "failed",
+      "should_complete": false,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "recovery_success": null,
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 1.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 0.0,
+      "mean_stops": 0.0,
+      "mean_failures": 1.0
+    },
+    "persistent_execution_recovery_failure": {
+      "fault": "tracking_error_recoverable",
+      "expected_action": "stop",
+      "expected_terminal_state": "stopped",
+      "should_complete": false,
+      "detection": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "correct_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "completion": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "recovery_success": null,
+      "appropriate_terminal_response": {
+        "count": 30,
+        "total": 30,
+        "rate": 1.0,
+        "95_ci": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "false_alarm": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "unsafe_continuation": {
+        "count": 0,
+        "total": 30,
+        "rate": 0.0,
+        "95_ci": [
+          0.0,
+          0.11351339317396876
+        ]
+      },
+      "mean_response_latency_steps": 0.0,
+      "maximum_response_latency_steps": 0,
+      "mean_replans": 0.0,
+      "mean_reacquisitions": 0.0,
+      "mean_recoveries": 2.0,
+      "mean_stops": 1.0,
+      "mean_failures": 0.0
+    }
+  },
+  "interpretation_boundary": "Software fault-response verification in engineered simulation scenarios only. These rates are not clinical hazard probabilities and do not establish surgical or medical-device safety.",
+  "trial_csv": "results\\phase7_autonomous_safety\\phase7_autonomous_safety_trials.csv",
+  "summary_json": "results\\phase7_autonomous_safety\\phase7_autonomous_safety_summary.json"
+}
