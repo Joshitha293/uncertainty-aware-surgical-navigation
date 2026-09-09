@@ -699,42 +699,39 @@ If the regression suite fails, definitive experimental outputs should not be gen
 
 ## 29. Experimental Output Organisation
 
-Recommended structure:
+Definitive experimental evidence is stored under `results/`.
+
+The repository separates final aggregate evidence from phase-specific and supplementary experiments:
 
 ```text
 results/
-└── final_experiment/
-    ├── metadata/
-    ├── raw/
-    ├── processed/
-    ├── figures/
-    └── summary/
+|-- final_evidence/                    # authoritative final summary and reproducibility manifest
+|-- figures/                           # final aggregate figures
+|-- phase1_*/                          # Phase 1 protocol, validation and held-out evidence
+|-- phase2/                            # planning benchmark
+|-- phase3/                            # stereo uncertainty benchmark
+|-- phase4/                            # segmentation and uncertainty benchmarks
+|-- phase5/                            # registration and tracking benchmarks
+|-- phase6_*/                          # chance-constrained and closed-loop risk experiments
+|-- phase7_*/                          # autonomous safety experiments
+`-- supplementary_*/                   # calibration, illumination and efficiency analyses
 ```
 
-### `raw/`
+The authoritative final evidence package is:
 
-Immutable per-trial machine-readable results.
+```text
+results/final_evidence/
+|-- final_metrics.csv
+|-- final_results_report.md
+|-- final_results_summary.json
+`-- reproducibility_manifest.json
+```
 
-### `processed/`
+Machine-generated trial data should remain reproducible from the documented experiment configuration, random-seed policy, software revision and environment.
 
-Derived analysis tables.
-
-### `figures/`
-
-Generated plots.
-
-### `metadata/`
-
-Experiment configuration and software revision.
-
-### `summary/`
-
-Aggregate statistics and human-readable summaries.
-
-Raw experiment files should not be manually edited after generation.
+Raw or generated experimental evidence should not be manually altered after generation.
 
 ---
-
 ## 30. Figure Generation
 
 Publication-quality figures should be generated programmatically from stored raw or processed data.
